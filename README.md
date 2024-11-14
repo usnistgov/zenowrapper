@@ -88,9 +88,9 @@ pip install ".[test,doc]"
 ### Copyright
 
 The ZENOWrapper source code is hosted at https://github.com/jaclark5/zenowrapper
-and is available under the GNU General Public License, version 2 (see the file [LICENSE](https://github.com/jaclark5/zenowrapper/blob/main/LICENSE)).
+and is available under a dual license with the NIST Licences and the GNU General Public License, version 2 (see the file [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_NIST.txt) and [GPLv2 LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_GPL.txt)).
 
-Copyright (c) 2024, Jennifer A. Clark
+Works of NIST employees are not not subject to copyright protection in the United States'
 
 
 #### Acknowledgements

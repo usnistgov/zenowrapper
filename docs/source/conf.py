@@ -24,7 +24,7 @@ import zenowrapper  # noqa
 
 project = "ZENOWrapper"
 copyright = (
-    "2024, Jennifer A. Clark. "
+    "Works of NIST employees are not not subject to copyright protection in the United States. "
     "Project structure based on the "
     "MDAnalysis Cookiecutter version 0.1"
 )
