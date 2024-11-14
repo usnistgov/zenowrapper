@@ -6,7 +6,7 @@ This module contains the :class:`ZenoWrapper` class.
 
 """
 
-#import zenolib
+from ..zenowrapper_ext import zenolib
 from typing import Union, TYPE_CHECKING
 
 from MDAnalysis.analysis.base import AnalysisBase
