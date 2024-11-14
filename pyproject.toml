@@ -1,17 +1,11 @@
 [build-system]
-requires = [
-  "versioningit",
-  "wheel",
-  "scikit-build-core >=0.4.3",
-  "nanobind >=1.3.2",
-]
+requires = ["scikit-build-core >=0.4.3", "nanobind >=1.3.2"]
 build-backend = "scikit_build_core.build"
 
 
 [project]
 name = "zenowrapper"
 description = "This package wraps the package ZENO in a compatible way with MDAnalysis."
-license = {file = "LICENSES/LICENSE_GPL.txt"}
 authors = [
     {name = "Jennifer A. Clark", email = "jennifer.clark@nist.gov"},
 ]
@@ -37,22 +31,26 @@ dynamic = [
 # source = "https://github.com/jaclark5/zenowrapper"
 # documentation = "https://zenowrapper.readthedocs.io"
 
+
 [tool.scikit-build]
 wheel.license-files = ["LICENSES/*.txt", "AUTHORS*"]
 metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
-sdist.include = ["zenowrapper", "src/package/_version.py"]
+
 # Protect the configuration against future changes in scikit-build-core
 minimum-version = "0.4"
 
 # Setuptools-style build caching in a local directory
-build-dir = "zenowrapper/analysis/c_module/build/{wheel_tag}"
+build-dir = "build/{wheel_tag}"
 
 # Build stable ABI wheels for CPython 3.12+
 wheel.py-api = "cp312"
 
+[tool.cibuildwheel]
+# Necessary to see build output from the actual compilation
+build-verbosity = 1
 
 [tool.setuptools_scm]
-write_to = "src/package/_version.py"
+write_to = "src/zenowrapper/_version.py"
 
 
 [project.optional-dependencies]
@@ -70,26 +68,12 @@ doc = [
 [tool.pytest.ini_options]
 minversion = "6.0"
 testpaths = [
-    "zenowrapper/tests",
+    "src/tests",
 ]
 
 
 [tool.black]
 line-length = 80
-
-[tool.versioningit]
-default-version = "1+unknown"
-
-[tool.versioningit.vcs]
-method = "git"
-# the below line expects tags to look like '1.0.2'.
-# if prefixing with a v, e.g. 'v1.0.2', change it to ["v*"]
-match = ["*"]
-
-[tool.versioningit.format]
-distance = "{base_version}+{distance}.{vcs}{rev}"
-dirty = "{base_version}+{distance}.{vcs}{rev}.dirty"
-distance-dirty = "{base_version}+{distance}.{vcs}{rev}.dirty"
 
 
 [tool.coverage.run]

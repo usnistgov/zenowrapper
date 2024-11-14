@@ -7,4 +7,7 @@ This package wraps the package ZENO in a compatible way with MDAnalysis.
 from importlib.metadata import version
 
 __version__ = version("zenowrapper")
-from .analysis.build import zenolib
+
+from .zenowrapper_ext import add
+from zenowrapper.analysis.main import Property, ZenoWrapper
+#import .zenowrapper_ext.zenolib as zenolib
