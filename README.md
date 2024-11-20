@@ -75,6 +75,11 @@ and is available under a dual license with the NIST Licences and the GNU General
 
 Works of NIST employees are not not subject to copyright protection in the United States'
 
+### License
+
+The license in this repository is superseded by the most updated language
+on of the Public Access to NIST Research [*Copyright, Fair Use, and Licensing
+Statement for SRD, Data, and Software*][nist-open].
 
 #### Acknowledgements
  
@@ -85,3 +90,4 @@ Please cite [MDAnalysis](https://github.com/MDAnalysis/mdanalysis#citation) when
 <!-- References -->
 
 [nist-disclaimer]: https://www.nist.gov/open/license
+[nist-open]: https://www.nist.gov/open/license#software
