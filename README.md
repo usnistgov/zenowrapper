@@ -7,23 +7,29 @@ ZENOWrapper
 | **Status**         | [![GH Actions Status][badge_actions]][url_actions] [![codecov][badge_codecov]][url_codecov] |
 | **Community**      | [![License: GPL v2][badge_license]][url_license]  [![Powered by MDAnalysis][badge_mda]][url_mda]|
 
-[badge_actions]: https://github.com/jaclark5/zenowrapper/actions/workflows/gh-ci.yaml/badge.svg
-[badge_codecov]: https://codecov.io/gh/jaclark5/zenowrapper/branch/main/graph/badge.svg
-[badge_commits_since]: https://img.shields.io/github/commits-since/jaclark5/zenowrapper/latest
+[badge_actions]: https://github.com/usnistgov/zenowrapper/actions/workflows/gh-ci.yaml/badge.svg
+[badge_codecov]: https://codecov.io/gh/usnistgov/zenowrapper/branch/main/graph/badge.svg
+[badge_commits_since]: https://img.shields.io/github/commits-since/usnistgov/zenowrapper/latest
 [badge_docs]: https://readthedocs.org/projects/zenowrapper/badge/?version=latest
 [badge_license]: https://img.shields.io/badge/License-GPLv2-blue.svg
 [badge_mda]: https://img.shields.io/badge/powered%20by-MDAnalysis-orange.svg?logoWidth=16&logo=data:image/x-icon;base64,AAABAAEAEBAAAAEAIAAoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJD+XwCY/fEAkf3uAJf97wGT/a+HfHaoiIWE7n9/f+6Hh4fvgICAjwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACT/yYAlP//AJ///wCg//8JjvOchXly1oaGhv+Ghob/j4+P/39/f3IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJH8aQCY/8wAkv2kfY+elJ6al/yVlZX7iIiI8H9/f7h/f38UAAAAAAAAAAAAAAAAAAAAAAAAAAB/f38egYF/noqAebF8gYaagnx3oFpUUtZpaWr/WFhY8zo6OmT///8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgICAn46Ojv+Hh4b/jouJ/4iGhfcAAADnAAAA/wAAAP8AAADIAAAAAwCj/zIAnf2VAJD/PAAAAAAAAAAAAAAAAICAgNGHh4f/gICA/4SEhP+Xl5f/AwMD/wAAAP8AAAD/AAAA/wAAAB8Aov9/ALr//wCS/Z0AAAAAAAAAAAAAAACBgYGOjo6O/4mJif+Pj4//iYmJ/wAAAOAAAAD+AAAA/wAAAP8AAABhAP7+FgCi/38Axf4fAAAAAAAAAAAAAAAAiIiID4GBgYKCgoKogoB+fYSEgZhgYGDZXl5e/m9vb/9ISEjpEBAQxw8AAFQAAAAAAAAANQAAADcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjo6Mb5iYmP+cnJz/jY2N95CQkO4pKSn/AAAA7gAAAP0AAAD7AAAAhgAAAAEAAAAAAAAAAACL/gsAkv2uAJX/QQAAAAB9fX3egoKC/4CAgP+NjY3/c3Nz+wAAAP8AAAD/AAAA/wAAAPUAAAAcAAAAAAAAAAAAnP4NAJL9rgCR/0YAAAAAfX19w4ODg/98fHz/i4uL/4qKivwAAAD/AAAA/wAAAP8AAAD1AAAAGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALGxsVyqqqr/mpqa/6mpqf9KSUn/AAAA5QAAAPkAAAD5AAAAhQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADkUFBSuZ2dn/3V1df8uLi7bAAAATgBGfyQAAAA2AAAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB0AAADoAAAA/wAAAP8AAAD/AAAAWgC3/2AAnv3eAJ/+dgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9AAAA/wAAAP8AAAD/AAAA/wAKDzEAnP3WAKn//wCS/OgAf/8MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAANwAAADtAAAA7QAAAMAAABUMAJn9gwCe/e0Aj/2LAP//AQAAAAAAAAAA
-[badge_release]: https://img.shields.io/github/release-pre/jaclark5/zenowrapper.svg
-[url_actions]: https://github.com/jaclark5/zenowrapper/actions?query=branch%3Amain+workflow%3Agh-ci
-[url_codecov]: https://codecov.io/gh/jaclark5/zenowrapper/branch/main
+[badge_release]: https://img.shields.io/github/release-pre/usnistgov/zenowrapper.svg
+[url_actions]: https://github.com/usnistgov/zenowrapper/actions?query=branch%3Amain+workflow%3Agh-ci
+[url_codecov]: https://codecov.io/gh/usnistgov/zenowrapper/branch/main
 [url_docs]: https://zenowrapper.readthedocs.io/en/latest/?badge=latest
-[url_latest_release]: https://github.com/jaclark5/zenowrapper/releases
+[url_latest_release]: https://github.com/usnistgov/zenowrapper/releases
 [url_license]: https://www.gnu.org/licenses/gpl-2.0
 [url_mda]: https://www.mdanalysis.org
 
+### [NIST Disclaimer][nist-disclaimer]
+
+Certain commercial equipment, instruments, or materials are identified in this paper to foster understanding. Such identification does not imply recommendation or endorsement by the National Institute of Standards and Technology, nor does it imply that the materials or equipment identified are necessarily the best available for the purpose.
+
+### Summary
+
 This package wraps the package ZENO in a compatible way with MDAnalysis.
 
-ZENOWrapper is bound by a [Code of Conduct](https://github.com/jaclark5/zenowrapper/blob/main/CODE_OF_CONDUCT.md).
+ZENOWrapper is bound by a [Code of Conduct](https://github.com/usnistgov/zenowrapper/blob/main/CODE_OF_CONDUCT.md).
 
 ### Installation
 
@@ -31,46 +37,9 @@ To build ZENOWrapper from source,
 we highly recommend using virtual environments.
 If possible, we strongly recommend that you use
 [Anaconda](https://docs.conda.io/en/latest/) as your package manager.
-Below we provide instructions both for `conda` and
-for `pip`.
+Below we provide instructions for `pip`.
 
-#### With conda
-
-Ensure that you have [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) installed.
-
-Create a virtual environment and activate it:
-
-```
-conda create --name zenowrapper
-conda activate zenowrapper
-```
-
-Install the development and documentation dependencies:
-
-```
-conda env update --name zenowrapper --file devtools/conda-envs/test_env.yaml
-conda env update --name zenowrapper --file docs/requirements.yaml
-```
-
-Build this package from source:
-
-```
-pip install -e .
-```
-
-If you want to update your dependencies (which can be risky!), run:
-
-```
-conda update --all
-```
-
-And when you are finished, you can exit the virtual environment with:
-
-```
-conda deactivate
-```
-
-#### With pip
+#### User with pip
 
 To build the package from source, run:
 
@@ -85,9 +54,23 @@ the dependencies required for tests and docs with:
 pip install ".[test,doc]"
 ```
 
+#### Developer with pip
+
+To build the package from source in editable mode, run:
+
+```
+pip install -e .
+```
+
+Initialize pre-commit for automatic formatting.
+
+```
+pre-commit install
+```
+
 ### Copyright
 
-The ZENOWrapper source code is hosted at https://github.com/jaclark5/zenowrapper
+The ZENOWrapper source code is hosted at https://github.com/usnistgov/zenowrapper
 and is available under a dual license with the NIST Licences and the GNU General Public License, version 2 (see the file [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_NIST.txt) and [GPLv2 LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_GPL.txt)).
 
 Works of NIST employees are not not subject to copyright protection in the United States'
@@ -98,3 +81,7 @@ Works of NIST employees are not not subject to copyright protection in the Unite
 Project based on the 
 [MDAnalysis Cookiecutter](https://github.com/MDAnalysis/cookiecutter-mda) version 0.1.
 Please cite [MDAnalysis](https://github.com/MDAnalysis/mdanalysis#citation) when using ZENOWrapper in published work.
+
+<!-- References -->
+
+[nist-disclaimer]: https://www.nist.gov/open/license

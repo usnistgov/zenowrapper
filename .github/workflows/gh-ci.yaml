@@ -24,7 +24,7 @@ defaults:
 
 jobs:
   main-tests:
-    if: "github.repository == 'jaclark5/zenowrapper'"
+    if: "github.repository == 'usnistgov/zenowrapper'"
     runs-on: ${{ matrix.os }}
     strategy:
         fail-fast: false
@@ -95,7 +95,7 @@ jobs:
         pytest -n 2 -v --cov=zenowrapper --cov-report=xml --color=yes zenowrapper/tests/
 
     - name: codecov
-      if: github.repository == 'jaclark5/zenowrapper' && github.event_name != 'schedule'
+      if: github.repository == 'usnistgov/zenowrapper' && github.event_name != 'schedule'
       uses: codecov/codecov-action@v4
       with:
         file: coverage.xml
@@ -113,7 +113,7 @@ jobs:
 
 
   pylint_check:
-    if: "github.repository == 'jaclark5/zenowrapper'"
+    if: "github.repository == 'usnistgov/zenowrapper'"
     runs-on: ubuntu-latest
 
     steps:
@@ -138,7 +138,7 @@ jobs:
 
 
   pypi_check:
-    if: "github.repository == 'jaclark5/zenowrapper'"
+    if: "github.repository == 'usnistgov/zenowrapper'"
     runs-on: ubuntu-latest
 
     steps:
