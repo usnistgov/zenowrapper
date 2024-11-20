@@ -163,3 +163,11 @@ jobs:
         test -n "${DISTRIBUTION}" || { echo "no distribution dist/zenowrapper-*.tar.gz found"; exit 1; }
         echo "twine check $DISTRIBUTION"
         twine check $DISTRIBUTION
+
+    - name: docs
+      uses: usnistgov/Docs4NIST@0.6
+      with:
+        docs-folder: docs/
+        formats: |-
+          epub
+          pdf
