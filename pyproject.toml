@@ -17,6 +17,8 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "MDAnalysis>=2.1.0",
+    "pytest-cov>=3.0",
+    "pytest-xdist>=2.5",
 ]
 keywords = [
     "molecular simulations",
@@ -67,6 +69,12 @@ minversion = "6.0"
 testpaths = [
     "src/tests",
 ]
+addopts = [
+    "--cov=src/zenowrapper",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
 
 
 [tool.black]
@@ -74,16 +82,23 @@ line-length = 80
 
 
 [tool.coverage.run]
+source = ["src/zenowrapper"]
 omit = [
     # Omit the tests
     "*/tests/*",
+    # Omit version file
+    "*/_version.py",
 ]
+branch = true
 
 
 [tool.coverage.report]
 exclude_also = [
     "if TYPE_CHECKING:",
 ]
+precision = 2
+show_missing = true
+skip_covered = false
 
 
 [tool.isort]

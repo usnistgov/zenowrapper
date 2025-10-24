@@ -92,9 +92,9 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest -n 2 -v --cov=zenowrapper --cov-report=xml --color=yes zenowrapper/tests/
+        pytest -n 2 -v --cov=src/zenowrapper --cov-report=xml --cov-report=term-missing --cov-report=html --color=yes src/tests/
 
-    - name: codecov
+    - name: Upload coverage reports to Codecov
       if: github.repository == 'usnistgov/zenowrapper' && github.event_name != 'schedule'
       uses: codecov/codecov-action@v4
       with:
@@ -110,6 +110,21 @@ jobs:
         # Forks can't access the CODECOV_TOKEN secret,
         # and a failed upload registers as an error
         fail_ci_if_error: true
+
+    - name: Coverage comment
+      if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11' && matrix.mdanalysis-version == 'latest'
+      uses: py-cov-action/python-coverage-comment-action@v3
+      with:
+        GITHUB_TOKEN: ${{ github.token }}
+        MINIMUM_GREEN: 90
+        MINIMUM_ORANGE: 70
+
+    - name: Store Pull Request comment to be posted
+      uses: actions/upload-artifact@v4
+      if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+      with:
+        name: python-coverage-comment-action
+        path: python-coverage-comment-action.txt
 
 
   pylint_check:
