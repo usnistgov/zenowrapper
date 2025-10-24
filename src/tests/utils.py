@@ -62,6 +62,13 @@ def make_Universe(
         extras = []
     for ex in extras:
         u.add_TopologyAttr(ex)
+    
+    # Always add types if not already in extras
+    # This is needed for many analysis classes including ZenoWrapper
+    if 'types' not in extras:
+        u.add_TopologyAttr('types')
+        # Set default type values (e.g., 'X' for all atoms)
+        u.atoms.types = ['X'] * n_atoms
 
     if trajectory:
         pos = np.arange(3 * n_atoms * n_frames).reshape(n_frames, n_atoms, 3)

@@ -8,8 +8,18 @@ Global pytest fixtures
 # https://docs.pytest.org/en/stable/how-to/fixtures.html#scope-sharing-fixtures-across-classes-modules-packages-or-session
 
 import pytest
+from pathlib import Path
+import sys
 
-from zenowrapper.data.files import MDANALYSIS_LOGO
+# Ensure the repo root and src directory are on sys.path so tests can import the package
+ROOT = Path(__file__).resolve().parents[2]  # /.../zenowrapper
+SRC = ROOT / "src"
+for p in (str(SRC), str(ROOT)):
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+# Import from the correct path
+from data.files import MDANALYSIS_LOGO
 
 
 @pytest.fixture
