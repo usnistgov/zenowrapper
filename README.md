@@ -20,13 +20,13 @@ ZENOWrapper
 [url_latest_release]: https://github.com/usnistgov/zenowrapper/releases
 [url_mda]: https://www.mdanalysis.org
 
-### [NIST Disclaimer][nist-disclaimer]
+## [NIST Disclaimer][nist-disclaimer]
 
 Certain commercial equipment, instruments, or materials are identified in this paper to foster understanding. Such identification does not imply recommendation or endorsement by the National Institute of Standards and Technology, nor does it imply that the materials or equipment identified are necessarily the best available for the purpose.
 
-### Summary
+## Summary
 
-This package wraps the package ZENO in a compatible way with MDAnalysis.
+This package provides a concise Python wrapper around the ZENO computation engine with an MDAnalysis‑friendly API. It automates preparing ZENO inputs, running ZENO computations, and returning results as Python objects (accepting MDAnalysis Universe/AtomGroup objects and trajectory frames), enabling transport and hydrodynamic analyses to be run directly within MDAnalysis workflows for reproducible analysis and scripting. See the ZenoWrapper API documentation for details.
 
 ZENOWrapper is bound by a [Code of Conduct](https://github.com/usnistgov/zenowrapper/blob/main/CODE_OF_CONDUCT.md).
 
@@ -51,7 +51,7 @@ Then set an environmental variable for the path: `ZENOPATH='/Users/jennifer.clar
 
 ``git clone https://github.com/usnistgov/zenowrapper``
 
-#### User with pip
+#### User Install from Source
 
 To build the package from source, run:
 
@@ -66,7 +66,7 @@ the dependencies required for tests and docs with:
 pip install ".[test,doc]"
 ```
 
-#### Developer with pip
+#### Developer Install from Source
 
 To build the package from source in editable mode, run:
 
@@ -80,11 +80,11 @@ Initialize pre-commit for automatic formatting.
 pre-commit install
 ```
 
-### Copyright
+## Copyright
 
 Works of NIST employees are not not subject to copyright protection in the United States'
 
-### License
+## License
 
 The ZENOWrapper source code is hosted at https://github.com/usnistgov/zenowrapper
 and is available under the [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSE.md).
@@ -92,24 +92,24 @@ The license in this repository is superseded by the most updated language
 on of the Public Access to NIST Research [*Copyright, Fair Use, and Licensing
 Statement for SRD, Data, and Software*][nist-open].
 
-### Contact
+## Contact
 
 Jennifer A. Clark, PhD\
 [Debra J. Audus, PhD][daudus] (debra.audus@nist.gov)\
-[Jack F. Douglas, PhD][jdouglas]\
+[Jack F. Douglas, PhD][jdouglas]
 
 Affilation:
 [Polymer Analytics Project][polyanal]\
 [Polymer and Complex Fluids Group][group1]\
 [Materials Science and Engineering Division][msed]\
 [Material Measurement Laboratory][mml]\
-[National Institute of Standards and Technology][nist]\
+[National Institute of Standards and Technology][nist]
 
-### Citation
+## Citation
 
 Clark, J. A.; Audus, D. J.; Douglas, J. F. XXX, 2024. https://doi.org/10.18434/mds2-XXXX.
 
-#### Acknowledgements
+### Acknowledgements
 
 Project based on the
 [MDAnalysis Cookiecutter](https://github.com/MDAnalysis/cookiecutter-mda) version 0.1.

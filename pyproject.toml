@@ -62,6 +62,7 @@ test = [
 doc = [
     "sphinx",
     "sphinx_rtd_theme",
+    "myst_parser",
 ]
 dev = [
     "mypy>=1.0",
