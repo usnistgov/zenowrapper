@@ -139,32 +139,32 @@ class ZenoWrapper(AnalysisBase):
         if launch_radius is not None:
             self.parametersWalkOnSpheres.setLaunchRadius(launch_radius)
         
-#        # Initialize Parameters for Interior Sampling
-#        self.parametersInteriorSampling = zenolib.parametersInteriorSampling()
-#        if min_n_interior_samples is not None:
-#            self.parametersInteriorSampling.setMinTotalNumSamples(min_n_interior_samples)
-#        if n_interior_samples is not None:
-#            self.parametersInteriorSampling.setTotalNumSamples(n_interior_samples)
-#        if max_rsd_volume is not None:
-#            self.parametersInteriorSampling.setMaxErrorVolume(max_rsd_volume)
-#        if max_run_time is not None:
-#            self.parametersInteriorSampling.setMaxRunTime(max_run_time)
-#        if seed is not None:
-#            self.parametersInteriorSampling.setSeed(seed)
-#        if launch_radius is not None:
-#            self.parametersInteriorSampling.setLaunchRadius(launch_radius)
-#        
-#        # Initialize Parameters for Parameter Results
-#        self.parametersResults = zenolib.parametersResults()
-#        self.parametersResults.setLengthScale(1, length_units)
-#        if temperature is not None:
-#            self.parametersResults.setTemperature(temperature, temperature_units)
-#        if mass is not None:
-#            self.parametersResults.setMass(mass, mass_units)
-#        if viscosity is not None:
-#            self.parametersResults.setMass(viscosity, viscosity_units)
-#        if buoyancy_factor is not None:
-#            self.parametersResults.setBuoyancyFactor(buoyancy_factor)
+        # Initialize Parameters for Interior Sampling
+        self.parametersInteriorSampling = zenolib.parametersInteriorSampling()
+        if min_n_interior_samples is not None:
+            self.parametersInteriorSampling.setMinTotalNumSamples(min_n_interior_samples)
+        if n_interior_samples is not None:
+            self.parametersInteriorSampling.setTotalNumSamples(n_interior_samples)
+        if max_rsd_volume is not None:
+            self.parametersInteriorSampling.setMaxErrorVolume(max_rsd_volume)
+        if max_run_time is not None:
+            self.parametersInteriorSampling.setMaxRunTime(max_run_time)
+        if seed is not None:
+            self.parametersInteriorSampling.setSeed(seed)
+        if launch_radius is not None:
+            self.parametersInteriorSampling.setLaunchRadius(launch_radius)
+        
+        # Initialize Parameters for Parameter Results
+        self.parametersResults = zenolib.parametersResults()
+        self.parametersResults.setLengthScale(1, length_units)
+        if temperature is not None:
+            self.parametersResults.setTemperature(temperature, temperature_units)
+        if mass is not None:
+            self.parametersResults.setMass(mass, mass_units)
+        if viscosity is not None:
+            self.parametersResults.setMass(viscosity, viscosity_units)
+        if buoyancy_factor is not None:
+            self.parametersResults.setBuoyancyFactor(buoyancy_factor)
         
         # Check atom types
         if len(type_radii) == 0:
@@ -214,91 +214,90 @@ class ZenoWrapper(AnalysisBase):
 
     def _single_frame(self):
         """Calculate data from a single frame of trajectory"""
+
+        # Get values from python
+        positions = self.atom_group.positions
         
-############ Do this
-#        # Get values from python
-#        positions = self.atom_group.positions
-#        
-#        if self.verbose:
-#            print("Building spatial data structure")
-#        MixedModel = zenolib.MixedModel()
-#        for i, pos in enumerate(positions):
-#            vec = zenolib.Vector3(*pos)
-#            sphere = zenolib.Sphere(vec, self.type_radii[i])
-#            MixedModel.addSphere(sphere)
-#        Zeno = zenolib.Zeno(MixedModel)            
-#    
-#        if self.verbose:
-#            print("Walk on Spheres")    
-#        doWalkOnSpheresStatus = Zeno.doWalkOnSpheres(
-#            self.parametersWalkOnSpheres,
-#            self.parametersResults
-#        )
-#        if not doWalkOnSpheresStatus:
-#            raise ValueError("Error: no geometry loaded")
-#            
-#        if self.verbose:
-#            print("Interior Samples")
-#        doInteriorSamplingStatus = Zeno.doInteriorSampling(
-#            self.parametersInteriorSampling,
-#			self.parametersResults,
-#        )
-#        if not doInteriorSamplingStatus:
-#            raise ValueError("Error: no geometry loaded")
-#        
-#        if Zeno.getTotalTime() > self.max_run_time:
-#            warnings.warn(
-#                "*** Warning *** Max run time was reached.  Not all requested"
-#                " computations may have been performed."
-#            )
-#        
-#        # TODO: Initialize Results class
-#        results = zenolib.Results()
-#        
-#        Zeno.getResults(self.parametersResults, results)
-#############
+        if self.verbose:
+            print("Building spatial data structure")
+        MixedModel = zenolib.MixedModel()
+        for i, pos in enumerate(positions):
+            vec = zenolib.Vector3(*pos)
+            sphere = zenolib.Sphere(vec, self.type_radii[i])
+            MixedModel.addSphere(sphere)
+        Zeno = zenolib.Zeno(MixedModel)            
+    
+        if self.verbose:
+            print("Walk on Spheres")    
+        doWalkOnSpheresStatus = Zeno.doWalkOnSpheres(
+            self.parametersWalkOnSpheres,
+            self.parametersResults
+        )
+        if not doWalkOnSpheresStatus:
+            raise ValueError("Error: no geometry loaded")
+            
+        if self.verbose:
+            print("Interior Samples")
+        doInteriorSamplingStatus = Zeno.doInteriorSampling(
+            self.parametersInteriorSampling,
+			self.parametersResults,
+        )
+        if not doInteriorSamplingStatus:
+            raise ValueError("Error: no geometry loaded")
+        
+        if Zeno.getTotalTime() > self.max_run_time:
+            warnings.warn(
+                "*** Warning *** Max run time was reached.  Not all requested"
+                " computations may have been performed."
+            )
+        
+        # TODO: Initialize Results class
+        results = zenolib.Results()
+        
+        Zeno.getResults(self.parametersResults, results)
+
 #        # All set
-#        self.results.capacitance.add_value(self._frame_index) = results.capacitance.value.getMean()
-#        self.results.electric_polarizability_tensor.add_value(self._frame_index) = results.polarizabilityTensor.value.getMean()
-#        self.results.electric_polarizability_eigenvalues.add_value(self._frame_index) = results.polarizabilityEigenvalues.value.getMean()
-#        self.results.electric_polarizability.add_value(self._frame_index) = results.meanPolarizability.value.getMean()
-#        self.results.intrinsic_conductivity.add_value(self._frame_index) = results.intrinsicConductivity.value.getMean()
-#        self.results.volume.add_value(self._frame_index) = results.volume.value.getMean()
-#        self.results.gyration_tensor.add_value(self._frame_index) = results.gyrationTensor.value.getMean()
-#        self.results.gyration_eigenvalues.add_value(self._frame_index) = results.gyrationEigenvalues.value.getMean()
-#        self.results.capacitance_same_volume_sphere.add_value(self._frame_index) = results.capacitanceOfASphere.value.getMean()
-#        self.results.hydrodynamic_radius.add_value(self._frame_index) = results.hydrodynamicRadius.value.getMean()
-#        self.results.prefactor_polarizability2intrinsic_viscosity.add_value(self._frame_index) = results.q_eta.value.getMean()
-#        self.results.viscometric_radius.add_value(self._frame_index) = results.viscometricRadius.value.getMean()
-#        self.results.intrinsic_viscosity.add_value(self._frame_index) = results.intrinsicViscosity.value.getMean()
-#        
-#        self.results.capacitance.add_variance(self._frame_index) = results.capacitance.value.getVariance()
-#        self.results.electric_polarizability_tensor.add_variance(self._frame_index) = results.polarizabilityTensor.value.getVariance()
-#        self.results.electric_polarizability_eigenvalues.add_variance(self._frame_index) = results.polarizabilityEigenvalues.value.getVariance()
-#        self.results.electric_polarizability.add_variance(self._frame_index) = results.meanPolarizability.value.getVariance()
-#        self.results.intrinsic_conductivity.add_variance(self._frame_index) = results.intrinsicConductivity.value.getVariance()
-#        self.results.volume.add_variance(self._frame_index) = results.volume.value.getVariance()
-#        self.results.gyration_tensor.add_variance(self._frame_index) = results.gyrationTensor.value.getVariance()
-#        self.results.gyration_eigenvalues.add_variance(self._frame_index) = results.gyrationEigenvalues.value.getVariance()
-#        self.results.capacitance_same_volume_sphere.add_variance(self._frame_index) = results.capacitanceOfASphere.value.getVariance()
-#        self.results.hydrodynamic_radius.add_variance(self._frame_index) = results.hydrodynamicRadius.value.getVariance()
-#        self.results.prefactor_polarizability2intrinsic_viscosity.add_variance(self._frame_index) = results.q_eta.value.getVariance()
-#        self.results.viscometric_radius.add_variance(self._frame_index) = results.viscometricRadius.value.getVariance()
-#        self.results.intrinsic_viscosity.add_variance(self._frame_index) = results.intrinsicViscosity.value.getVariance()
-#        
-#        if self.viscosity is not None:
-#            self.results.friction_coefficient.add_value(self._frame_index) = results.frictionCoefficient.value.getMean()
-#            self.results.friction_coefficient.add_variance(self._frame_index) = results.frictionCoefficient.value.getVariance()
-#            if self.mass is not None and self.buoyancy_factor is not None:
-#                self.results.sedimentation_coefficient.add_value(self._frame_index) = results.sedimentationCoefficient.value.getMean()
-#                self.results.sedimentation_coefficient.add_variance(self._frame_index) = results.sedimentationCoefficient.value.getVariance()
-#            if self.temperature is not None:
-#                self.results.diffusion_coefficient.add_value(self._frame_index) = results.diffusionCoefficient.value.getMean()
-#                self.results.diffusion_coefficient.add_variance(self._frame_index) = results.diffusionCoefficient.value.getVariance()
-#        
-#        if self.mass is not None:        
-#            self.results.mass_intrinsic_viscosity.add_value(self._frame_index) = results.intrinsicViscosityConventional.value.getMean()
-#            self.results.mass_intrinsic_viscosity.add_variance(self._frame_index) = results.intrinsicViscosityConventional.value.getVariance()
+        self.results.capacitance.add_value(self._frame_index) = results.capacitance.value.getMean()
+        self.results.electric_polarizability_tensor.add_value(self._frame_index) = results.polarizabilityTensor.value.getMean()
+        self.results.electric_polarizability_eigenvalues.add_value(self._frame_index) = results.polarizabilityEigenvalues.value.getMean()
+        self.results.electric_polarizability.add_value(self._frame_index) = results.meanPolarizability.value.getMean()
+        self.results.intrinsic_conductivity.add_value(self._frame_index) = results.intrinsicConductivity.value.getMean()
+        self.results.volume.add_value(self._frame_index) = results.volume.value.getMean()
+        self.results.gyration_tensor.add_value(self._frame_index) = results.gyrationTensor.value.getMean()
+        self.results.gyration_eigenvalues.add_value(self._frame_index) = results.gyrationEigenvalues.value.getMean()
+        self.results.capacitance_same_volume_sphere.add_value(self._frame_index) = results.capacitanceOfASphere.value.getMean()
+        self.results.hydrodynamic_radius.add_value(self._frame_index) = results.hydrodynamicRadius.value.getMean()
+        self.results.prefactor_polarizability2intrinsic_viscosity.add_value(self._frame_index) = results.q_eta.value.getMean()
+        self.results.viscometric_radius.add_value(self._frame_index) = results.viscometricRadius.value.getMean()
+        self.results.intrinsic_viscosity.add_value(self._frame_index) = results.intrinsicViscosity.value.getMean()
+        
+        self.results.capacitance.add_variance(self._frame_index) = results.capacitance.value.getVariance()
+        self.results.electric_polarizability_tensor.add_variance(self._frame_index) = results.polarizabilityTensor.value.getVariance()
+        self.results.electric_polarizability_eigenvalues.add_variance(self._frame_index) = results.polarizabilityEigenvalues.value.getVariance()
+        self.results.electric_polarizability.add_variance(self._frame_index) = results.meanPolarizability.value.getVariance()
+        self.results.intrinsic_conductivity.add_variance(self._frame_index) = results.intrinsicConductivity.value.getVariance()
+        self.results.volume.add_variance(self._frame_index) = results.volume.value.getVariance()
+        self.results.gyration_tensor.add_variance(self._frame_index) = results.gyrationTensor.value.getVariance()
+        self.results.gyration_eigenvalues.add_variance(self._frame_index) = results.gyrationEigenvalues.value.getVariance()
+        self.results.capacitance_same_volume_sphere.add_variance(self._frame_index) = results.capacitanceOfASphere.value.getVariance()
+        self.results.hydrodynamic_radius.add_variance(self._frame_index) = results.hydrodynamicRadius.value.getVariance()
+        self.results.prefactor_polarizability2intrinsic_viscosity.add_variance(self._frame_index) = results.q_eta.value.getVariance()
+        self.results.viscometric_radius.add_variance(self._frame_index) = results.viscometricRadius.value.getVariance()
+        self.results.intrinsic_viscosity.add_variance(self._frame_index) = results.intrinsicViscosity.value.getVariance()
+        
+        if self.viscosity is not None:
+            self.results.friction_coefficient.add_value(self._frame_index) = results.frictionCoefficient.value.getMean()
+            self.results.friction_coefficient.add_variance(self._frame_index) = results.frictionCoefficient.value.getVariance()
+            if self.mass is not None and self.buoyancy_factor is not None:
+                self.results.sedimentation_coefficient.add_value(self._frame_index) = results.sedimentationCoefficient.value.getMean()
+                self.results.sedimentation_coefficient.add_variance(self._frame_index) = results.sedimentationCoefficient.value.getVariance()
+            if self.temperature is not None:
+                self.results.diffusion_coefficient.add_value(self._frame_index) = results.diffusionCoefficient.value.getMean()
+                self.results.diffusion_coefficient.add_variance(self._frame_index) = results.diffusionCoefficient.value.getVariance()
+        
+        if self.mass is not None:        
+            self.results.mass_intrinsic_viscosity.add_value(self._frame_index) = results.intrinsicViscosityConventional.value.getMean()
+            self.results.mass_intrinsic_viscosity.add_variance(self._frame_index) = results.intrinsicViscosityConventional.value.getVariance()
 
     def _conclude(self):
         """Calculate the result uncertainties of the analysis"""
