@@ -104,15 +104,22 @@ References
 
 """
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any
+
 import numpy as np
 from MDAnalysis.analysis.base import AnalysisBase
-from MDAnalysis.core.groups import AtomGroup
 
 from .zenowrapper_ext import zenolib
 
+if TYPE_CHECKING:
+    from MDAnalysis.core.groups import AtomGroup
+    from numpy.typing import NDArray
+
 
 # Helper functions to convert string units to ZENO enum values
-def _get_length_unit(unit_str: str):
+def _get_length_unit(unit_str: str) -> zenolib.Length:
     """
     Convert length unit string to ZENO enum.
 
@@ -136,7 +143,7 @@ def _get_length_unit(unit_str: str):
     return unit_map.get(unit_str, zenolib.Length.L)
 
 
-def _get_temperature_unit(unit_str: str):
+def _get_temperature_unit(unit_str: str) -> zenolib.Temperature:
     """
     Convert temperature unit string to ZENO enum.
 
@@ -157,7 +164,7 @@ def _get_temperature_unit(unit_str: str):
     return unit_map.get(unit_str, zenolib.Temperature.K)
 
 
-def _get_mass_unit(unit_str: str):
+def _get_mass_unit(unit_str: str) -> zenolib.Mass:
     """
     Convert mass unit string to ZENO enum.
 
@@ -180,7 +187,7 @@ def _get_mass_unit(unit_str: str):
     return unit_map.get(unit_str, zenolib.Mass.kg)
 
 
-def _get_viscosity_unit(unit_str: str):
+def _get_viscosity_unit(unit_str: str) -> zenolib.Viscosity:
     """
     Convert viscosity unit string to ZENO enum.
 
@@ -238,14 +245,16 @@ class Property:
     where N is the number of random walks or interior samples.
     """
 
-    def __init__(self, name, shape, unit):
-        self.name = name
-        self.values = np.nan * np.ones(shape, dtype=float)
-        self.variance = np.nan * np.ones(shape, dtype=float)
-        self.unit = unit
-        self.shape = shape
+    def __init__(self, name: str, shape: tuple[int, ...], unit: str | None) -> None:
+        self.name: str = name
+        self.values: NDArray[np.floating] = np.nan * np.ones(shape, dtype=float)
+        self.variance: NDArray[np.floating] = np.nan * np.ones(shape, dtype=float)
+        self.unit: str | None = unit
+        self.shape: tuple[int, ...] = shape
+        self.overall_value: float | NDArray[np.floating] | None = None
+        self.overall_variance: float | NDArray[np.floating] | None = None
 
-    def add_value(self, index, value):
+    def add_value(self, index: int, value: float | NDArray[np.floating]) -> None:
         """
         Store computed value for a specific frame.
 
@@ -258,7 +267,7 @@ class Property:
         """
         self.values[index] = value
 
-    def add_variance(self, index, value):
+    def add_variance(self, index: int, value: float | NDArray[np.floating]) -> None:
         """
         Store variance (uncertainty²) for a specific frame.
 
@@ -271,7 +280,7 @@ class Property:
         """
         self.variance[index] = value
 
-    def compute_total_values(self):
+    def compute_total_values(self) -> None:
         """
         Compute overall statistics across all analyzed frames.
 
@@ -461,23 +470,23 @@ class ZenoWrapper(AnalysisBase):
     def __init__(
         self,
         atom_group: AtomGroup,
-        type_radii: dict = None,
-        n_walks: int = 100000,
-        min_n_walks: int = None,
-        n_interior_samples: int = 10000,
-        min_n_interior_samples: int = None,
-        max_rsd_capacitance: float = None,
-        max_rsd_polarizability: float = None,
-        max_rsd_volume: float = None,
-        max_run_time: float = None,
+        type_radii: dict[str, float] | None = None,
+        n_walks: int | None = 100000,
+        min_n_walks: int | None = None,
+        n_interior_samples: int | None = 10000,
+        min_n_interior_samples: int | None = None,
+        max_rsd_capacitance: float | None = None,
+        max_rsd_polarizability: float | None = None,
+        max_rsd_volume: float | None = None,
+        max_run_time: float | None = None,
         num_threads: int = 1,
-        temperature: float = None,
-        size_scaling_factor: float = 1,
-        launch_radius: float = None,
-        skin_thickness: float = None,
-        mass: str = None,
-        viscosity: float = None,
-        buoyancy_factor: float = None,
+        temperature: float | None = None,
+        size_scaling_factor: float = 1.0,
+        launch_radius: float | None = None,
+        skin_thickness: float | None = None,
+        mass: float | None = None,
+        viscosity: float | None = None,
+        buoyancy_factor: float | None = None,
         temperature_units: str = "K",
         viscosity_units: str = "p",
         length_units: str = "L",
@@ -485,7 +494,7 @@ class ZenoWrapper(AnalysisBase):
         seed: int = -1,
         verbose: bool = False,
         **kwargs,
-    ):
+    ) -> None:
         if type_radii is None:
             type_radii = {}
 
@@ -494,22 +503,22 @@ class ZenoWrapper(AnalysisBase):
 
         self.atom_group = atom_group
 
-        self.length_units = length_units
-        self.mass_units = mass_units
-        self.temperature_units = temperature_units
-        self.viscosity_units = viscosity_units
-        self.verbose = verbose
+        self.length_units: str = length_units
+        self.mass_units: str = mass_units
+        self.temperature_units: str = temperature_units
+        self.viscosity_units: str = viscosity_units
+        self.verbose: bool = verbose
 
         # Store attributes needed for optional results
-        self.temperature = temperature
-        self.mass = mass
-        self.viscosity = viscosity
-        self.buoyancy_factor = buoyancy_factor
+        self.temperature: float | None = temperature
+        self.mass: float | None = mass
+        self.viscosity: float | None = viscosity
+        self.buoyancy_factor: float | None = buoyancy_factor
 
         # Store ZENO parameter settings (not the objects themselves!)
         # We'll create fresh parameter objects for each frame in _single_frame()
         # This prevents parameter pollution across frames
-        self._zeno_walk_settings = {
+        self._zeno_walk_settings: dict[str, Any] = {
             "n_walks": n_walks,
             "min_n_walks": min_n_walks,
             "max_rsd_capacitance": max_rsd_capacitance,
@@ -520,7 +529,7 @@ class ZenoWrapper(AnalysisBase):
             "skin_thickness": skin_thickness,
             "launch_radius": launch_radius,
         }
-        self._zeno_interior_settings = {
+        self._zeno_interior_settings: dict[str, Any] = {
             "min_n_interior_samples": min_n_interior_samples,
             "n_interior_samples": n_interior_samples,
             "max_rsd_volume": max_rsd_volume,
@@ -529,7 +538,7 @@ class ZenoWrapper(AnalysisBase):
             "seed": seed,
             "launch_radius": launch_radius,
         }
-        self._zeno_results_settings = {
+        self._zeno_results_settings: dict[str, str | float | None] = {
             "temperature": temperature,
             "temperature_units": temperature_units,
             "mass": mass,
@@ -606,7 +615,7 @@ class ZenoWrapper(AnalysisBase):
                 "mass_intrinsic_viscosity", (self.n_frames), self.mass_units
             )
 
-    def _single_frame(self):
+    def _single_frame(self) -> None:
         """
         Compute ZENO properties for the current trajectory frame.
 
@@ -676,20 +685,26 @@ class ZenoWrapper(AnalysisBase):
 
         # Results parameters
         params_results = zenolib.ParametersResults()
-        params_results.setLengthScale(1.0, _get_length_unit(self._zeno_results_settings["length_units"]))
+        length_units_str = self._zeno_results_settings["length_units"]
+        assert isinstance(length_units_str, str)
+        params_results.setLengthScale(1.0, _get_length_unit(length_units_str))
         if self._zeno_results_settings["temperature"] is not None:
+            temp_units_str = self._zeno_results_settings["temperature_units"]
+            assert isinstance(temp_units_str, str)
             params_results.setTemperature(
                 self._zeno_results_settings["temperature"],
-                _get_temperature_unit(self._zeno_results_settings["temperature_units"]),
+                _get_temperature_unit(temp_units_str),
             )
         if self._zeno_results_settings["mass"] is not None:
-            params_results.setMass(
-                self._zeno_results_settings["mass"], _get_mass_unit(self._zeno_results_settings["mass_units"])
-            )
+            mass_units_str = self._zeno_results_settings["mass_units"]
+            assert isinstance(mass_units_str, str)
+            params_results.setMass(self._zeno_results_settings["mass"], _get_mass_unit(mass_units_str))
         if self._zeno_results_settings["viscosity"] is not None:
+            visc_units_str = self._zeno_results_settings["viscosity_units"]
+            assert isinstance(visc_units_str, str)
             params_results.setSolventViscosity(
                 self._zeno_results_settings["viscosity"],
-                _get_viscosity_unit(self._zeno_results_settings["viscosity_units"]),
+                _get_viscosity_unit(visc_units_str),
             )
         if self._zeno_results_settings["buoyancy_factor"] is not None:
             params_results.setBuoyancyFactor(self._zeno_results_settings["buoyancy_factor"])
@@ -781,7 +796,7 @@ class ZenoWrapper(AnalysisBase):
                 self._frame_index, results.mass_intrinsic_viscosity_variance
             )
 
-    def _conclude(self):
+    def _conclude(self) -> None:
         """Calculate the result uncertainties of the analysis"""
 
         self.results.capacitance.compute_total_values()
