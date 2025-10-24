@@ -54,14 +54,14 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python-version }}
-        environment-file: devtools/conda-envs/test_env.yaml
+        environment-file: devtools/conda-envs/dev_env.yaml
         add-pip-as-python-dependency: true
 
         miniforge-variant: Mambaforge
         use-mamba: true
         channels: conda-forge, defaults
 
-        activate-environment: zenowrapper-test
+        activate-environment: zenowrapper-dev
         auto-update-conda: true
         auto-activate-base: false
         show-channel-urls: true
@@ -127,7 +127,7 @@ jobs:
         path: python-coverage-comment-action.txt
 
 
-  pylint_check:
+  ruff_check:
     if: "github.repository == 'usnistgov/zenowrapper'"
     runs-on: ubuntu-latest
 
@@ -139,17 +139,19 @@ jobs:
       with:
         python-version: "3.11"
 
-    - name: Install Pylint
+    - name: Install Ruff
       run: |
         which pip
         which python
-        pip install pylint mdanalysis
+        pip install ruff
 
-    - name: Run Pylint
-      env:
-        PYLINTRC: .pylintrc
+    - name: Run Ruff Linter
       run: |
-        pylint zenowrapper
+        ruff check src/zenowrapper
+
+    - name: Run Ruff Formatter Check
+      run: |
+        ruff format --check src/zenowrapper
 
 
   pypi_check:

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["scikit-build-core >=0.4.3", "nanobind >=1.3.2"]
+requires = ["scikit-build-core >=0.4.3", "nanobind >=1.3.2", "setuptools-scm"]
 build-backend = "scikit_build_core.build"
 
 
@@ -17,8 +17,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "MDAnalysis>=2.1.0",
-    "pytest-cov>=3.0",
-    "pytest-xdist>=2.5",
+    "numpy",
 ]
 keywords = [
     "molecular simulations",
@@ -58,14 +57,25 @@ test = [
     "pytest-xdist>=2.5",
     "pytest-cov>=3.0",
     "mypy>=1.0",
+    "codecov",
 ]
 doc = [
-    "sphinx",
+    "sphinx>=6.2.1",
     "sphinx_rtd_theme",
     "myst_parser",
+    "mdanalysis-sphinx-theme>=1.0.1",
 ]
 dev = [
     "mypy>=1.0",
+    "ruff",
+    "pre-commit",
+]
+build = [
+    "scikit-build-core>=0.4.3",
+    "nanobind>=1.3.2",
+    "setuptools-scm",
+    "cmake>=3.15",
+    "ninja",
 ]
 
 
@@ -82,8 +92,9 @@ addopts = [
 ]
 
 
-[tool.black]
-line-length = 80
+# [tool.black]
+# Replaced by ruff-format
+# line-length = 80
 
 
 [tool.coverage.run]
@@ -106,18 +117,20 @@ show_missing = true
 skip_covered = false
 
 
-[tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-line_length = 80
+# [tool.isort]
+# Replaced by ruff lint rule "I"
+# multi_line_output = 3
+# include_trailing_comma = true
+# force_grid_wrap = 0
+# use_parentheses = true
+# line_length = 80
 
 
-[tool.yapf]
-COLUMN_LIMIT = 80
-INDENT_WIDTH = 4
-USE_TABS = false
+# [tool.yapf]
+# Replaced by ruff-format
+# COLUMN_LIMIT = 80
+# INDENT_WIDTH = 4
+# USE_TABS = false
 
 
 [tool.ruff]
