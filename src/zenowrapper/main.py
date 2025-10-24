@@ -303,12 +303,12 @@ class ZenoWrapper(AnalysisBase):
         Mapping of atom types to VdW radii in length_units, e.g.,
         ``{'C': 1.7, 'N': 1.55, 'O': 1.52}``. Required for all atom types present.
     n_walks : int, optional
-        Number of random walks for exterior calculation (default: 1000000).
+        Number of random walks for exterior calculation (default: 100000).
         Higher values improve accuracy but increase computation time.
     min_n_walks : int, optional
         Minimum walks before convergence check. If None, runs exactly n_walks.
     n_interior_samples : int, optional
-        Number of sample points for interior calculation (default: 100000).
+        Number of sample points for interior calculation (default: 10000).
         Higher values improve volume/gyration accuracy.
     min_n_interior_samples : int, optional
         Minimum samples before convergence check. If None, runs exactly n_interior_samples.
@@ -456,14 +456,15 @@ class ZenoWrapper(AnalysisBase):
         self,
         atom_group: AtomGroup,
         type_radii: dict = {},
-        n_walks: int = 1000000,
+        n_walks: int = 100000,
         min_n_walks: int = None,
-        n_interior_samples: int = 100000,
+        n_interior_samples: int = 10000,
         min_n_interior_samples: int = None,
         max_rsd_capacitance: float = None,
         max_rsd_polarizability: float = None,
         max_rsd_volume: float = None,
         max_run_time: float = None,
+        num_threads: int = 1,
         temperature: float = None,
         size_scaling_factor: float = 1,
         launch_radius: float = None,
@@ -505,6 +506,7 @@ class ZenoWrapper(AnalysisBase):
             'max_rsd_capacitance': max_rsd_capacitance,
             'max_rsd_polarizability': max_rsd_polarizability,
             'max_run_time': max_run_time,
+            'num_threads': num_threads,
             'seed': seed,
             'skin_thickness': skin_thickness,
             'launch_radius': launch_radius,
@@ -514,6 +516,7 @@ class ZenoWrapper(AnalysisBase):
             'n_interior_samples': n_interior_samples,
             'max_rsd_volume': max_rsd_volume,
             'max_run_time': max_run_time,
+            'num_threads': num_threads,
             'seed': seed,
             'launch_radius': launch_radius,
         }
@@ -632,6 +635,8 @@ class ZenoWrapper(AnalysisBase):
             params_walk.setSkinThickness(self._zeno_walk_settings['skin_thickness'])
         if self._zeno_walk_settings['launch_radius'] is not None:
             params_walk.setLaunchRadius(self._zeno_walk_settings['launch_radius'])
+        # CRITICAL: Set num_threads (default 1). If 0, ZENO won't run any computations!
+        params_walk.setNumThreads(self._zeno_walk_settings['num_threads'])
         
         # Interior Sampling parameters
         params_interior = zenolib.ParametersInteriorSampling()
@@ -647,6 +652,8 @@ class ZenoWrapper(AnalysisBase):
             params_interior.setSeed(self._zeno_interior_settings['seed'])
         if self._zeno_interior_settings['launch_radius'] is not None:
             params_interior.setLaunchRadius(self._zeno_interior_settings['launch_radius'])
+        # CRITICAL: Set num_threads (default 1). If 0, ZENO won't run any computations!
+        params_interior.setNumThreads(self._zeno_interior_settings['num_threads'])
         
         # Results parameters
         params_results = zenolib.ParametersResults()

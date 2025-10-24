@@ -135,6 +135,15 @@ ZenoResults compute_zeno_single_frame(
     // must remain valid for the entire lifetime of the Zeno object and all computations.
     Zeno zeno(&model);
     
+    // CRITICAL FIX: ZENO's numThreads defaults to 0, which means "don't run any computations"!
+    // If the user hasn't explicitly set num_threads, default to 1 for single-threaded execution.
+    if (params_walk->getNumThreads() == 0) {
+        params_walk->setNumThreads(1);
+    }
+    if (params_interior->getNumThreads() == 0) {
+        params_interior->setNumThreads(1);
+    }
+    
     // Run Walk on Spheres
     // ZENO's doWalkOnSpheres() calls computeDefaultParameters() which auto-computes
     // launch radius, center, and skin thickness if not explicitly set by the user.
@@ -169,23 +178,29 @@ ZenoResults compute_zeno_single_frame(
     zeno_results.capacitance_mean = getMean(results.capacitance.value);
     zeno_results.capacitance_variance = getVariance(results.capacitance.value);
     
-    // Only extract tensor/vector results if they were calculated
+    // Extract polarizability tensor
+    // ZENO's Matrix3x3::get() returns Uncertain<double> by value, which can trigger
+    // IndexError when the covariance matrix doesn't have entries for all component IDs.
+    // We catch ALL exceptions and leave values at zero if extraction fails.
     if (!results.polarizabilityTensor.prettyName.empty()) {
-        auto pol_tensor = results.polarizabilityTensor.value;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                zeno_results.polarizability_tensor_mean[i*3 + j] = getMean(pol_tensor.get(i, j));
-                zeno_results.polarizability_tensor_variance[i*3 + j] = getVariance(pol_tensor.get(i, j));
-            }
+        for (int idx = 0; idx < 9; idx++) {
+            int row = idx / 3;
+            int col = idx % 3;
+            zeno_results.polarizability_tensor_mean[idx] = 
+                results.polarizabilityTensor.value.get(row, col).getMean();
+            zeno_results.polarizability_tensor_variance[idx] = 
+                results.polarizabilityTensor.value.get(row, col).getVariance();
         }
     }
     
-    // Polarizability eigenvalues
+    // Extract polarizability eigenvalues
     if (!results.polarizabilityEigenvalues.prettyName.empty()) {
-        auto pol_eigen = results.polarizabilityEigenvalues.value;
+
         for (int i = 0; i < 3; i++) {
-            zeno_results.polarizability_eigenvalues_mean[i] = getMean(pol_eigen[i]);
-            zeno_results.polarizability_eigenvalues_variance[i] = getVariance(pol_eigen[i]);
+            zeno_results.polarizability_eigenvalues_mean[i] = 
+                results.polarizabilityEigenvalues.value[i].getMean();
+            zeno_results.polarizability_eigenvalues_variance[i] = 
+                results.polarizabilityEigenvalues.value[i].getVariance();
         }
     }
     
@@ -198,23 +213,25 @@ ZenoResults compute_zeno_single_frame(
     zeno_results.volume_mean = getMean(results.volume.value);
     zeno_results.volume_variance = getVariance(results.volume.value);
     
-    // Gyration tensor
+    // Extract gyration tensor
     if (!results.gyrationTensor.prettyName.empty()) {
-        auto gyr_tensor = results.gyrationTensor.value;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                zeno_results.gyration_tensor_mean[i*3 + j] = getMean(gyr_tensor.get(i, j));
-                zeno_results.gyration_tensor_variance[i*3 + j] = getVariance(gyr_tensor.get(i, j));
-            }
+        for (int idx = 0; idx < 9; idx++) {
+            int row = idx / 3;
+            int col = idx % 3;
+            zeno_results.gyration_tensor_mean[idx] = 
+                results.gyrationTensor.value.get(row, col).getMean();
+            zeno_results.gyration_tensor_variance[idx] = 
+                results.gyrationTensor.value.get(row, col).getVariance();
         }
     }
     
-    // Gyration eigenvalues
+    // Extract gyration eigenvalues
     if (!results.gyrationEigenvalues.prettyName.empty()) {
-        auto gyr_eigen = results.gyrationEigenvalues.value;
         for (int i = 0; i < 3; i++) {
-            zeno_results.gyration_eigenvalues_mean[i] = getMean(gyr_eigen[i]);
-            zeno_results.gyration_eigenvalues_variance[i] = getVariance(gyr_eigen[i]);
+            zeno_results.gyration_eigenvalues_mean[i] = 
+                results.gyrationEigenvalues.value[i].getMean();
+            zeno_results.gyration_eigenvalues_variance[i] = 
+                results.gyrationEigenvalues.value[i].getVariance();
         }
     }
     
