@@ -1,4 +1,6 @@
-# ZenoWrapper Implementation - Data Transfer Optimization
+# Implementation Details
+
+This document describes the internal architecture and implementation details of ZenoWrapper, including the optimization strategies used to minimize data transfer between Python and C++ layers.
 
 ## Overview
 
@@ -135,7 +137,7 @@ print(f"Hydrodynamic radius: {zw.results.hydrodynamic_radius.overall_value} ± "
       f"{np.sqrt(zw.results.hydrodynamic_radius.overall_variance)}")
 ```
 
-## Notes
+## Implementation Notes
 
 - All ZENO computation parameters are configured once during `__init__`
 - The same parameter objects are reused for all frames (thread-safe)
