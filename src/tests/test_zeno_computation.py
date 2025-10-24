@@ -242,10 +242,13 @@ class TestZenoWrapperIntegration:
         )
         
         assert wrapper.atom_group.n_atoms == 10
-        # Parameters should be stored
-        assert hasattr(wrapper, 'parametersWalkOnSpheres')
-        assert hasattr(wrapper, 'parametersInteriorSampling')
-        assert hasattr(wrapper, 'parametersResults')
+        # Parameter settings should be stored (not the objects themselves)
+        assert hasattr(wrapper, '_zeno_walk_settings')
+        assert hasattr(wrapper, '_zeno_interior_settings')
+        assert hasattr(wrapper, '_zeno_results_settings')
+        # Check that some settings were stored correctly
+        assert wrapper._zeno_walk_settings['n_walks'] == 50000
+        assert wrapper._zeno_interior_settings['n_interior_samples'] == 5000
     
     def test_wrapper_atom_selection(self, simple_universe):
         """Test that atom selection works correctly."""

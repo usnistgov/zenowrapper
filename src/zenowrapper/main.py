@@ -105,7 +105,6 @@ References
 """
 
 from .zenowrapper_ext import zenolib
-from typing import Union, TYPE_CHECKING
 
 from MDAnalysis.core.universe import Universe
 from MDAnalysis.core.groups import AtomGroup
@@ -497,51 +496,37 @@ class ZenoWrapper(AnalysisBase):
         self.viscosity = viscosity
         self.buoyancy_factor = buoyancy_factor
         
-        # Initialize Parameters for Walk on Spheres
-        self.parametersWalkOnSpheres = zenolib.ParametersWalkOnSpheres()
-        if n_walks is not None:
-            self.parametersWalkOnSpheres.setTotalNumWalks(n_walks)
-        if min_n_walks is not None:
-            self.parametersWalkOnSpheres.setMinTotalNumWalks(min_n_walks)
-        if max_rsd_capacitance is not None:
-            self.parametersWalkOnSpheres.setMaxErrorCapacitance(max_rsd_capacitance)
-        if max_rsd_polarizability is not None:
-            self.parametersWalkOnSpheres.setMaxErrorPolarizability(max_rsd_polarizability)
-        if max_run_time is not None:
-            self.parametersWalkOnSpheres.setMaxRunTime(max_run_time)
-        if seed != -1:
-            self.parametersWalkOnSpheres.setSeed(seed)
-        if skin_thickness is not None:
-            self.parametersWalkOnSpheres.setSkinThickness(skin_thickness)
-        if launch_radius is not None:
-            self.parametersWalkOnSpheres.setLaunchRadius(launch_radius)
-        
-        # Initialize Parameters for Interior Sampling
-        self.parametersInteriorSampling = zenolib.ParametersInteriorSampling()
-        if min_n_interior_samples is not None:
-            self.parametersInteriorSampling.setMinTotalNumSamples(min_n_interior_samples)
-        if n_interior_samples is not None:
-            self.parametersInteriorSampling.setTotalNumSamples(n_interior_samples)
-        if max_rsd_volume is not None:
-            self.parametersInteriorSampling.setMaxErrorVolume(max_rsd_volume)
-        if max_run_time is not None:
-            self.parametersInteriorSampling.setMaxRunTime(max_run_time)
-        if seed != -1:
-            self.parametersInteriorSampling.setSeed(seed)
-        if launch_radius is not None:
-            self.parametersInteriorSampling.setLaunchRadius(launch_radius)
-        
-        # Initialize Parameters for Parameter Results
-        self.parametersResults = zenolib.ParametersResults()
-        self.parametersResults.setLengthScale(1.0, _get_length_unit(length_units))
-        if temperature is not None:
-            self.parametersResults.setTemperature(temperature, _get_temperature_unit(temperature_units))
-        if mass is not None:
-            self.parametersResults.setMass(mass, _get_mass_unit(mass_units))
-        if viscosity is not None:
-            self.parametersResults.setSolventViscosity(viscosity, _get_viscosity_unit(viscosity_units))
-        if buoyancy_factor is not None:
-            self.parametersResults.setBuoyancyFactor(buoyancy_factor)
+        # Store ZENO parameter settings (not the objects themselves!)
+        # We'll create fresh parameter objects for each frame in _single_frame()
+        # This prevents parameter pollution across frames
+        self._zeno_walk_settings = {
+            'n_walks': n_walks,
+            'min_n_walks': min_n_walks,
+            'max_rsd_capacitance': max_rsd_capacitance,
+            'max_rsd_polarizability': max_rsd_polarizability,
+            'max_run_time': max_run_time,
+            'seed': seed,
+            'skin_thickness': skin_thickness,
+            'launch_radius': launch_radius,
+        }
+        self._zeno_interior_settings = {
+            'min_n_interior_samples': min_n_interior_samples,
+            'n_interior_samples': n_interior_samples,
+            'max_rsd_volume': max_rsd_volume,
+            'max_run_time': max_run_time,
+            'seed': seed,
+            'launch_radius': launch_radius,
+        }
+        self._zeno_results_settings = {
+            'temperature': temperature,
+            'temperature_units': temperature_units,
+            'mass': mass,
+            'mass_units': mass_units,
+            'viscosity': viscosity,
+            'viscosity_units': viscosity_units,
+            'buoyancy_factor': buoyancy_factor,
+            'length_units': length_units,
+        }
         
         # Check atom types
         if len(type_radii) == 0:
@@ -623,14 +608,75 @@ class ZenoWrapper(AnalysisBase):
         if self.verbose:
             print(f"Analyzing frame {self._frame_index}")
         
+        # Create fresh parameter objects for this frame
+        # This is critical: ZENO's computeDefaultParameters() modifies the parameter
+        # objects in-place (setting launch sphere center/radius, skin thickness, etc.)
+        # Reusing the same objects across frames causes stale launch sphere parameters
+        # from previous frames to be incorrectly applied to new geometry
+        
+        # Walk-on-Spheres parameters
+        params_walk = zenolib.ParametersWalkOnSpheres()
+        if self._zeno_walk_settings['n_walks'] is not None:
+            params_walk.setTotalNumWalks(self._zeno_walk_settings['n_walks'])
+        if self._zeno_walk_settings['min_n_walks'] is not None:
+            params_walk.setMinTotalNumWalks(self._zeno_walk_settings['min_n_walks'])
+        if self._zeno_walk_settings['max_rsd_capacitance'] is not None:
+            params_walk.setMaxErrorCapacitance(self._zeno_walk_settings['max_rsd_capacitance'])
+        if self._zeno_walk_settings['max_rsd_polarizability'] is not None:
+            params_walk.setMaxErrorPolarizability(self._zeno_walk_settings['max_rsd_polarizability'])
+        if self._zeno_walk_settings['max_run_time'] is not None:
+            params_walk.setMaxRunTime(self._zeno_walk_settings['max_run_time'])
+        if self._zeno_walk_settings['seed'] != -1:
+            params_walk.setSeed(self._zeno_walk_settings['seed'])
+        if self._zeno_walk_settings['skin_thickness'] is not None:
+            params_walk.setSkinThickness(self._zeno_walk_settings['skin_thickness'])
+        if self._zeno_walk_settings['launch_radius'] is not None:
+            params_walk.setLaunchRadius(self._zeno_walk_settings['launch_radius'])
+        
+        # Interior Sampling parameters
+        params_interior = zenolib.ParametersInteriorSampling()
+        if self._zeno_interior_settings['min_n_interior_samples'] is not None:
+            params_interior.setMinTotalNumSamples(self._zeno_interior_settings['min_n_interior_samples'])
+        if self._zeno_interior_settings['n_interior_samples'] is not None:
+            params_interior.setTotalNumSamples(self._zeno_interior_settings['n_interior_samples'])
+        if self._zeno_interior_settings['max_rsd_volume'] is not None:
+            params_interior.setMaxErrorVolume(self._zeno_interior_settings['max_rsd_volume'])
+        if self._zeno_interior_settings['max_run_time'] is not None:
+            params_interior.setMaxRunTime(self._zeno_interior_settings['max_run_time'])
+        if self._zeno_interior_settings['seed'] != -1:
+            params_interior.setSeed(self._zeno_interior_settings['seed'])
+        if self._zeno_interior_settings['launch_radius'] is not None:
+            params_interior.setLaunchRadius(self._zeno_interior_settings['launch_radius'])
+        
+        # Results parameters
+        params_results = zenolib.ParametersResults()
+        params_results.setLengthScale(1.0, _get_length_unit(self._zeno_results_settings['length_units']))
+        if self._zeno_results_settings['temperature'] is not None:
+            params_results.setTemperature(
+                self._zeno_results_settings['temperature'],
+                _get_temperature_unit(self._zeno_results_settings['temperature_units'])
+            )
+        if self._zeno_results_settings['mass'] is not None:
+            params_results.setMass(
+                self._zeno_results_settings['mass'],
+                _get_mass_unit(self._zeno_results_settings['mass_units'])
+            )
+        if self._zeno_results_settings['viscosity'] is not None:
+            params_results.setSolventViscosity(
+                self._zeno_results_settings['viscosity'],
+                _get_viscosity_unit(self._zeno_results_settings['viscosity_units'])
+            )
+        if self._zeno_results_settings['buoyancy_factor'] is not None:
+            params_results.setBuoyancyFactor(self._zeno_results_settings['buoyancy_factor'])
+        
         # Call C++ function to compute ZENO results
         # All geometry building and computation happens in C++ layer
         results = zenolib.compute_zeno_single_frame(
             positions, 
             self.type_radii,
-            self.parametersWalkOnSpheres,
-            self.parametersInteriorSampling,
-            self.parametersResults,
+            params_walk,
+            params_interior,
+            params_results,
         )
         
         # Extract results - note the C++ returns flat arrays for tensors
