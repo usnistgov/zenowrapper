@@ -45,4 +45,9 @@ nanobind_add_module(
 )
 
 # Install directive for scikit-build-core
-install(TARGETS zenowrapper_ext LIBRARY DESTINATION zenowrapper)
+set_target_properties(zenowrapper_ext PROPERTIES
+  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper/analysis"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper/analysis"   # for Windows DLLs
+  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper/analysis"   # for static/archives
+)
+install(TARGETS zenowrapper_ext LIBRARY DESTINATION src/zenowrapper)

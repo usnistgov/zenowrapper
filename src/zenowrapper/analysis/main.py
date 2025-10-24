@@ -6,7 +6,7 @@ This module contains the :class:`ZenoWrapper` class.
 
 """
 
-from ..zenowrapper_ext import zenolib
+from .zenowrapper_ext import zenolib
 from typing import Union, TYPE_CHECKING
 
 from MDAnalysis.analysis.base import AnalysisBase
@@ -41,13 +41,8 @@ class ZenoWrapper(AnalysisBase):
 
     Parameters
     ----------
-    universe_or_atomgroup: :class:`~MDAnalysis.core.universe.Universe` or :class:`~MDAnalysis.core.groups.AtomGroup`
-        Universe or group of atoms to apply this analysis to.
-        If a trajectory is associated with the atoms,
-        then the computation iterates over the trajectory.
-    select: str
-        Selection string for atoms to extract from the input Universe or
-        AtomGroup
+    atom_group: :class:`~MDAnalysis.core.groups.AtomGroup`
+        AtomGroup represented a subset of the universe
     buoyancy_factor : float, default=None
         Buoyancy factor, required for the computation of results: ``sedimentation coefficient``,
         ``friction_coefficient`` and ``sedimentation coefficient``
@@ -64,10 +59,10 @@ class ZenoWrapper(AnalysisBase):
     ----------
     universe: :class:`~MDAnalysis.core.universe.Universe`
         The universe to which this analysis is applied
-    atomgroup: :class:`~MDAnalysis.core.groups.AtomGroup`
+    atom_group: :class:`~MDAnalysis.core.groups.AtomGroup`
         The atoms to which this analysis is applied
     type_radii: numpy.ndarray
-        List of radii corresponding to the atoms/beads in ``atomgroup``
+        List of radii corresponding to the atoms/beads in ``atom_group``
     results: :class:`~MDAnalysis.analysis.base.Results`
         results of calculation are stored here, after calling
         :meth:`ZenoWrapper.run`
@@ -89,8 +84,7 @@ class ZenoWrapper(AnalysisBase):
 
     def __init__(
         self,
-        universe_or_atomgroup: Union["Universe", "AtomGroup"],
-        select: str = "all",
+        atom_group: AtomGroup,
         type_radii: dict = {},
         n_walks: int = None,
         min_n_walks: int = None,
@@ -115,11 +109,10 @@ class ZenoWrapper(AnalysisBase):
         verbose: bool = False,
         **kwargs
     ):
+        self.universe = atom_group.universe
+        super().__init__(self.universe.trajectory, **kwargs)
 
-        super().__init__(universe_or_atomgroup.trajectory, **kwargs)
-
-        self.universe = universe_or_atomgroup.universe
-        self.atomgroup = universe_or_atomgroup.select_atoms(select)
+        self.atom_group = atom_group
 
         self.length_units = length_units
         self.mass_units = mass_units
@@ -177,11 +170,11 @@ class ZenoWrapper(AnalysisBase):
         if len(type_radii) == 0:
             raise ValueError(
                 "Please specify radii for atom/bead types: {}".format(
-                    ", ".join(self.atomgroup.types)
+                    ", ".join(self.atom_group.types)
                 )
             )
         else:
-            missing_radii = [x for x in self.atomgroup.types if x not in type_radii]
+            missing_radii = [x for x in self.atom_group.types if x not in type_radii]
             if missing_radii:
                 raise ValueError(
                     "Missing radii for atom/bead types: {}".format(
@@ -224,7 +217,7 @@ class ZenoWrapper(AnalysisBase):
         
 ############ Do this
 #        # Get values from python
-#        positions = self.atomgroup.positions
+#        positions = self.atom_group.positions
 #        
 #        if self.verbose:
 #            print("Building spatial data structure")

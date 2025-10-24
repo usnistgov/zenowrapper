@@ -14,13 +14,13 @@ maintainers = [
     {name = "Derek Juba", email = "derek.juba@nist.gov"},
 ]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "MDAnalysis>=2.1.0",
 ]
 keywords = [
     "molecular simulations",
-    "hydrodynamic",
+    "hydrodynamics",
 ]
 dynamic = [
     "version",
@@ -40,10 +40,7 @@ metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
 minimum-version = "0.4"
 
 # Setuptools-style build caching in a local directory
-build-dir = "build/{wheel_tag}"
-
-# Build stable ABI wheels for CPython 3.12+
-wheel.py-api = "cp312"
+build-dir = "src/build/{wheel_tag}"
 
 [tool.cibuildwheel]
 # Necessary to see build output from the actual compilation
