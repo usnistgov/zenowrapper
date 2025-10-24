@@ -5,7 +5,7 @@ ZENOWrapper
 | **Latest release** | [![Last release tag][badge_release]][url_latest_release] ![GitHub commits since latest release (by date) for a branch][badge_commits_since]  |
 | :----------------- | :------- |
 | **Status**         | [![GH Actions Status][badge_actions]][url_actions] [![codecov][badge_codecov]][url_codecov] |
-| **Community**      | [![License: GPL v2][badge_license]][url_license]  [![Powered by MDAnalysis][badge_mda]][url_mda]|
+| **Community**      | [![License: NIST][badge_license]][nist-open]  [![Powered by MDAnalysis][badge_mda]][url_mda]|
 
 [badge_actions]: https://github.com/usnistgov/zenowrapper/actions/workflows/gh-ci.yaml/badge.svg
 [badge_codecov]: https://codecov.io/gh/usnistgov/zenowrapper/branch/main/graph/badge.svg
@@ -18,7 +18,6 @@ ZENOWrapper
 [url_codecov]: https://codecov.io/gh/usnistgov/zenowrapper/branch/main
 [url_docs]: https://zenowrapper.readthedocs.io/en/latest/?badge=latest
 [url_latest_release]: https://github.com/usnistgov/zenowrapper/releases
-[url_license]: https://www.gnu.org/licenses/gpl-2.0
 [url_mda]: https://www.mdanalysis.org
 
 ### [NIST Disclaimer][nist-disclaimer]
@@ -45,7 +44,7 @@ Below we provide instructions for `pip`.
 
 #### Download
 
-``git clone https://github.com/usnistgov/generate_alchemical_lammps_inputs``
+``git clone https://github.com/usnistgov/zenowrapper``
 
 #### User with pip
 
@@ -78,13 +77,12 @@ pre-commit install
 
 ### Copyright
 
-The ZENOWrapper source code is hosted at https://github.com/usnistgov/zenowrapper
-and is available under a dual license with the NIST Licences and the GNU General Public License, version 2 (see the file [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_NIST.txt) and [GPLv2 LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSES/LICENSE_GPL.txt)).
-
 Works of NIST employees are not not subject to copyright protection in the United States'
 
 ### License
 
+The ZENOWrapper source code is hosted at https://github.com/usnistgov/zenowrapper
+and is available under the [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSE.md). 
 The license in this repository is superseded by the most updated language
 on of the Public Access to NIST Research [*Copyright, Fair Use, and Licensing
 Statement for SRD, Data, and Software*][nist-open].

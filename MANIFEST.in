@@ -2,9 +2,7 @@ include CODE_OF_CONDUCT.md
 include CODEMETA
 include CODEOWNERS
 include fair-software.md
-include LICENSES/LICENSE_GPL.txt
-include LICENSES/LICENSE_NIST.txt
-include MANIFEST.in
+include LICENSE.md
 include AUTHORS.md CHANGELOG.md CODE_OF_CONDUCT.md README.md
 
 graft zenowrapper
