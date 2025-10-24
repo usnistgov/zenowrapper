@@ -20,7 +20,7 @@ concurrency:
 
 defaults:
   run:
-    shell: bash  -l {0} 
+    shell: bash  -l {0}
 
 jobs:
   main-tests:
@@ -72,13 +72,13 @@ jobs:
       with:
         version: ${{ matrix.mdanalysis-version }}
         install-tests: false
-        installer:  mamba 
-        shell: bash  -l {0} 
-      
+        installer:  mamba
+        shell: bash  -l {0}
+
     - name: Install package
       run: |
         python --version
-        python -m pip install .  --no-deps 
+        python -m pip install .  --no-deps
 
     - name: Python information
       run: |

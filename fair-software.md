@@ -88,42 +88,42 @@ can be replicated and/or combined in different settings.
 software FAIR][lc-fair-poster] (PDF). An annotated list follows.
 Note that while the list is software-centric, it applies equally to data.
 
-1. *Create a description of your software.*  
+1. *Create a description of your software.*
    Write this in `README.md` with supporting tables, charts, images,
    etc. Include its dependencies, installation instructions, and
    citations of any work it builds upon.
-2. *Register your software in a software registry.*  
+2. *Register your software in a software registry.*
    [MIDAS][midas] is the go-to where Data Sponsorship is concerned,
    but is not the only option.
-3. *Use a unique and persistent identifier for your software.*  
+3. *Use a unique and persistent identifier for your software.*
    Any registry compliant with [NIST O 5702][o5702] will provide you
    with a persistent handle.
-4. *Make sure that people can download your software.*  
+4. *Make sure that people can download your software.*
    If the data is fire- or pay-walled, provide an alternative site.
    Wherever your data lives, check back from time to time to make
    sure the links are still valid.
-5. *Explain the functionality of your software.*  
+5. *Explain the functionality of your software.*
    Write this into a "Usage" section of `README.md`, or similar,
    with example of how to configure, launch, and interact with the
    software, with examples of output to be expected.
-6. *Use standard (community-agreed) formats for inputs and outputs.*  
+6. *Use standard (community-agreed) formats for inputs and outputs.*
    While open standards are preferred, if a proprietary format is the
    *lingua franca* of the field, focus on that. Create open versions
    if possible.
-7. *Document your software.*  
+7. *Document your software.*
     This goes beyond `README.md` and in-line comments. Place
     documentation, or its build scripts, in a folder named `doc` with
     its own `README.md` describing how to build the docs and what to
     expect.
-8. *Give your software a license.*  
+8. *Give your software a license.*
    If all members of the development team are Federal employees, use
    the standard NIST Disclaimer of Copyright and Warranty for your
    [LICENSE.md][disc-copy]. Otherwise, decide on an appropriate
    license.
-9. *State how to cite your software.*  
+9. *State how to cite your software.*
    This can be done in `README.md`, or as a separate
    [`CITATION.md`][citation] using a BiBTeX-styled code block.
-10. *Follow best practices for software development.*  
+10. *Follow best practices for software development.*
    Broadly speaking, this starts with version control using
    [git][git] or similar, [linting][lint] your code, and following
    some type of branching workflow when multiple developers are
@@ -247,7 +247,7 @@ Some more general FAIR resources:
 - [CodeMeta Standard](https://codemeta.github.io/)
   - [CodeMeta Generator][cmg] (*tool*): generate a complete set of
     [CodeMeta][codemeta]-compliant metadata for your research software
-    and/or data with this handy form. Exports to JSON.  
+    and/or data with this handy form. Exports to JSON.
     *Note:* `codemeta.json` is *not* the same as `codemeta.yaml`: the
     former is a nascent general schema, while the latter is only used
     to help index and link NIST websites.

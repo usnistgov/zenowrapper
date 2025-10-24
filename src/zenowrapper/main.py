@@ -47,16 +47,16 @@ and propagation of uncertainties.
 
     import MDAnalysis as mda
     from zenowrapper import ZenoWrapper
-    
+
     # Load system
     u = mda.Universe('protein.pdb', 'trajectory.dcd')
-    
+
     # Define VdW radii by atom type
     type_radii = {
         'C': 1.70, 'N': 1.55, 'O': 1.52, 'S': 1.80,
         'H': 1.20, 'P': 1.80
     }
-    
+
     # Initialize analysis
     zeno = ZenoWrapper(
         u.select_atoms('protein'),
@@ -69,10 +69,10 @@ and propagation of uncertainties.
         buoyancy_factor=0.73,      # typical for proteins in water
         length_units='A'           # Angstroms
     )
-    
+
     # Run over trajectory frames
     zeno.run(start=0, stop=100, step=1, verbose=True)
-    
+
     # Access results (each is a Property object with .values and .variance arrays)
     print(f"Hydrodynamic radius: {zeno.results.hydrodynamic_radius.values.mean():.2f} Å")
     print(f"Diffusion coefficient: {zeno.results.diffusion_coefficient.values.mean():.2e}")
@@ -104,23 +104,23 @@ References
 
 """
 
+import numpy as np
+from MDAnalysis.analysis.base import AnalysisBase
+from MDAnalysis.core.groups import AtomGroup
+
 from .zenowrapper_ext import zenolib
 
-from MDAnalysis.core.universe import Universe
-from MDAnalysis.core.groups import AtomGroup
-from MDAnalysis.analysis.base import AnalysisBase
-import numpy as np
 
 # Helper functions to convert string units to ZENO enum values
 def _get_length_unit(unit_str: str):
     """
     Convert length unit string to ZENO enum.
-    
+
     Parameters
     ----------
     unit_str : str
         Length unit: 'm', 'cm', 'nm', 'A' (Angstrom), or 'L' (arbitrary length)
-    
+
     Returns
     -------
     zenolib.Length
@@ -135,15 +135,16 @@ def _get_length_unit(unit_str: str):
     }
     return unit_map.get(unit_str, zenolib.Length.L)
 
+
 def _get_temperature_unit(unit_str: str):
     """
     Convert temperature unit string to ZENO enum.
-    
+
     Parameters
     ----------
     unit_str : str
         Temperature unit: 'C' (Celsius) or 'K' (Kelvin)
-    
+
     Returns
     -------
     zenolib.Temperature
@@ -155,15 +156,16 @@ def _get_temperature_unit(unit_str: str):
     }
     return unit_map.get(unit_str, zenolib.Temperature.K)
 
+
 def _get_mass_unit(unit_str: str):
     """
     Convert mass unit string to ZENO enum.
-    
+
     Parameters
     ----------
     unit_str : str
         Mass unit: 'Da' (Dalton), 'kDa' (kiloDalton), 'g' (gram), or 'kg' (kilogram)
-    
+
     Returns
     -------
     zenolib.Mass
@@ -177,15 +179,16 @@ def _get_mass_unit(unit_str: str):
     }
     return unit_map.get(unit_str, zenolib.Mass.kg)
 
+
 def _get_viscosity_unit(unit_str: str):
     """
     Convert viscosity unit string to ZENO enum.
-    
+
     Parameters
     ----------
     unit_str : str
         Viscosity unit: 'p' (poise) or 'cp' (centipoise)
-    
+
     Returns
     -------
     zenolib.Viscosity
@@ -197,13 +200,14 @@ def _get_viscosity_unit(unit_str: str):
     }
     return unit_map.get(unit_str, zenolib.Viscosity.p)
 
+
 class Property:
     """
     Container for ZENO computed property with values and statistical uncertainties.
-    
+
     Each property stores per-frame values and variances from Monte Carlo calculations.
     Uncertainties are rigorously estimated via variance propagation.
-    
+
     Parameters
     ----------
     name : str
@@ -212,7 +216,7 @@ class Property:
         Shape of values array, typically (n_frames,) for scalars or (n_frames, 3, 3) for tensors
     unit : str or None
         Physical unit string for documentation (e.g., 'Å', 'Å³', 'cm²/s')
-    
+
     Attributes
     ----------
     name : str
@@ -227,23 +231,24 @@ class Property:
         Mean across all frames (computed by :meth:`compute_total_values`)
     overall_variance : float
         Total variance across frames (computed by :meth:`compute_total_values`)
-    
+
     Notes
     -----
     Statistical uncertainties from Monte Carlo sampling decrease as ~1/sqrt(N)
     where N is the number of random walks or interior samples.
     """
+
     def __init__(self, name, shape, unit):
         self.name = name
         self.values = np.nan * np.ones(shape, dtype=float)
-        self.variance  = np.nan * np.ones(shape, dtype=float)
+        self.variance = np.nan * np.ones(shape, dtype=float)
         self.unit = unit
         self.shape = shape
-        
+
     def add_value(self, index, value):
         """
         Store computed value for a specific frame.
-        
+
         Parameters
         ----------
         index : int
@@ -252,11 +257,11 @@ class Property:
             Computed property value
         """
         self.values[index] = value
-        
+
     def add_variance(self, index, value):
         """
         Store variance (uncertainty²) for a specific frame.
-        
+
         Parameters
         ----------
         index : int
@@ -265,20 +270,20 @@ class Property:
             Statistical variance of the property
         """
         self.variance[index] = value
-        
+
     def compute_total_values(self):
         """
         Compute overall statistics across all analyzed frames.
-        
+
         Calculates mean value and total variance from per-frame results.
-        
+
         Raises
         ------
         ValueError
             If any frame values are NaN (indicating incomplete analysis)
         """
         if np.any(np.isnan(self.values)):
-            raise ValueError("Values of NaN found in {}".format(self.name))
+            raise ValueError(f"Values of NaN found in {self.name}")
         self.overall_value = np.nanmean(self.values, axis=0)
         self.overall_variance = np.nansum(self.variance, axis=0)
 
@@ -286,16 +291,16 @@ class Property:
 class ZenoWrapper(AnalysisBase):
     """
     Compute hydrodynamic and geometric properties via ZENO Monte Carlo methods.
-    
+
     This analysis class wraps the NIST ZENO software to calculate physical properties
     of molecular structures from MD trajectories. It uses two Monte Carlo algorithms:
     Walk-on-Spheres (exterior) for electrical/hydrodynamic properties and Interior
     Sampling for geometric properties.
-    
+
     The electrical properties are converted to hydrodynamic properties via the
     electrostatic-hydrodynamic analogy. All properties include rigorous statistical
     uncertainties from variance estimation.
-    
+
     Parameters
     ----------
     atom_group : MDAnalysis.core.groups.AtomGroup
@@ -354,7 +359,7 @@ class ZenoWrapper(AnalysisBase):
         Print progress information (default: False)
     **kwargs
         Additional arguments passed to :class:`MDAnalysis.analysis.base.AnalysisBase`
-    
+
     Attributes
     ----------
     universe : MDAnalysis.core.universe.Universe
@@ -367,7 +372,7 @@ class ZenoWrapper(AnalysisBase):
         Container for computed properties. Each property is a :class:`Property` object
         with ``.values`` and ``.variance`` arrays indexed by frame. Available properties
         depend on input parameters:
-        
+
         **Always computed:**
             - ``capacitance`` : Molecular capacitance (length units)
             - ``electric_polarizability_tensor`` : 3×3 polarizability tensor (length³)
@@ -382,30 +387,30 @@ class ZenoWrapper(AnalysisBase):
             - ``viscometric_radius`` : Radius from viscosity (length)
             - ``intrinsic_viscosity`` : Dimensionless intrinsic viscosity
             - ``prefactor_polarizability2intrinsic_viscosity`` : Shape factor
-        
+
         **Requires viscosity:**
             - ``friction_coefficient`` : Resistance to motion (mass/time)
-        
+
         **Requires temperature and viscosity:**
             - ``diffusion_coefficient`` : Translational diffusion (length²/time)
-        
+
         **Requires mass, buoyancy_factor, and viscosity:**
             - ``sedimentation_coefficient`` : Sedimentation rate (time)
-        
+
         **Requires mass:**
             - ``intrinsic_viscosity_mass`` : Intrinsic viscosity (length³/mass)
-    
+
     n_frames : int
         Number of frames analyzed
     times : numpy.ndarray
         Timestamps of analyzed frames
     frames : numpy.ndarray
         Indices of analyzed frames
-    
+
     Examples
     --------
     Basic usage computing hydrodynamic radius::
-    
+
         >>> import MDAnalysis as mda
         >>> from zenowrapper import ZenoWrapper
         >>> u = mda.Universe('protein.pdb', 'traj.dcd')
@@ -413,9 +418,9 @@ class ZenoWrapper(AnalysisBase):
         >>> zeno = ZenoWrapper(u.select_atoms('protein'), type_radii=type_radii)
         >>> zeno.run(start=0, stop=100, step=10)
         >>> print(zeno.results.hydrodynamic_radius.values.mean())
-    
+
     Computing diffusion coefficient::
-    
+
         >>> zeno = ZenoWrapper(
         ...     u.atoms,
         ...     type_radii=type_radii,
@@ -428,12 +433,12 @@ class ZenoWrapper(AnalysisBase):
         >>> D = zeno.results.diffusion_coefficient.values
         >>> D_mean = D.mean()
         >>> D_std = np.sqrt(zeno.results.diffusion_coefficient.variance.mean())
-    
+
     See Also
     --------
     MDAnalysis.analysis.base.AnalysisBase : Base class with run() method
     Property : Container for results with values and uncertainties
-    
+
     Notes
     -----
     - Computation time scales linearly with n_walks and n_interior_samples
@@ -442,7 +447,7 @@ class ZenoWrapper(AnalysisBase):
       radius: R_h = C (exact for spheres, approximate for other shapes)
     - All properties include variance estimates via propagation of uncertainties
     - Setting a fixed seed ensures reproducible results
-    
+
     References
     ----------
     .. [1] Douglas, J.F., Zhou, H.X., Hubbard, J.B. (1994)
@@ -456,7 +461,7 @@ class ZenoWrapper(AnalysisBase):
     def __init__(
         self,
         atom_group: AtomGroup,
-        type_radii: dict = {},
+        type_radii: dict = None,
         n_walks: int = 100000,
         min_n_walks: int = None,
         n_interior_samples: int = 10000,
@@ -479,8 +484,11 @@ class ZenoWrapper(AnalysisBase):
         mass_units: str = "kg",
         seed: int = -1,
         verbose: bool = False,
-        **kwargs
+        **kwargs,
     ):
+        if type_radii is None:
+            type_radii = {}
+
         self.universe = atom_group.universe
         super().__init__(self.universe.trajectory, **kwargs)
 
@@ -491,114 +499,124 @@ class ZenoWrapper(AnalysisBase):
         self.temperature_units = temperature_units
         self.viscosity_units = viscosity_units
         self.verbose = verbose
-        
+
         # Store attributes needed for optional results
         self.temperature = temperature
         self.mass = mass
         self.viscosity = viscosity
         self.buoyancy_factor = buoyancy_factor
-        
+
         # Store ZENO parameter settings (not the objects themselves!)
         # We'll create fresh parameter objects for each frame in _single_frame()
         # This prevents parameter pollution across frames
         self._zeno_walk_settings = {
-            'n_walks': n_walks,
-            'min_n_walks': min_n_walks,
-            'max_rsd_capacitance': max_rsd_capacitance,
-            'max_rsd_polarizability': max_rsd_polarizability,
-            'max_run_time': max_run_time,
-            'num_threads': num_threads,
-            'seed': seed,
-            'skin_thickness': skin_thickness,
-            'launch_radius': launch_radius,
+            "n_walks": n_walks,
+            "min_n_walks": min_n_walks,
+            "max_rsd_capacitance": max_rsd_capacitance,
+            "max_rsd_polarizability": max_rsd_polarizability,
+            "max_run_time": max_run_time,
+            "num_threads": num_threads,
+            "seed": seed,
+            "skin_thickness": skin_thickness,
+            "launch_radius": launch_radius,
         }
         self._zeno_interior_settings = {
-            'min_n_interior_samples': min_n_interior_samples,
-            'n_interior_samples': n_interior_samples,
-            'max_rsd_volume': max_rsd_volume,
-            'max_run_time': max_run_time,
-            'num_threads': num_threads,
-            'seed': seed,
-            'launch_radius': launch_radius,
+            "min_n_interior_samples": min_n_interior_samples,
+            "n_interior_samples": n_interior_samples,
+            "max_rsd_volume": max_rsd_volume,
+            "max_run_time": max_run_time,
+            "num_threads": num_threads,
+            "seed": seed,
+            "launch_radius": launch_radius,
         }
         self._zeno_results_settings = {
-            'temperature': temperature,
-            'temperature_units': temperature_units,
-            'mass': mass,
-            'mass_units': mass_units,
-            'viscosity': viscosity,
-            'viscosity_units': viscosity_units,
-            'buoyancy_factor': buoyancy_factor,
-            'length_units': length_units,
+            "temperature": temperature,
+            "temperature_units": temperature_units,
+            "mass": mass,
+            "mass_units": mass_units,
+            "viscosity": viscosity,
+            "viscosity_units": viscosity_units,
+            "buoyancy_factor": buoyancy_factor,
+            "length_units": length_units,
         }
-        
+
         # Check atom types
         if len(type_radii) == 0:
-            raise ValueError(
-                "Please specify radii for atom/bead types: {}".format(
-                    ", ".join(self.atom_group.types)
-                )
-            )
+            raise ValueError("Please specify radii for atom/bead types: {}".format(", ".join(self.atom_group.types)))
         else:
             missing_radii = [x for x in self.atom_group.types if x not in type_radii]
             if missing_radii:
-                raise ValueError(
-                    "Missing radii for atom/bead types: {}".format(
-                        ", ".join(missing_radii)
-                    )
-                )
-            self.type_radii = np.array([type_radii[atom_type] * size_scaling_factor 
-                                        for atom_type in self.atom_group.types])
-
+                raise ValueError("Missing radii for atom/bead types: {}".format(", ".join(missing_radii)))
+            self.type_radii = np.array(
+                [type_radii[atom_type] * size_scaling_factor for atom_type in self.atom_group.types]
+            )
 
     def _prepare(self):
         """
         Initialize result containers before trajectory analysis.
-        
+
         Creates :class:`Property` objects for all computable quantities based on
         the provided parameters. Properties requiring optional parameters (temperature,
         viscosity, mass, buoyancy_factor) are only created if those parameters were
         specified during initialization.
-        
+
         This method is called automatically by :meth:`run` before frame iteration.
         """
-        
+
         self.results.capacitance = Property("capacitance", (self.n_frames), self.length_units)
-        self.results.electric_polarizability_tensor = Property("electric_polarizability_tensor", (self.n_frames, 3, 3), f"{self.length_units}^3")
-        self.results.electric_polarizability_eigenvalues = Property("electric_polarizability_eigenvalues", (self.n_frames, 3), f"{self.length_units}^3")
-        self.results.electric_polarizability = Property("electric_polarizability", (self.n_frames), f"{self.length_units}^3")
+        self.results.electric_polarizability_tensor = Property(
+            "electric_polarizability_tensor", (self.n_frames, 3, 3), f"{self.length_units}^3"
+        )
+        self.results.electric_polarizability_eigenvalues = Property(
+            "electric_polarizability_eigenvalues", (self.n_frames, 3), f"{self.length_units}^3"
+        )
+        self.results.electric_polarizability = Property(
+            "electric_polarizability", (self.n_frames), f"{self.length_units}^3"
+        )
         self.results.intrinsic_conductivity = Property("intrinsic_conductivity", (self.n_frames), None)
         self.results.volume = Property("volume", (self.n_frames), f"{self.length_units}^3")
         self.results.gyration_tensor = Property("gyration_tensor", (self.n_frames, 3, 3), f"{self.length_units}^2")
-        self.results.gyration_eigenvalues = Property("gyration_eigenvalues", (self.n_frames, 3), f"{self.length_units}^2")
-        self.results.capacitance_same_volume_sphere = Property("capacitance_same_volume_sphere", (self.n_frames), self.length_units)
+        self.results.gyration_eigenvalues = Property(
+            "gyration_eigenvalues", (self.n_frames, 3), f"{self.length_units}^2"
+        )
+        self.results.capacitance_same_volume_sphere = Property(
+            "capacitance_same_volume_sphere", (self.n_frames), self.length_units
+        )
         self.results.hydrodynamic_radius = Property("hydrodynamic_radius", (self.n_frames), self.length_units)
-        self.results.prefactor_polarizability2intrinsic_viscosity = Property("prefactor_polarizability2intrinsic_viscosity", (self.n_frames), None)
+        self.results.prefactor_polarizability2intrinsic_viscosity = Property(
+            "prefactor_polarizability2intrinsic_viscosity", (self.n_frames), None
+        )
         self.results.viscometric_radius = Property("viscometric_radius", (self.n_frames), self.length_units)
         self.results.intrinsic_viscosity = Property("intrinsic_viscosity", (self.n_frames), None)
-        
+
         if self.viscosity is not None:
             unit_sed_coeff = f"{self.length_units} * {self.viscosity}"
             self.results.friction_coefficient = Property("friction_coefficient", (self.n_frames), unit_sed_coeff)
             if self.mass is not None and self.buoyancy_factor is not None:
-                self.results.sedimentation_coefficient = Property("sedimentation_coefficient", (self.n_frames), f"{self.mass_units} / ({unit_sed_coeff})")
+                self.results.sedimentation_coefficient = Property(
+                    "sedimentation_coefficient", (self.n_frames), f"{self.mass_units} / ({unit_sed_coeff})"
+                )
             if self.temperature is not None:
-                self.results.diffusion_coefficient = Property("diffusion_coefficient", (self.n_frames), f"{self.temperature_units} / ({unit_sed_coeff})")
-        
-        if self.mass is not None:        
-            self.results.mass_intrinsic_viscosity = Property("mass_intrinsic_viscosity", (self.n_frames), self.mass_units)
+                self.results.diffusion_coefficient = Property(
+                    "diffusion_coefficient", (self.n_frames), f"{self.temperature_units} / ({unit_sed_coeff})"
+                )
+
+        if self.mass is not None:
+            self.results.mass_intrinsic_viscosity = Property(
+                "mass_intrinsic_viscosity", (self.n_frames), self.mass_units
+            )
 
     def _single_frame(self):
         """
         Compute ZENO properties for the current trajectory frame.
-        
+
         Executes the Monte Carlo calculations (Walk-on-Spheres and Interior Sampling)
         for the current frame's atomic coordinates. Results are stored in the
         corresponding :class:`Property` objects in :attr:`results`.
-        
+
         This method is called automatically by :meth:`run` for each analyzed frame.
         All heavy computation occurs in the C++ layer via the zenolib extension.
-        
+
         Notes
         -----
         The method extracts atomic positions from the current frame and passes them
@@ -608,155 +626,164 @@ class ZenoWrapper(AnalysisBase):
 
         # Get values from python
         positions = self.atom_group.positions
-        
+
         if self.verbose:
             print(f"Analyzing frame {self._frame_index}")
-        
+
         # Create fresh parameter objects for this frame
         # This is critical: ZENO's computeDefaultParameters() modifies the parameter
         # objects in-place (setting launch sphere center/radius, skin thickness, etc.)
         # Reusing the same objects across frames causes stale launch sphere parameters
         # from previous frames to be incorrectly applied to new geometry
-        
+
         # Walk-on-Spheres parameters
         params_walk = zenolib.ParametersWalkOnSpheres()
-        if self._zeno_walk_settings['n_walks'] is not None:
-            params_walk.setTotalNumWalks(self._zeno_walk_settings['n_walks'])
-        if self._zeno_walk_settings['min_n_walks'] is not None:
-            params_walk.setMinTotalNumWalks(self._zeno_walk_settings['min_n_walks'])
-        if self._zeno_walk_settings['max_rsd_capacitance'] is not None:
-            params_walk.setMaxErrorCapacitance(self._zeno_walk_settings['max_rsd_capacitance'])
-        if self._zeno_walk_settings['max_rsd_polarizability'] is not None:
-            params_walk.setMaxErrorPolarizability(self._zeno_walk_settings['max_rsd_polarizability'])
-        if self._zeno_walk_settings['max_run_time'] is not None:
-            params_walk.setMaxRunTime(self._zeno_walk_settings['max_run_time'])
-        if self._zeno_walk_settings['seed'] != -1:
-            params_walk.setSeed(self._zeno_walk_settings['seed'])
-        if self._zeno_walk_settings['skin_thickness'] is not None:
-            params_walk.setSkinThickness(self._zeno_walk_settings['skin_thickness'])
-        if self._zeno_walk_settings['launch_radius'] is not None:
-            params_walk.setLaunchRadius(self._zeno_walk_settings['launch_radius'])
+        if self._zeno_walk_settings["n_walks"] is not None:
+            params_walk.setTotalNumWalks(self._zeno_walk_settings["n_walks"])
+        if self._zeno_walk_settings["min_n_walks"] is not None:
+            params_walk.setMinTotalNumWalks(self._zeno_walk_settings["min_n_walks"])
+        if self._zeno_walk_settings["max_rsd_capacitance"] is not None:
+            params_walk.setMaxErrorCapacitance(self._zeno_walk_settings["max_rsd_capacitance"])
+        if self._zeno_walk_settings["max_rsd_polarizability"] is not None:
+            params_walk.setMaxErrorPolarizability(self._zeno_walk_settings["max_rsd_polarizability"])
+        if self._zeno_walk_settings["max_run_time"] is not None:
+            params_walk.setMaxRunTime(self._zeno_walk_settings["max_run_time"])
+        if self._zeno_walk_settings["seed"] != -1:
+            params_walk.setSeed(self._zeno_walk_settings["seed"])
+        if self._zeno_walk_settings["skin_thickness"] is not None:
+            params_walk.setSkinThickness(self._zeno_walk_settings["skin_thickness"])
+        if self._zeno_walk_settings["launch_radius"] is not None:
+            params_walk.setLaunchRadius(self._zeno_walk_settings["launch_radius"])
         # CRITICAL: Set num_threads (default 1). If 0, ZENO won't run any computations!
-        params_walk.setNumThreads(self._zeno_walk_settings['num_threads'])
-        
+        params_walk.setNumThreads(self._zeno_walk_settings["num_threads"])
+
         # Interior Sampling parameters
         params_interior = zenolib.ParametersInteriorSampling()
-        if self._zeno_interior_settings['min_n_interior_samples'] is not None:
-            params_interior.setMinTotalNumSamples(self._zeno_interior_settings['min_n_interior_samples'])
-        if self._zeno_interior_settings['n_interior_samples'] is not None:
-            params_interior.setTotalNumSamples(self._zeno_interior_settings['n_interior_samples'])
-        if self._zeno_interior_settings['max_rsd_volume'] is not None:
-            params_interior.setMaxErrorVolume(self._zeno_interior_settings['max_rsd_volume'])
-        if self._zeno_interior_settings['max_run_time'] is not None:
-            params_interior.setMaxRunTime(self._zeno_interior_settings['max_run_time'])
-        if self._zeno_interior_settings['seed'] != -1:
-            params_interior.setSeed(self._zeno_interior_settings['seed'])
-        if self._zeno_interior_settings['launch_radius'] is not None:
-            params_interior.setLaunchRadius(self._zeno_interior_settings['launch_radius'])
+        if self._zeno_interior_settings["min_n_interior_samples"] is not None:
+            params_interior.setMinTotalNumSamples(self._zeno_interior_settings["min_n_interior_samples"])
+        if self._zeno_interior_settings["n_interior_samples"] is not None:
+            params_interior.setTotalNumSamples(self._zeno_interior_settings["n_interior_samples"])
+        if self._zeno_interior_settings["max_rsd_volume"] is not None:
+            params_interior.setMaxErrorVolume(self._zeno_interior_settings["max_rsd_volume"])
+        if self._zeno_interior_settings["max_run_time"] is not None:
+            params_interior.setMaxRunTime(self._zeno_interior_settings["max_run_time"])
+        if self._zeno_interior_settings["seed"] != -1:
+            params_interior.setSeed(self._zeno_interior_settings["seed"])
+        if self._zeno_interior_settings["launch_radius"] is not None:
+            params_interior.setLaunchRadius(self._zeno_interior_settings["launch_radius"])
         # CRITICAL: Set num_threads (default 1). If 0, ZENO won't run any computations!
-        params_interior.setNumThreads(self._zeno_interior_settings['num_threads'])
-        
+        params_interior.setNumThreads(self._zeno_interior_settings["num_threads"])
+
         # Results parameters
         params_results = zenolib.ParametersResults()
-        params_results.setLengthScale(1.0, _get_length_unit(self._zeno_results_settings['length_units']))
-        if self._zeno_results_settings['temperature'] is not None:
+        params_results.setLengthScale(1.0, _get_length_unit(self._zeno_results_settings["length_units"]))
+        if self._zeno_results_settings["temperature"] is not None:
             params_results.setTemperature(
-                self._zeno_results_settings['temperature'],
-                _get_temperature_unit(self._zeno_results_settings['temperature_units'])
+                self._zeno_results_settings["temperature"],
+                _get_temperature_unit(self._zeno_results_settings["temperature_units"]),
             )
-        if self._zeno_results_settings['mass'] is not None:
+        if self._zeno_results_settings["mass"] is not None:
             params_results.setMass(
-                self._zeno_results_settings['mass'],
-                _get_mass_unit(self._zeno_results_settings['mass_units'])
+                self._zeno_results_settings["mass"], _get_mass_unit(self._zeno_results_settings["mass_units"])
             )
-        if self._zeno_results_settings['viscosity'] is not None:
+        if self._zeno_results_settings["viscosity"] is not None:
             params_results.setSolventViscosity(
-                self._zeno_results_settings['viscosity'],
-                _get_viscosity_unit(self._zeno_results_settings['viscosity_units'])
+                self._zeno_results_settings["viscosity"],
+                _get_viscosity_unit(self._zeno_results_settings["viscosity_units"]),
             )
-        if self._zeno_results_settings['buoyancy_factor'] is not None:
-            params_results.setBuoyancyFactor(self._zeno_results_settings['buoyancy_factor'])
-        
+        if self._zeno_results_settings["buoyancy_factor"] is not None:
+            params_results.setBuoyancyFactor(self._zeno_results_settings["buoyancy_factor"])
+
         # Call C++ function to compute ZENO results
         # All geometry building and computation happens in C++ layer
         results = zenolib.compute_zeno_single_frame(
-            positions, 
+            positions,
             self.type_radii,
             params_walk,
             params_interior,
             params_results,
         )
-        
+
         # Extract results - note the C++ returns flat arrays for tensors
         self.results.capacitance.add_value(self._frame_index, results.capacitance_mean)
         self.results.capacitance.add_variance(self._frame_index, results.capacitance_variance)
-        
+
         # Polarizability tensor is returned as flat array (row-major)
         pol_tensor = np.array(results.polarizability_tensor_mean).reshape(3, 3)
         pol_tensor_var = np.array(results.polarizability_tensor_variance).reshape(3, 3)
         self.results.electric_polarizability_tensor.add_value(self._frame_index, pol_tensor)
         self.results.electric_polarizability_tensor.add_variance(self._frame_index, pol_tensor_var)
-        
+
         pol_eigen = np.array(results.polarizability_eigenvalues_mean)
         pol_eigen_var = np.array(results.polarizability_eigenvalues_variance)
         self.results.electric_polarizability_eigenvalues.add_value(self._frame_index, pol_eigen)
         self.results.electric_polarizability_eigenvalues.add_variance(self._frame_index, pol_eigen_var)
-        
+
         self.results.electric_polarizability.add_value(self._frame_index, results.mean_polarizability_mean)
         self.results.electric_polarizability.add_variance(self._frame_index, results.mean_polarizability_variance)
-        
+
         self.results.intrinsic_conductivity.add_value(self._frame_index, results.intrinsic_conductivity_mean)
         self.results.intrinsic_conductivity.add_variance(self._frame_index, results.intrinsic_conductivity_variance)
-        
+
         self.results.volume.add_value(self._frame_index, results.volume_mean)
         self.results.volume.add_variance(self._frame_index, results.volume_variance)
-        
+
         # Gyration tensor
         gyr_tensor = np.array(results.gyration_tensor_mean).reshape(3, 3)
         gyr_tensor_var = np.array(results.gyration_tensor_variance).reshape(3, 3)
         self.results.gyration_tensor.add_value(self._frame_index, gyr_tensor)
         self.results.gyration_tensor.add_variance(self._frame_index, gyr_tensor_var)
-        
+
         gyr_eigen = np.array(results.gyration_eigenvalues_mean)
         gyr_eigen_var = np.array(results.gyration_eigenvalues_variance)
         self.results.gyration_eigenvalues.add_value(self._frame_index, gyr_eigen)
         self.results.gyration_eigenvalues.add_variance(self._frame_index, gyr_eigen_var)
-        
+
         self.results.capacitance_same_volume_sphere.add_value(self._frame_index, results.capacitance_sphere_mean)
         self.results.capacitance_same_volume_sphere.add_variance(self._frame_index, results.capacitance_sphere_variance)
-        
+
         self.results.hydrodynamic_radius.add_value(self._frame_index, results.hydrodynamic_radius_mean)
         self.results.hydrodynamic_radius.add_variance(self._frame_index, results.hydrodynamic_radius_variance)
-        
+
         self.results.prefactor_polarizability2intrinsic_viscosity.add_value(self._frame_index, results.q_eta_mean)
-        self.results.prefactor_polarizability2intrinsic_viscosity.add_variance(self._frame_index, results.q_eta_variance)
-        
+        self.results.prefactor_polarizability2intrinsic_viscosity.add_variance(
+            self._frame_index, results.q_eta_variance
+        )
+
         self.results.viscometric_radius.add_value(self._frame_index, results.viscometric_radius_mean)
         self.results.viscometric_radius.add_variance(self._frame_index, results.viscometric_radius_variance)
-        
+
         self.results.intrinsic_viscosity.add_value(self._frame_index, results.intrinsic_viscosity_mean)
         self.results.intrinsic_viscosity.add_variance(self._frame_index, results.intrinsic_viscosity_variance)
-        
+
         # Optional results
         if self.viscosity is not None:
             self.results.friction_coefficient.add_value(self._frame_index, results.friction_coefficient_mean)
             self.results.friction_coefficient.add_variance(self._frame_index, results.friction_coefficient_variance)
-            
+
             if self.mass is not None and self.buoyancy_factor is not None:
-                self.results.sedimentation_coefficient.add_value(self._frame_index, results.sedimentation_coefficient_mean)
-                self.results.sedimentation_coefficient.add_variance(self._frame_index, results.sedimentation_coefficient_variance)
-            
+                self.results.sedimentation_coefficient.add_value(
+                    self._frame_index, results.sedimentation_coefficient_mean
+                )
+                self.results.sedimentation_coefficient.add_variance(
+                    self._frame_index, results.sedimentation_coefficient_variance
+                )
+
             if self.temperature is not None:
                 self.results.diffusion_coefficient.add_value(self._frame_index, results.diffusion_coefficient_mean)
-                self.results.diffusion_coefficient.add_variance(self._frame_index, results.diffusion_coefficient_variance)
-        
-        if self.mass is not None:        
+                self.results.diffusion_coefficient.add_variance(
+                    self._frame_index, results.diffusion_coefficient_variance
+                )
+
+        if self.mass is not None:
             self.results.mass_intrinsic_viscosity.add_value(self._frame_index, results.mass_intrinsic_viscosity_mean)
-            self.results.mass_intrinsic_viscosity.add_variance(self._frame_index, results.mass_intrinsic_viscosity_variance)
+            self.results.mass_intrinsic_viscosity.add_variance(
+                self._frame_index, results.mass_intrinsic_viscosity_variance
+            )
 
     def _conclude(self):
         """Calculate the result uncertainties of the analysis"""
-        
+
         self.results.capacitance.compute_total_values()
         self.results.electric_polarizability_tensor.compute_total_values()
         self.results.electric_polarizability_eigenvalues.compute_total_values()
@@ -770,13 +797,13 @@ class ZenoWrapper(AnalysisBase):
         self.results.prefactor_polarizability2intrinsic_viscosity.compute_total_values()
         self.results.viscometric_radius.compute_total_values()
         self.results.intrinsic_viscosity.compute_total_values()
-        
+
         if self.viscosity is not None:
             self.results.friction_coefficient.compute_total_values()
             if self.mass is not None and self.buoyancy_factor is not None:
                 self.results.sedimentation_coefficient.compute_total_values()
             if self.temperature is not None:
                 self.results.diffusion_coefficient.compute_total_values()
-        
-        if self.mass is not None:        
+
+        if self.mass is not None:
             self.results.mass_intrinsic_viscosity.compute_total_values()

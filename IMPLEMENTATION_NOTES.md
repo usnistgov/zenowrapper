@@ -43,13 +43,13 @@ This implementation minimizes data transfer between Python and C++ layers by per
    ```cpp
    ZenoResults compute_zeno_single_frame(
        positions,  // Nx3 numpy array
-       radii,      // N numpy array  
+       radii,      // N numpy array
        params_walk,
        params_interior,
        params_results
    )
    ```
-   
+
    **Internal workflow:**
    - Builds `MixedModel<double>` from positions and radii
    - Creates spheres using ZENO's `Vector3` and `Sphere` classes
@@ -73,7 +73,7 @@ This implementation minimizes data transfer between Python and C++ layers by per
 - Loop over all atoms in Python
 - For each atom: create `Vector3`, create `Sphere`, call `addSphere()` → N Python→C++ calls
 - Call `doWalkOnSpheres()` → 1 call
-- Call `doInteriorSampling()` → 1 call  
+- Call `doInteriorSampling()` → 1 call
 - Access each result property individually → 26+ C++→Python calls
 - **Total: ~N+30 calls across Python/C++ boundary**
 

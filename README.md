@@ -87,7 +87,7 @@ Works of NIST employees are not not subject to copyright protection in the Unite
 ### License
 
 The ZENOWrapper source code is hosted at https://github.com/usnistgov/zenowrapper
-and is available under the [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSE.md). 
+and is available under the [NIST LICENSE](https://github.com/usnistgov/zenowrapper/blob/main/LICENSE.md).
 The license in this repository is superseded by the most updated language
 on of the Public Access to NIST Research [*Copyright, Fair Use, and Licensing
 Statement for SRD, Data, and Software*][nist-open].
@@ -110,8 +110,8 @@ Affilation:
 Clark, J. A.; Audus, D. J.; Douglas, J. F. XXX, 2024. https://doi.org/10.18434/mds2-XXXX.
 
 #### Acknowledgements
- 
-Project based on the 
+
+Project based on the
 [MDAnalysis Cookiecutter](https://github.com/MDAnalysis/cookiecutter-mda) version 0.1.
 Please cite [MDAnalysis](https://github.com/MDAnalysis/mdanalysis#citation) when using ZENOWrapper in published work.
 

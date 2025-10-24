@@ -72,7 +72,7 @@ message(STATUS "ZENO include directory: ${ZENO_INCLUDE_DIR}")
 
 nanobind_add_module(
     zenowrapper_ext
-    STABLE_ABI 
+    STABLE_ABI
     NB_STATIC
     src/zenowrapper/zenolib.cpp
 )
