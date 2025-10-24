@@ -179,17 +179,16 @@ ZenoResults compute_zeno_single_frame(
     zeno_results.capacitance_variance = getVariance(results.capacitance.value);
     
     // Extract polarizability tensor
-    // ZENO's Matrix3x3::get() returns Uncertain<double> by value, which can trigger
-    // IndexError when the covariance matrix doesn't have entries for all component IDs.
-    // We catch ALL exceptions and leave values at zero if extraction fails.
+    // ZENO's Matrix3x3::get() returns Uncertain<double> by VALUE, triggering copy constructor
+    // which can fail due to covariance matrix issues. Instead, access components array directly
+    // using pointer arithmetic to avoid copying Uncertain objects.
     if (!results.polarizabilityTensor.prettyName.empty()) {
+        // Matrix3x3 has components[9] as first data member, so &matrix == &components[0]
+        const Uncertain<double>* components = reinterpret_cast<const Uncertain<double>*>(&results.polarizabilityTensor.value);
         for (int idx = 0; idx < 9; idx++) {
-            int row = idx / 3;
-            int col = idx % 3;
-            zeno_results.polarizability_tensor_mean[idx] = 
-                results.polarizabilityTensor.value.get(row, col).getMean();
-            zeno_results.polarizability_tensor_variance[idx] = 
-                results.polarizabilityTensor.value.get(row, col).getVariance();
+            const Uncertain<double>& element = components[idx];
+            zeno_results.polarizability_tensor_mean[idx] = element.getMean();
+            zeno_results.polarizability_tensor_variance[idx] = element.getVariance();
         }
     }
     
@@ -215,13 +214,12 @@ ZenoResults compute_zeno_single_frame(
     
     // Extract gyration tensor
     if (!results.gyrationTensor.prettyName.empty()) {
+        // Access components array directly to avoid Uncertain copy constructor
+        const Uncertain<double>* components = reinterpret_cast<const Uncertain<double>*>(&results.gyrationTensor.value);
         for (int idx = 0; idx < 9; idx++) {
-            int row = idx / 3;
-            int col = idx % 3;
-            zeno_results.gyration_tensor_mean[idx] = 
-                results.gyrationTensor.value.get(row, col).getMean();
-            zeno_results.gyration_tensor_variance[idx] = 
-                results.gyrationTensor.value.get(row, col).getVariance();
+            const Uncertain<double>& element = components[idx];
+            zeno_results.gyration_tensor_mean[idx] = element.getMean();
+            zeno_results.gyration_tensor_variance[idx] = element.getVariance();
         }
     }
     

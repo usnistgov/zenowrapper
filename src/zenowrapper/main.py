@@ -238,6 +238,7 @@ class Property:
         self.values = np.nan * np.ones(shape, dtype=float)
         self.variance  = np.nan * np.ones(shape, dtype=float)
         self.unit = unit
+        self.shape = shape
         
     def add_value(self, index, value):
         """
@@ -278,8 +279,8 @@ class Property:
         """
         if np.any(np.isnan(self.values)):
             raise ValueError("Values of NaN found in {}".format(self.name))
-        self.overall_value = np.nanmean(self.values)
-        self.overall_variance = np.nansum(self.variance)
+        self.overall_value = np.nanmean(self.values, axis=0)
+        self.overall_variance = np.nansum(self.variance, axis=0)
 
 
 class ZenoWrapper(AnalysisBase):
