@@ -74,7 +74,7 @@ myst_enable_extensions = [
 myst_heading_anchors = 3
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ["_templates"]
+templates_path = ["_templates", os.path.join("_templates", "autosummary")]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -120,7 +120,7 @@ html_theme_options = {
 
 # Set your logo and favicon here -- replace the placeholders!
 # An SVG with empty gears is provided for editing
-html_logo = "_static/logo/mdakits-placeholder-logo.png"
+html_logo = "_static/logo/zeno_mdakit.png"
 html_favicon = "_static/logo/mdakits-empty-favicon-template.svg"
 
 # Add any paths that contain custom static files (such as style sheets) here,
