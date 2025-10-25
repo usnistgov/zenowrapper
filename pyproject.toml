@@ -29,8 +29,8 @@ dynamic = [
 
 
 # [project.urls]
-# source = "https://github.com/usnistgov/zenowrapper"
-# documentation = "https://zenowrapper.readthedocs.io"
+"Source" = "https://github.com/usnistgov/zenowrapper"
+"Public Documentation" = "https://Docs4NIST.nist.gov/zenowrapper/"
 
 
 [tool.scikit-build]
