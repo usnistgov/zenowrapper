@@ -2,5 +2,5 @@
 
 .. currentmodule:: {{ module }}
 
-.. autofunction:: {{ objname }}
+.. automethod:: {{ objname }}
    :no-index:

@@ -1,5 +1,6 @@
-ZENOWrapper was created by Jennifer A. Clark in 2024.
+# Authors
 
+ZENOWrapper was created by Jennifer A. Clark in 2024.
 
 All contributing authors are listed in this file below.
 The repository history at https://github.com/usnistgov/zenowrapper

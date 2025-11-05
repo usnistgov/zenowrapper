@@ -96,11 +96,11 @@ ZENO Documentation : Algorithm and property details
 
 References
 ----------
-.. [1] Douglas, J.F., Zhou, H.X., and Hubbard, J.B. (2017)
-       "Hydrodynamic friction and the capacitance of arbitrarily shaped objects"
-       Phys. Rev. E 49: 5319
-.. [2] ZENO Calculations: https://zeno.nist.gov/Calculations.html
-.. [3] ZENO Output: https://zeno.nist.gov/Output.html
+* Douglas, J.F., Zhou, H.X., and Hubbard, J.B. (2017)
+  "Hydrodynamic friction and the capacitance of arbitrarily shaped objects"
+  Phys. Rev. E 49: 5319
+* ZENO Calculations: https://zeno.nist.gov/Calculations.html
+* ZENO Output: https://zeno.nist.gov/Output.html
 
 """
 
@@ -459,12 +459,12 @@ class ZenoWrapper(AnalysisBase):
 
     References
     ----------
-    .. [1] Douglas, J.F., Zhou, H.X., Hubbard, J.B. (1994)
-           "Hydrodynamic friction and the capacitance of arbitrarily shaped objects"
-           Phys. Rev. E 49: 5319-5331
-    .. [2] ZENO Documentation: https://zeno.nist.gov/
-    .. [3] ZENO Calculations: https://zeno.nist.gov/Calculations.html
-    .. [4] ZENO Output Properties: https://zeno.nist.gov/Output.html
+    * Douglas, J.F., Zhou, H.X., Hubbard, J.B. (1994)
+      "Hydrodynamic friction and the capacitance of arbitrarily shaped objects"
+      Phys. Rev. E 49: 5319-5331
+    * ZENO Documentation: https://zeno.nist.gov/
+    * ZENO Calculations: https://zeno.nist.gov/Calculations.html
+    * ZENO Output Properties: https://zeno.nist.gov/Output.html
     """
 
     def __init__(

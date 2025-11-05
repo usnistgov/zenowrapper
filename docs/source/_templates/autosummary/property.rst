@@ -2,5 +2,5 @@
 
 .. currentmodule:: {{ module }}
 
-.. autofunction:: {{ objname }}
+.. autoproperty:: {{ objname }}
    :no-index:
