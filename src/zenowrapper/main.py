@@ -110,6 +110,7 @@ from typing import TYPE_CHECKING, Any
 
 import numpy as np
 from MDAnalysis.analysis.base import AnalysisBase
+from MDAnalysis.analysis.results import ResultsGroup
 
 from .zenowrapper_ext import zenolib
 
@@ -310,6 +311,28 @@ class ZenoWrapper(AnalysisBase):
     electrostatic-hydrodynamic analogy. All properties include rigorous statistical
     uncertainties from variance estimation.
 
+    **Two-Level Parallelization**
+
+    ZenoWrapper supports parallelization at two independent levels:
+
+    1. **Frame-level parallelism** (MDAnalysis): Distribute trajectory frames across
+       multiple Python processes using the ``backend`` parameter in :meth:`run()`.
+       Supported backends: ``'serial'``, ``'multiprocessing'``, ``'dask'``.
+
+    2. **Within-frame parallelism** (ZENO C++): Parallelize Monte Carlo walks within
+       each frame using the ``num_threads`` parameter. ZENO uses C++ std::thread for
+       efficient shared-memory parallelism.
+
+    These can be combined for maximum performance. For example, with 16 CPU cores:
+    ``run(backend='multiprocessing', n_workers=4)`` with ``num_threads=4`` uses
+    all 16 cores (4 processes × 4 threads per process).
+
+    .. note::
+       Frame-level parallelization requires trajectory readers that support random
+       access and pickling (most file-based readers). Streaming readers like
+       :class:`~MDAnalysis.coordinates.IMD.IMDReader` only support serial analysis
+       with within-frame threading.
+
     Parameters
     ----------
     atom_group : MDAnalysis.core.groups.AtomGroup
@@ -416,6 +439,24 @@ class ZenoWrapper(AnalysisBase):
     frames : numpy.ndarray
         Indices of analyzed frames
 
+    Notes
+    -----
+    **Parallelization Strategy**
+
+    For optimal performance, consider your workload characteristics:
+
+    * **Many frames (>100), fast computation**: Use frame-level parallelism
+      (``backend='multiprocessing'``) with ``num_threads=1`` or small values
+
+    * **Few frames (<20), expensive computation**: Use within-frame parallelism
+      with higher ``num_threads`` and ``backend='serial'``
+
+    * **Balanced workload**: Use hybrid approach, e.g., ``n_workers=4`` with
+      ``num_threads=4`` on a 16-core machine
+
+    Memory usage scales with ``n_workers`` (each worker loads a copy of the trajectory),
+    while ``num_threads`` shares memory within each worker.
+
     Examples
     --------
     Basic usage computing hydrodynamic radius::
@@ -443,6 +484,29 @@ class ZenoWrapper(AnalysisBase):
         >>> D_mean = D.mean()
         >>> D_std = np.sqrt(zeno.results.diffusion_coefficient.variance.mean())
 
+    Using frame-level parallelization for long trajectories::
+
+        >>> # Process 1000 frames using 8 workers, single-threaded per frame
+        >>> zeno = ZenoWrapper(u.atoms, type_radii=type_radii, num_threads=1)
+        >>> zeno.run(backend='multiprocessing', n_workers=8)
+
+    Using within-frame parallelization for expensive computation::
+
+        >>> # Process few frames with 16-threaded ZENO per frame
+        >>> zeno = ZenoWrapper(
+        ...     u.atoms,
+        ...     type_radii=type_radii,
+        ...     n_walks=10000000,  # 10M walks = expensive!
+        ...     num_threads=16
+        ... )
+        >>> zeno.run(backend='serial')
+
+    Using hybrid two-level parallelization::
+
+        >>> # Balance: 4 workers × 4 threads = 16 cores total
+        >>> zeno = ZenoWrapper(u.atoms, type_radii=type_radii, num_threads=4)
+        >>> zeno.run(backend='multiprocessing', n_workers=4)
+
     See Also
     --------
     MDAnalysis.analysis.base.AnalysisBase : Base class with run() method
@@ -466,6 +530,109 @@ class ZenoWrapper(AnalysisBase):
     * ZENO Calculations: https://zeno.nist.gov/Calculations.html
     * ZENO Output Properties: https://zeno.nist.gov/Output.html
     """
+
+    # Mark this analysis as parallelizable with split-apply-combine
+    _analysis_algorithm_is_parallelizable = True
+
+    @classmethod
+    def get_supported_backends(cls):
+        """Return the supported parallel backends for this analysis.
+
+        ZenoWrapper supports all standard MDAnalysis parallel backends since
+        each frame's analysis is completely independent and results can be
+        concatenated across frames.
+
+        Returns
+        -------
+        tuple of str
+            Supported backend names: ('serial', 'multiprocessing', 'dask')
+
+        See Also
+        --------
+        :ref:`parallel-analysis` : MDAnalysis parallel analysis documentation
+
+        Notes
+        -----
+        Even when using parallel backends, each worker will use ``num_threads``
+        for within-frame ZENO parallelization, giving two-level parallelism.
+
+        .. versionadded:: 3.0.0
+        """
+        return ("serial", "multiprocessing", "dask")
+
+    def _get_aggregator(self):
+        """Define how to aggregate results from parallel workers.
+
+        Returns
+        -------
+        ResultsGroup
+            Aggregator specifying how to combine results from multiple workers
+
+        Notes
+        -----
+        All ZenoWrapper results are stored as Property objects with `.values`
+        and `.variance` arrays. We use `ndarray_vstack` to concatenate these
+        arrays along the frame dimension (axis 0).
+
+        """
+
+        property_names = [
+            "capacitance",
+            "electric_polarizability_tensor",
+            "electric_polarizability_eigenvalues",
+            "electric_polarizability",
+            "intrinsic_conductivity",
+            "volume",
+            "gyration_tensor",
+            "gyration_eigenvalues",
+            "capacitance_same_volume_sphere",
+            "hydrodynamic_radius",
+            "prefactor_polarizability2intrinsic_viscosity",
+            "viscometric_radius",
+            "intrinsic_viscosity",
+        ]
+
+        if self.viscosity is not None:
+            property_names.append("friction_coefficient")
+            if self.mass is not None and self.buoyancy_factor is not None:
+                property_names.append("sedimentation_coefficient")
+            if self.temperature is not None:
+                property_names.append("diffusion_coefficient")
+        if self.mass is not None:
+            property_names.append("mass_intrinsic_viscosity")
+
+        # Define custom aggregator function for Property objects
+        def aggregate_property(properties):
+            """Aggregate Property objects by concatenating values and variance arrays.
+
+            Parameters
+            ----------
+            properties : list of Property
+                Property objects from each worker for a single attribute
+
+            Returns
+            -------
+            Property
+                Combined Property with stacked values and variance arrays
+            """
+            import numpy as np
+
+            # Concatenate values and variance arrays from all workers
+            # Each property has shape (n_frames_worker, ...) - concatenate along frame axis
+            stacked_values = np.concatenate([prop.values for prop in properties], axis=0)
+            stacked_variance = np.concatenate([prop.variance for prop in properties], axis=0)
+
+            # Create a new Property with combined data
+            combined = properties[0]  # Get template from first worker
+            combined.values = stacked_values
+            combined.variance = stacked_variance
+
+            return combined
+
+        # Build lookup with custom aggregator for each property
+        lookup = {name: aggregate_property for name in property_names}
+
+        return ResultsGroup(lookup=lookup)
 
     def __init__(
         self,

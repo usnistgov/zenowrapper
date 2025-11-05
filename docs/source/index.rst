@@ -14,6 +14,8 @@ Welcome to ZENOWrapper's documentation!
    :caption: Contents:
 
    api
+   implementation
+   parallelization
    authors
 
 
