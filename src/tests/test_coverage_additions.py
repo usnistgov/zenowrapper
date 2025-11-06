@@ -146,7 +146,7 @@ class TestZenoWrapperOptionalParameters:
         # Should have friction_coefficient AND sedimentation_coefficient
         assert hasattr(wrapper.results, "friction_coefficient")
         assert hasattr(wrapper.results, "sedimentation_coefficient")
-        assert wrapper.results.sedimentation_coefficient.values.shape[0] == 2
+        assert wrapper.results["sedimentation_coefficient"].values.shape[0] == 2
 
     def test_with_viscosity_and_temperature(self, simple_universe):
         """Test ZenoWrapper with viscosity and temperature."""
@@ -166,7 +166,7 @@ class TestZenoWrapperOptionalParameters:
         # Should have friction_coefficient AND diffusion_coefficient
         assert hasattr(wrapper.results, "friction_coefficient")
         assert hasattr(wrapper.results, "diffusion_coefficient")
-        assert wrapper.results.diffusion_coefficient.values.shape[0] == 2
+        assert wrapper.results["diffusion_coefficient"].values.shape[0] == 2
 
     def test_with_mass_only(self, simple_universe):
         """Test ZenoWrapper with mass but no viscosity."""
@@ -183,7 +183,7 @@ class TestZenoWrapperOptionalParameters:
 
         # Should have mass_intrinsic_viscosity
         assert hasattr(wrapper.results, "mass_intrinsic_viscosity")
-        assert wrapper.results.mass_intrinsic_viscosity.values.shape[0] == 2
+        assert wrapper.results["mass_intrinsic_viscosity"].values.shape[0] == 2
 
     def test_with_all_optional_parameters(self, simple_universe):
         """Test ZenoWrapper with all optional parameters set."""
@@ -420,10 +420,10 @@ class TestZenoWrapperConcludePhase:
         wrapper.run()
 
         # Check that overall_value and overall_variance are computed
-        assert hasattr(wrapper.results.capacitance, "overall_value")
-        assert hasattr(wrapper.results.capacitance, "overall_variance")
-        assert wrapper.results.capacitance.overall_value is not None
-        assert wrapper.results.capacitance.overall_variance is not None
+        assert hasattr(wrapper.results["capacitance"], "overall_value")
+        assert hasattr(wrapper.results["capacitance"], "overall_variance")
+        assert wrapper.results["capacitance"].overall_value is not None
+        assert wrapper.results["capacitance"].overall_variance is not None
 
     def test_conclude_with_all_optional_results(self, universe_multiframe):
         """Test _conclude with all optional results."""
@@ -441,10 +441,10 @@ class TestZenoWrapperConcludePhase:
         wrapper.run()
 
         # All optional properties should have overall values computed
-        assert hasattr(wrapper.results.friction_coefficient, "overall_value")
-        assert hasattr(wrapper.results.sedimentation_coefficient, "overall_value")
-        assert hasattr(wrapper.results.diffusion_coefficient, "overall_value")
-        assert hasattr(wrapper.results.mass_intrinsic_viscosity, "overall_value")
+        assert hasattr(wrapper.results["friction_coefficient"], "overall_value")
+        assert hasattr(wrapper.results["sedimentation_coefficient"], "overall_value")
+        assert hasattr(wrapper.results["diffusion_coefficient"], "overall_value")
+        assert hasattr(wrapper.results["mass_intrinsic_viscosity"], "overall_value")
 
 
 if __name__ == "__main__":

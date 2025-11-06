@@ -74,9 +74,9 @@ and propagation of uncertainties.
     zeno.run(start=0, stop=100, step=1, verbose=True)
 
     # Access results (each is a Property object with .values and .variance arrays)
-    print(f"Hydrodynamic radius: {zeno.results.hydrodynamic_radius.values.mean():.2f} Å")
-    print(f"Diffusion coefficient: {zeno.results.diffusion_coefficient.values.mean():.2e}")
-    print(f"Volume: {zeno.results.volume.values.mean():.2f} Å³")
+    print(f"Hydrodynamic radius: {zeno.results["hydrodynamic_radius"].values.mean():.2f} Å")
+    print(f"Diffusion coefficient: {zeno.results["diffusion_coefficient"].values.mean():.2e}")
+    print(f"Volume: {zeno.results["volume"]values.mean():.2f} Å³")
 
 **Notes**
 
@@ -382,9 +382,9 @@ class ZenoWrapper(AnalysisBase):
     viscosity_units : str, optional
         'p' (poise) or 'cp' (centipoise), default 'p'
     length_units : str, optional
-        'm', 'cm', 'nm', 'A' (Angstrom), or 'L' (arbitrary), default 'L'
+        'm', 'cm', 'nm', 'A' (Angstrom), or 'L' (arbitrary), default 'A'
     mass_units : str, optional
-        'Da', 'kDa', 'g', or 'kg', default 'kg'
+        'Da', 'kDa', 'g', or 'kg', default 'g'
     seed : int, optional
         Random seed for reproducibility. Default -1 (random seed).
     verbose : bool, optional
@@ -534,106 +534,6 @@ class ZenoWrapper(AnalysisBase):
     # Mark this analysis as parallelizable with split-apply-combine
     _analysis_algorithm_is_parallelizable = True
 
-    @classmethod
-    def get_supported_backends(cls):
-        """Return the supported parallel backends for this analysis.
-
-        ZenoWrapper supports all standard MDAnalysis parallel backends since
-        each frame's analysis is completely independent and results can be
-        concatenated across frames.
-
-        Returns
-        -------
-        tuple of str
-            Supported backend names: ('serial', 'multiprocessing', 'dask')
-
-        See Also
-        --------
-        :ref:`parallel-analysis` : MDAnalysis parallel analysis documentation
-
-        Notes
-        -----
-        Even when using parallel backends, each worker will use ``num_threads``
-        for within-frame ZENO parallelization, giving two-level parallelism.
-
-        .. versionadded:: 3.0.0
-        """
-        return ("serial", "multiprocessing", "dask")
-
-    def _get_aggregator(self):
-        """Define how to aggregate results from parallel workers.
-
-        Returns
-        -------
-        ResultsGroup
-            Aggregator specifying how to combine results from multiple workers
-
-        Notes
-        -----
-        All ZenoWrapper results are stored as Property objects with `.values`
-        and `.variance` arrays. We use `ndarray_vstack` to concatenate these
-        arrays along the frame dimension (axis 0).
-
-        """
-
-        property_names = [
-            "capacitance",
-            "electric_polarizability_tensor",
-            "electric_polarizability_eigenvalues",
-            "electric_polarizability",
-            "intrinsic_conductivity",
-            "volume",
-            "gyration_tensor",
-            "gyration_eigenvalues",
-            "capacitance_same_volume_sphere",
-            "hydrodynamic_radius",
-            "prefactor_polarizability2intrinsic_viscosity",
-            "viscometric_radius",
-            "intrinsic_viscosity",
-        ]
-
-        if self.viscosity is not None:
-            property_names.append("friction_coefficient")
-            if self.mass is not None and self.buoyancy_factor is not None:
-                property_names.append("sedimentation_coefficient")
-            if self.temperature is not None:
-                property_names.append("diffusion_coefficient")
-        if self.mass is not None:
-            property_names.append("mass_intrinsic_viscosity")
-
-        # Define custom aggregator function for Property objects
-        def aggregate_property(properties):
-            """Aggregate Property objects by concatenating values and variance arrays.
-
-            Parameters
-            ----------
-            properties : list of Property
-                Property objects from each worker for a single attribute
-
-            Returns
-            -------
-            Property
-                Combined Property with stacked values and variance arrays
-            """
-            import numpy as np
-
-            # Concatenate values and variance arrays from all workers
-            # Each property has shape (n_frames_worker, ...) - concatenate along frame axis
-            stacked_values = np.concatenate([prop.values for prop in properties], axis=0)
-            stacked_variance = np.concatenate([prop.variance for prop in properties], axis=0)
-
-            # Create a new Property with combined data
-            combined = properties[0]  # Get template from first worker
-            combined.values = stacked_values
-            combined.variance = stacked_variance
-
-            return combined
-
-        # Build lookup with custom aggregator for each property
-        lookup = {name: aggregate_property for name in property_names}
-
-        return ResultsGroup(lookup=lookup)
-
     def __init__(
         self,
         atom_group: AtomGroup,
@@ -656,8 +556,8 @@ class ZenoWrapper(AnalysisBase):
         buoyancy_factor: float | None = None,
         temperature_units: str = "K",
         viscosity_units: str = "p",
-        length_units: str = "L",
-        mass_units: str = "kg",
+        length_units: str = "A",
+        mass_units: str = "g",
         seed: int = -1,
         verbose: bool = False,
         **kwargs,
@@ -989,3 +889,103 @@ class ZenoWrapper(AnalysisBase):
 
         if self.mass is not None:
             self.results.mass_intrinsic_viscosity.compute_total_values()
+
+    @classmethod
+    def get_supported_backends(cls):
+        """Return the supported parallel backends for this analysis.
+
+        ZenoWrapper supports all standard MDAnalysis parallel backends since
+        each frame's analysis is completely independent and results can be
+        concatenated across frames.
+
+        Returns
+        -------
+        tuple of str
+            Supported backend names: ('serial', 'multiprocessing', 'dask')
+
+        See Also
+        --------
+        :ref:`parallel-analysis` : MDAnalysis parallel analysis documentation
+
+        Notes
+        -----
+        Even when using parallel backends, each worker will use ``num_threads``
+        for within-frame ZENO parallelization, giving two-level parallelism.
+
+        .. versionadded:: 3.0.0
+        """
+        return ("serial", "multiprocessing", "dask")
+
+    def _get_aggregator(self):
+        """Define how to aggregate results from parallel workers.
+
+        Returns
+        -------
+        ResultsGroup
+            Aggregator specifying how to combine results from multiple workers
+
+        Notes
+        -----
+        All ZenoWrapper results are stored as Property objects with `.values`
+        and `.variance` arrays. We use `ndarray_vstack` to concatenate these
+        arrays along the frame dimension (axis 0).
+
+        """
+
+        property_names = [
+            "capacitance",
+            "electric_polarizability_tensor",
+            "electric_polarizability_eigenvalues",
+            "electric_polarizability",
+            "intrinsic_conductivity",
+            "volume",
+            "gyration_tensor",
+            "gyration_eigenvalues",
+            "capacitance_same_volume_sphere",
+            "hydrodynamic_radius",
+            "prefactor_polarizability2intrinsic_viscosity",
+            "viscometric_radius",
+            "intrinsic_viscosity",
+        ]
+
+        if self.viscosity is not None:
+            property_names.append("friction_coefficient")
+            if self.mass is not None and self.buoyancy_factor is not None:
+                property_names.append("sedimentation_coefficient")
+            if self.temperature is not None:
+                property_names.append("diffusion_coefficient")
+        if self.mass is not None:
+            property_names.append("mass_intrinsic_viscosity")
+
+        # Define custom aggregator function for Property objects
+        def aggregate_property(properties):
+            """Aggregate Property objects by concatenating values and variance arrays.
+
+            Parameters
+            ----------
+            properties : list of Property
+                Property objects from each worker for a single attribute
+
+            Returns
+            -------
+            Property
+                Combined Property with stacked values and variance arrays
+            """
+            import numpy as np
+
+            # Concatenate values and variance arrays from all workers
+            # Each property has shape (n_frames_worker, ...) - concatenate along frame axis
+            stacked_values = np.concatenate([prop.values for prop in properties], axis=0)
+            stacked_variance = np.concatenate([prop.variance for prop in properties], axis=0)
+
+            # Create a new Property with combined data
+            combined = properties[0]  # Get template from first worker
+            combined.values = stacked_values
+            combined.variance = stacked_variance
+
+            return combined
+
+        # Build lookup with custom aggregator for each property
+        lookup = {name: aggregate_property for name in property_names}
+
+        return ResultsGroup(lookup=lookup)

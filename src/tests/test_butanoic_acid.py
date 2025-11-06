@@ -110,10 +110,10 @@ class TestButanoicAcid:
         assert hasattr(zeno.results, "volume")
         assert hasattr(zeno.results, "hydrodynamic_radius")
 
-        assert len(zeno.results.capacitance.values) == 1
-        assert zeno.results.capacitance.values[0] > 0
-        assert zeno.results.volume.values[0] > 0
-        assert zeno.results.hydrodynamic_radius.values[0] > 0
+        assert len(zeno.results["capacitance"].values) == 1
+        assert zeno.results["capacitance"].values[0] > 0
+        assert zeno.results["volume"].values[0] > 0
+        assert zeno.results["hydrodynamic_radius"].values[0] > 0
 
     @pytest.mark.parametrize(
         "launch_radius_factor, n_walks, n_interior_samples",
@@ -141,13 +141,13 @@ class TestButanoicAcid:
         zeno.run()
 
         # Verify results are physically reasonable
-        assert zeno.results.capacitance.values[0] > 0
-        assert zeno.results.volume.values[0] > 0
-        assert zeno.results.hydrodynamic_radius.values[0] > 0
+        assert zeno.results["capacitance"].values[0] > 0
+        assert zeno.results["volume"].values[0] > 0
+        assert zeno.results["hydrodynamic_radius"].values[0] > 0
 
         # Volume should be reasonable for a small molecule (rough estimate)
         # Butanoic acid is small, volume should be on order of 100-1000 Ų
-        assert 10 < zeno.results.volume.values[0] < 10000
+        assert 10 < zeno.results["volume"].values[0] < 10000
 
     def test_results_consistency(self, butanoic_acid_universe, type_radii, molecular_extent):
         """Test that multiple runs with same parameters give consistent results."""
@@ -167,9 +167,9 @@ class TestButanoicAcid:
             zeno.run()
             results.append(
                 {
-                    "capacitance": zeno.results.capacitance.values[0],
-                    "volume": zeno.results.volume.values[0],
-                    "hydrodynamic_radius": zeno.results.hydrodynamic_radius.values[0],
+                    "capacitance": zeno.results["capacitance"].values[0],
+                    "volume": zeno.results["volume"].values[0],
+                    "hydrodynamic_radius": zeno.results["hydrodynamic_radius"].values[0],
                 }
             )
 

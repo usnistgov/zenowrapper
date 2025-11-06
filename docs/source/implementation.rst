@@ -156,8 +156,8 @@ Usage Example
    zw.run()
 
    # Access results
-   print(f"Hydrodynamic radius: {zw.results.hydrodynamic_radius.overall_value} ± "
-         f"{np.sqrt(zw.results.hydrodynamic_radius.overall_variance)}")
+   print(f"Hydrodynamic radius: {zw.results["hydrodynamic_radius"]overall_value} ± "
+         f"{np.sqrt(zw.results["hydrodynamic_radius"]overall_variance)}")
 
 Implementation Notes
 ====================

@@ -74,14 +74,14 @@ class TestSerialVsParallel:
         # Note: Due to different chunking, results may differ slightly
         # so we use a relaxed tolerance
         assert_allclose(
-            zeno_serial.results.capacitance.values,
-            zeno_parallel.results.capacitance.values,
+            zeno_serial.results["capacitance"].values,
+            zeno_parallel.results["capacitance"].values,
             rtol=1e-10,
             atol=1e-10,
         )
         assert_allclose(
-            zeno_serial.results.volume.values,
-            zeno_parallel.results.volume.values,
+            zeno_serial.results["volume"].values,
+            zeno_parallel.results["volume"].values,
             rtol=1e-10,
             atol=1e-10,
         )
@@ -100,8 +100,8 @@ class TestSerialVsParallel:
         zeno.run(backend="multiprocessing", n_workers=2)
 
         # Check that all frames are present
-        assert len(zeno.results.capacitance.values) == parallel_universe.trajectory.n_frames
-        assert len(zeno.results.volume.values) == parallel_universe.trajectory.n_frames
+        assert len(zeno.results["capacitance"].values) == parallel_universe.trajectory.n_frames
+        assert len(zeno.results["volume"].values) == parallel_universe.trajectory.n_frames
 
         # Check tensor shapes
         assert zeno.results.electric_polarizability_tensor.values.shape == (
