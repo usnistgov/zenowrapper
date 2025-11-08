@@ -89,6 +89,8 @@ Statement for SRD, Data, and Software*][nist-open].
 ## Contact
 
 Jennifer A. Clark, PhD\
+[Derek Juba][djuba] (derek.juba@nist.gov)\
+[Walid Keyrouz][walidk] (walid.keyrouz@nist.gov)\
 [Debra J. Audus, PhD][daudus] (debra.audus@nist.gov)\
 [Jack F. Douglas, PhD][jdouglas]
 
@@ -101,7 +103,10 @@ Affilation:
 
 ## Citation
 
-Clark, J. A.; Audus, D. J.; Douglas, J. F. XXX, 2024. https://doi.org/10.18434/mds2-XXXX.
+- Clark, J. A., D. J. Audus, J. F. Douglas. XXX, 2024. https://doi.org/10.18434/mds2-XXXX
+- Juba, D., W. Keyrouz, M. Mascagni, M.Brady. Procedia Computer Science, 80, 2026. https://doi.org/10.1016/j.procs.2016.05.319
+- Juba, D., D. J. Audus, M. Mascagni, J. F. Douglas, W. Keyrouz Journal of Research of National Institute of Standards and Technology, 20, 2017. https://doi.org/10.6028/jres.122.020micro
+
 
 ### Acknowledgements
 
@@ -115,6 +120,8 @@ Please cite [MDAnalysis](https://github.com/MDAnalysis/mdanalysis#citation) when
 [nist-open]: https://www.nist.gov/open/license#software
 [docs4nist]: https://pages.nist.gov/zenowrapper/en/main/index.html
 [scipy]: https://scipy.org
+[djuba]: https://www.nist.gov/people/derek-juba
+[walidk]: https://www.nist.gov/people/walid-keyrouz
 [daudus]: https://www.nist.gov/people/debra-audus
 [jdouglas]: https://www.nist.gov/people/jack-f-douglas
 [polyanal]: https://www.nist.gov/programs-projects/polymer-analytics
