@@ -76,7 +76,7 @@ pre-commit install
 
 ## Copyright
 
-Works of NIST employees are not not subject to copyright protection in the United States'
+Works of NIST employees are not not subject to copyright protection in the United States
 
 ## License
 
