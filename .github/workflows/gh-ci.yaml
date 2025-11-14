@@ -60,8 +60,7 @@ jobs:
         environment-file: devtools/conda-envs/dev_env.yaml
         add-pip-as-python-dependency: true
 
-        miniforge-variant: Mambaforge
-        use-mamba: true
+        miniforge-variant: Miniforge3
         channels: conda-forge, defaults
 
         activate-environment: zenowrapper-dev
