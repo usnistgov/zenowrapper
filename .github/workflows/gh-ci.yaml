@@ -94,7 +94,8 @@ jobs:
         echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
         echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
 
-    - name: Install SPRNG
+    - name: Install SPRNG (Linux/macOS)
+      if: runner.os != 'Windows'
       run: |
         wget http://sprng.org/Version5.0/sprng5.tar.bz2
         tar -xjf sprng5.tar.bz2
@@ -102,7 +103,18 @@ jobs:
         CXXFLAGS=-fPIC ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
         make && make install
 
-    - name: Install ZENO
+    - name: Install SPRNG (Windows)
+      if: runner.os == 'Windows'
+      shell: bash -l {0}
+      run: |
+        curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
+        tar -xjf sprng5.tar.bz2
+        mkdir sprng5-build && cd sprng5-build
+        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
+        make && make install
+
+    - name: Install ZENO (Linux/macOS)
+      if: runner.os != 'Windows'
       run: |
         cd $HOME
         git clone https://github.com/usnistgov/ZENO.git
@@ -114,6 +126,24 @@ jobs:
               -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
               ../cpp
         make && make install
+        pwd
+        ls
+
+    - name: Install ZENO (Windows)
+      if: runner.os == 'Windows'
+      shell: bash -l {0}
+      run: |
+        cd $HOME
+        git clone https://github.com/usnistgov/ZENO.git
+        cd ZENO
+        mkdir zeno-build && cd zeno-build
+        cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
+              -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
+              -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
+              -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+              -G "MinGW Makefiles" \
+              ../cpp
+        cmake --build . && cmake --install .
         pwd
         ls
 
@@ -216,52 +246,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: usnistgov/Docs4NIST@add_analytics
-
-      - name: Install miniconda dependencies
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          python-version: "3.11"
-          environment-file: devtools/conda-envs/dev_env.yaml
-          add-pip-as-python-dependency: true
-          miniforge-variant: Miniforge3
-          channels: conda-forge, defaults
-          activate-environment: zenowrapper-dev
-          auto-update-conda: true
-          auto-activate-base: false
-          show-channel-urls: true
-
-      - name: Install GCC-11
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-11 g++-11
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
-
-      - name: Install SPRNG
-        run: |
-          wget http://sprng.org/Version5.0/sprng5.tar.bz2
-          tar -xjf sprng5.tar.bz2
-          mkdir sprng5-build && cd sprng5-build
-          CXXFLAGS=-fPIC ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
-          make && make install
-
-      - name: Install ZENO
-        run: |
-          cd $HOME
-          git clone https://github.com/usnistgov/ZENO.git
-          cd ZENO
-          mkdir zeno-build && cd zeno-build
-          cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
-                -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
-                -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
-                -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-                ../cpp
-          make && make install
-
-      - name: Install package
-        run: |
-          export ZENOPATH=$HOME/ZENO
-          python -m pip install .  --no-deps
 
       - name: Build documentation
         uses: usnistgov/Docs4NIST@add_analytics
