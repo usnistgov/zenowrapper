@@ -2,8 +2,8 @@
 Hydrodynamic Property Calculations Using ZENO Monte Carlo Methods
 ===================================================================
 
-This module provides the :class:`ZenoWrapper` class for computing hydrodynamic
-and geometric properties of molecular systems via Monte Carlo integration.
+This module provides the :class:`ZenoWrapper` class for computing hydrodynamic,
+electronic, and geometric properties of molecular systems via Monte Carlo integration.
 
 The implementation wraps the NIST ZENO C++ library and integrates with MDAnalysis
 for seamless analysis of molecular dynamics trajectories.

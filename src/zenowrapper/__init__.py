@@ -3,9 +3,9 @@ ZenoWrapper - Hydrodynamic Property Calculations for Molecular Systems
 ========================================================================
 
 ZenoWrapper provides a Python interface to the NIST ZENO software for computing
-hydrodynamic and geometric properties of molecular structures from MD simulations.
-This package integrates ZENO's Monte Carlo algorithms with MDAnalysis, enabling
-high-throughput analysis of biomolecular trajectories.
+hydrodynamic, electronic, and geometric properties of molecular structures from
+MD simulations. This package integrates ZENO's Monte Carlo algorithms with
+MDAnalysis, enabling high-throughput analysis of biomolecular trajectories.
 
 **Key Applications**
 
@@ -22,7 +22,7 @@ Compute essential physical properties for understanding molecular behavior in so
 
 These properties are critical for:
 
-- Comparing simulation predictions with experimental measurements (AUC, DLS, viscometry)
+- Comparing simulation predictions with experimental measurements (AUC, DLS, etc.)
 - Characterizing protein complexes, polymers, and nanoparticles
 - Validating force field accuracy in solution conditions
 - Predicting macromolecular behavior in crowded cellular environments
@@ -32,7 +32,8 @@ These properties are critical for:
 ZENO employs two complementary Monte Carlo methods:
 
 1. **Walk-on-Spheres (exterior)**: Solves Laplace's equation to compute electrical
-   properties (capacitance, polarizability) via electrostatic-hydrodynamic analogy
+   properties (capacitance, polarizability) and hydrodynamic properties via
+   electrostatic-hydrodynamic analogy
 2. **Interior Sampling**: Estimates geometric properties (volume, gyration tensor)
    by random point sampling within the molecular volume
 
