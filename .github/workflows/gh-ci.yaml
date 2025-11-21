@@ -104,6 +104,7 @@ jobs:
 
     - name: Install ZENO
       run: |
+        cd $HOME
         git clone https://github.com/usnistgov/ZENO.git
         cd ZENO
         mkdir zeno-build && cd zeno-build
@@ -113,10 +114,12 @@ jobs:
               -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
               ../cpp
         make && make install
-        echo "ZENOPATH=$HOME/ZENO" >> $GITHUB_ENV
+        pwd
+        ls
 
     - name: Install package
       run: |
+        export ZENOPATH=$HOME/ZENO
         python --version
         python -m pip install .  --no-deps
 
