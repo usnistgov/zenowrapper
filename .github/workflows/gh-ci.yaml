@@ -126,7 +126,7 @@ jobs:
         export CXX=g++
         export MSYSTEM=MINGW64
         ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
-        make && make install
+        /c/tools/msys64/mingw64/bin/mingw32-make && /c/tools/msys64/mingw64/bin/mingw32-make install
 
     - name: Install ZENO (Linux/macOS)
       if: runner.os != 'Windows'
