@@ -94,6 +94,25 @@ jobs:
         echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
         echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
 
+    - name: Install CMake (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake
+        cmake --version
+
+    - name: Install CMake (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        brew install cmake
+        cmake --version
+
+    - name: Install CMake (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+        cmake --version
+
     - name: Install SPRNG
       run: |
         wget http://sprng.org/Version5.0/sprng5.tar.bz2
