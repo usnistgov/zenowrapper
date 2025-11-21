@@ -40,7 +40,7 @@ jobs:
             # Edit or remove as particular combinations come into or out of date
             # Below we exclude runs with the latest release and Python 3.12
             - mdanalysis-version: "latest"
-              python-version: "3.12"
+              python-version: "3.13"
 
     steps:
     - uses: actions/checkout@v4
@@ -94,6 +94,18 @@ jobs:
         echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
         echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
 
+    - name: Install GCC (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        choco install msys2 --no-progress
+        C:/tools/msys64/usr/bin/bash.exe -lc "pacman -S --noconfirm mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-cmake"
+        echo "C:/tools/msys64/mingw64/bin" >> $GITHUB_PATH
+        echo "C:/tools/msys64/usr/bin" >> $GITHUB_PATH
+        gcc --version
+        g++ --version
+        make --version
+        cmake --version
+
     - name: Install SPRNG (Linux/macOS)
       if: runner.os != 'Windows'
       run: |
@@ -110,6 +122,9 @@ jobs:
         curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
         tar -xjf sprng5.tar.bz2
         mkdir sprng5-build && cd sprng5-build
+        export CC=gcc
+        export CXX=g++
+        export MSYSTEM=MINGW64
         ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
         make && make install
 
@@ -140,12 +155,14 @@ jobs:
         cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
               -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
               -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
+              -DCMAKE_C_COMPILER=gcc \
+              -DCMAKE_CXX_COMPILER=g++ \
               -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
               -G "MinGW Makefiles" \
               ../cpp
-        cmake --build . && cmake --install .
+        cmake --build . --config Release
+        cmake --install .
         pwd
-        ls
 
     - name: Install package
       run: |
