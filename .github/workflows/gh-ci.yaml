@@ -74,7 +74,7 @@ jobs:
       with:
         version: ${{ matrix.mdanalysis-version }}
         install-tests: false
-        installer:  mamba
+        installer:  conda
         shell: bash  -l {0}
 
     - name: Install GCC-11 (Linux)
@@ -117,8 +117,8 @@ jobs:
 
     - name: Install SPRNG (Windows)
       if: runner.os == 'Windows'
-      shell: bash -l {0}
       run: |
+        export PATH="/c/tools/msys64/mingw64/bin:/c/tools/msys64/usr/bin:$PATH"
         curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
         tar -xjf sprng5.tar.bz2
         mkdir sprng5-build && cd sprng5-build
@@ -146,7 +146,6 @@ jobs:
 
     - name: Install ZENO (Windows)
       if: runner.os == 'Windows'
-      shell: bash -l {0}
       run: |
         cd $HOME
         git clone https://github.com/usnistgov/ZENO.git
@@ -167,6 +166,7 @@ jobs:
     - name: Install package
       run: |
         export ZENOPATH=$HOME/ZENO
+        echo "ZENOPATH=$HOME/ZENO" >> $GITHUB_ENV
         python --version
         python -m pip install .  --no-deps
 
