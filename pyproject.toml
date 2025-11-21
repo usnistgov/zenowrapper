@@ -91,12 +91,6 @@ addopts = [
     "--cov-report=xml",
 ]
 
-
-# [tool.black]
-# Replaced by ruff-format
-# line-length = 80
-
-
 [tool.coverage.run]
 source = ["src/zenowrapper"]
 omit = [
@@ -115,23 +109,6 @@ exclude_also = [
 precision = 2
 show_missing = true
 skip_covered = false
-
-
-# [tool.isort]
-# Replaced by ruff lint rule "I"
-# multi_line_output = 3
-# include_trailing_comma = true
-# force_grid_wrap = 0
-# use_parentheses = true
-# line_length = 80
-
-
-# [tool.yapf]
-# Replaced by ruff-format
-# COLUMN_LIMIT = 80
-# INDENT_WIDTH = 4
-# USE_TABS = false
-
 
 [tool.ruff]
 line-length = 120

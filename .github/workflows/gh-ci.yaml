@@ -149,11 +149,11 @@ jobs:
 
     - name: Run Ruff Linter
       run: |
-        ruff check src/zenowrapper
+        ruff check --config pyproject.toml src/zenowrapper
 
     - name: Run Ruff Formatter Check
       run: |
-        ruff format --check src/zenowrapper
+        ruff format --check --config pyproject.toml src/zenowrapper
 
 
   pypi_check:

@@ -986,6 +986,6 @@ class ZenoWrapper(AnalysisBase):
             return combined
 
         # Build lookup with custom aggregator for each property
-        lookup = {name: aggregate_property for name in property_names}
+        lookup = dict.fromkeys(property_names, aggregate_property)
 
         return ResultsGroup(lookup=lookup)
