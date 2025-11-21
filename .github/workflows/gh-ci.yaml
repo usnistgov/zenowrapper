@@ -10,10 +10,10 @@ on:
     branches:
       - main
   schedule:
-    # Monthly tests run on main by default:
+    # Biweekly tests run on main by default:
     #   Scheduled workflows run on the latest commit on the default or base branch.
     #   (from https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule)
-    - cron: "0 0 * * 0"
+    - cron: "0 0 1,15 * *"
 
 concurrency:
   # Specific group naming so CI is only cancelled
@@ -53,7 +53,7 @@ jobs:
 
 
     # More info on options: https://github.com/conda-incubator/setup-miniconda
-    - name: Install conda dependencies
+    - name: Install miniconda dependencies
       uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python-version }}
@@ -76,6 +76,22 @@ jobs:
         install-tests: false
         installer:  mamba
         shell: bash  -l {0}
+
+    - name: Install SPRNG
+      run: |
+        wget http://sprng.org/Version5.0/sprng5.tar.bz2
+        tar -xjf sprng5.tar.bz2
+        mkdir sprng5-build && cd sprng5-build
+        CXXFLAGS=-fPIC ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
+        make && make install
+
+    - name: Install ZENO
+      run: |
+        git clone https://github.com/usnistgov/ZENO.git
+        mkdir zeno-build && cd zeno-build
+        cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install ../ZENO/cpp
+        make && make install
+        export ZENOPATH='$HOME/ZENO'
 
     - name: Install package
       run: |
