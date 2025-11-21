@@ -105,14 +105,15 @@ jobs:
     - name: Install ZENO
       run: |
         git clone https://github.com/usnistgov/ZENO.git
+        cd ZENO
         mkdir zeno-build && cd zeno-build
         cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
               -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
               -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
               -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-              ../ZENO/cpp
+              ../cpp
         make && make install
-        echo "ZENOPATH=$HOME/zeno-install" >> $GITHUB_ENV
+        echo "ZENOPATH=$HOME/ZENO" >> $GITHUB_ENV
 
     - name: Install package
       run: |
