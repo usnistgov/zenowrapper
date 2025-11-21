@@ -119,14 +119,15 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         export PATH="/c/tools/msys64/mingw64/bin:/c/tools/msys64/usr/bin:$PATH"
+        export MAKE=/c/tools/msys64/mingw64/bin/mingw32-make
         curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
         tar -xjf sprng5.tar.bz2
         mkdir sprng5-build && cd sprng5-build
         export CC=gcc
         export CXX=g++
         export MSYSTEM=MINGW64
-        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
-        /c/tools/msys64/mingw64/bin/mingw32-make && /c/tools/msys64/mingw64/bin/mingw32-make install
+        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install MAKE=$MAKE
+        $MAKE && $MAKE install
 
     - name: Install ZENO (Linux/macOS)
       if: runner.os != 'Windows'
