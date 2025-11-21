@@ -77,6 +77,23 @@ jobs:
         installer:  mamba
         shell: bash  -l {0}
 
+    - name: Install GCC-11
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-11 g++-11
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+        sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+        gcc --version
+        g++ --version
+
+    - name: Install GCC-11
+      if: runner.os == 'macOS'
+      run: |
+        brew install gcc@11
+        echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
+        echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
+
     - name: Install SPRNG
       run: |
         wget http://sprng.org/Version5.0/sprng5.tar.bz2
