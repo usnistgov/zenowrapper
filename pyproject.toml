@@ -47,6 +47,11 @@ build-dir = "src/build/{wheel_tag}"
 # This is useful for documentation building with Sphinx
 cmake.build-type = "Release"
 
+# Skip building extension if ZENOWRAPPER_SKIP_EXTENSION is set
+[[tool.scikit-build.overrides]]
+if.env.ZENOWRAPPER_SKIP_EXTENSION = "1"
+cmake.targets = []
+
 [tool.cibuildwheel]
 # Necessary to see build output from the actual compilation
 build-verbosity = 1

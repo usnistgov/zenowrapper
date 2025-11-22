@@ -37,6 +37,15 @@ find_package(Python 3.8
 
 find_package(nanobind CONFIG REQUIRED)
 
+# Check if we should skip building the extension
+if(DEFINED ENV{ZENOWRAPPER_SKIP_EXTENSION})
+  set(SKIP_EXTENSION $ENV{ZENOWRAPPER_SKIP_EXTENSION})
+  if(SKIP_EXTENSION STREQUAL "1" OR SKIP_EXTENSION STREQUAL "true" OR SKIP_EXTENSION STREQUAL "yes")
+    message(STATUS "ZENOWRAPPER_SKIP_EXTENSION is set, skipping extension build")
+    return()
+  endif()
+endif()
+
 # Get ZENO path from environment variable
 if(DEFINED ENV{ZENOPATH})
   set(ZENO_ROOT $ENV{ZENOPATH})
