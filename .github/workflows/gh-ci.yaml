@@ -32,7 +32,8 @@ jobs:
     strategy:
         fail-fast: false
         matrix:
-          os: [ubuntu-latest, macOS-latest, windows-latest]
+          # Remove windows tests because of difficulties installing SPRNG v5
+          os: [ubuntu-latest, macOS-latest,] # windows-latest]
           mdanalysis-version: ["latest", "develop"]
           python-version: ["3.11", "3.12", "3.13"]
           exclude:
@@ -94,16 +95,16 @@ jobs:
         echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
         echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
 
-    - name: Install GCC (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        # Install MinGW-w64 via Chocolatey (includes GCC and make)
-        choco install mingw --version=11.2.0.07112021 --force --no-progress
-        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
-        echo "C:/ProgramData/mingw64/mingw64/bin" >> $GITHUB_PATH
-        gcc --version
-        g++ --version
-        mingw32-make --version
+#    - name: Install GCC (Windows)
+#      if: runner.os == 'Windows'
+#      run: |
+#        # Install MinGW-w64 via Chocolatey (includes GCC and make)
+#        choco install mingw --version=11.2.0.07112021 --force --no-progress
+#        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
+#        echo "C:/ProgramData/mingw64/mingw64/bin" >> $GITHUB_PATH
+#        gcc --version
+#        g++ --version
+#        mingw32-make --version
 
     - name: Install SPRNG (Linux/macOS)
       if: runner.os != 'Windows'
@@ -114,18 +115,18 @@ jobs:
         CXXFLAGS=-fPIC ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install
         make && make install
 
-    - name: Install SPRNG (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
-        export MAKE=/c/ProgramData/mingw64/mingw64/bin/mingw32-make
-        export CC=/c/ProgramData/mingw64/mingw64/bin/gcc
-        export CXX=/c/ProgramData/mingw64/mingw64/bin/g++
-        curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
-        tar -xjf sprng5.tar.bz2
-        mkdir sprng5-build && cd sprng5-build
-        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install MAKE=$MAKE CC=$CC CXX=$CXX
-        $MAKE && $MAKE install
+#    - name: Install SPRNG (Windows)
+#      if: runner.os == 'Windows'
+#      run: |
+#        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
+#        export MAKE=/c/ProgramData/mingw64/mingw64/bin/mingw32-make
+#        export CC=/c/ProgramData/mingw64/mingw64/bin/gcc
+#        export CXX=/c/ProgramData/mingw64/mingw64/bin/g++
+#        curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
+#        tar -xjf sprng5.tar.bz2
+#        mkdir sprng5-build && cd sprng5-build
+#        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install MAKE=$MAKE CC=$CC CXX=$CXX
+#        $MAKE && $MAKE install
 
     - name: Install ZENO (Linux/macOS)
       if: runner.os != 'Windows'
@@ -143,25 +144,25 @@ jobs:
         pwd
         ls
 
-    - name: Install ZENO (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
-        cd $HOME
-        git clone https://github.com/usnistgov/ZENO.git
-        cd ZENO
-        mkdir zeno-build && cd zeno-build
-        cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
-              -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
-              -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
-              -DCMAKE_C_COMPILER=/c/ProgramData/mingw64/mingw64/bin/gcc \
-              -DCMAKE_CXX_COMPILER=/c/ProgramData/mingw64/mingw64/bin/g++ \
-              -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-              -G "MinGW Makefiles" \
-              ../cpp
-        cmake --build . --config Release
-        cmake --install .
-        pwd
+#    - name: Install ZENO (Windows)
+#      if: runner.os == 'Windows'
+#      run: |
+#        export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
+#        cd $HOME
+#        git clone https://github.com/usnistgov/ZENO.git
+#        cd ZENO
+#        mkdir zeno-build && cd zeno-build
+#        cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
+#              -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
+#              -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
+#              -DCMAKE_C_COMPILER=/c/ProgramData/mingw64/mingw64/bin/gcc \
+#              -DCMAKE_CXX_COMPILER=/c/ProgramData/mingw64/mingw64/bin/g++ \
+#              -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+#              -G "MinGW Makefiles" \
+#              ../cpp
+#        cmake --build . --config Release
+#        cmake --install .
+#        pwd
 
     - name: Install package
       run: |
