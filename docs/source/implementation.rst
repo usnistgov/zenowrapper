@@ -82,30 +82,6 @@ C++ Layer (``zenolib.cpp``)
    - ``ZenoResults``: Read-only result struct with all properties exposed
    - ``compute_zeno_single_frame``: Main computation function
 
-Data Transfer Optimization
-===========================
-
-Before (Inefficient)
---------------------
-
-- Create empty ``MixedModel`` in Python
-- Loop over all atoms in Python
-- For each atom: create ``Vector3``, create ``Sphere``, call ``addSphere()`` → N Python→C++ calls
-- Call ``doWalkOnSpheres()`` → 1 call
-- Call ``doInteriorSampling()`` → 1 call
-- Access each result property individually → 26+ C++→Python calls
-- **Total: ~N+30 calls across Python/C++ boundary**
-
-After (Optimized)
------------------
-
-- Pass positions and radii as numpy arrays → 1 Python→C++ call
-- All geometry building in C++
-- All computations in C++
-- All result extraction in C++
-- Return single packed structure → 1 C++→Python call
-- **Total: 2 calls across Python/C++ boundary per frame**
-
 Benefits
 ========
 

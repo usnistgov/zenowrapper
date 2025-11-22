@@ -20,13 +20,13 @@ Architecture
 
 .. code-block:: text
 
-    ┌─────────────────────────────────────────────────────────────┐
-    │          MDAnalysis Multiprocessing (Frame Level)           │
-    │  Distributes FRAMES across Python processes                 │
-    ├─────────────────────────────────────────────────────────────┤
-    │  Process 1    │  Process 2    │  Process 3    │  Process 4  │
-    │  Frames 0-24  │  Frames 25-49 │  Frames 50-74 │  Frames 75-99│
-    └───────┬───────┴───────┬───────┴───────┬───────┴───────┬─────┘
+    ┌───────────────────────────────────────────────────────────────┐
+    │          MDAnalysis Multiprocessing (Frame Level)             │
+    │  Distributes FRAMES across Python processes                   │
+    ├───────────────────────────────────────────────────────────────┤
+    │  Process 1    │  Process 2    │  Process 3    │  Process 4    │
+    │  Frames 0-24  │  Frames 25-49 │  Frames 50-74 │  Frames 75-99 │
+    └───────┬───────┴───────┬───────┴───────┬───────┴───────┬───────┘
             │               │               │               │
             ▼               ▼               ▼               ▼
     ┌───────────────┐ ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
