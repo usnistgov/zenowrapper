@@ -58,7 +58,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3
       with:
         python-version: ${{ matrix.python-version }}
-        environment-file: devtools/conda-envs/dev_env.yaml
+        environment-file: devtools/conda-envs/ci_env.yaml
         add-pip-as-python-dependency: true
 
         miniforge-variant: Miniforge3
