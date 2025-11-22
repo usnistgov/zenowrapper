@@ -119,12 +119,12 @@ jobs:
       run: |
         export PATH="/c/ProgramData/mingw64/mingw64/bin:$PATH"
         export MAKE=/c/ProgramData/mingw64/mingw64/bin/mingw32-make
+        export CC=/c/ProgramData/mingw64/mingw64/bin/gcc
+        export CXX=/c/ProgramData/mingw64/mingw64/bin/g++
         curl -L http://sprng.org/Version5.0/sprng5.tar.bz2 -o sprng5.tar.bz2
         tar -xjf sprng5.tar.bz2
         mkdir sprng5-build && cd sprng5-build
-        export CC=gcc
-        export CXX=g++
-        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install MAKE=$MAKE
+        ../sprng5/configure --with-fortran=no --with-mpi=no --prefix=$HOME/sprng5-install MAKE=$MAKE CC=$CC CXX=$CXX
         $MAKE && $MAKE install
 
     - name: Install ZENO (Linux/macOS)
@@ -154,8 +154,8 @@ jobs:
         cmake -DSPRNG_INCLUDE_DIR=$HOME/sprng5-install/include \
               -DSPRNG_LIBRARY=$HOME/sprng5-install/lib/libsprng.a \
               -DCMAKE_INSTALL_PREFIX=$HOME/zeno-install \
-              -DCMAKE_C_COMPILER=gcc \
-              -DCMAKE_CXX_COMPILER=g++ \
+              -DCMAKE_C_COMPILER=/c/ProgramData/mingw64/mingw64/bin/gcc \
+              -DCMAKE_CXX_COMPILER=/c/ProgramData/mingw64/mingw64/bin/g++ \
               -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
               -G "MinGW Makefiles" \
               ../cpp
