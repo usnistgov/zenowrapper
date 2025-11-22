@@ -39,7 +39,7 @@ Below we provide instructions for `pip`.
 #### Install ZENO
 
 Follow the [installation instructions for ZENO](https://zeno.nist.gov/Compilation.html).
-Then set an environmental variable for the path: `ZENOPATH='/Users/jennifer.clark/bin/ZENO'`
+Then set an environmental variable for the path: `ZENOPATH='/Your/Path/to/ZENO'` containing the `cpp` and `zeno-build` directories.
 
 #### Download
 
