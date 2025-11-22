@@ -262,13 +262,10 @@ jobs:
   docs:
     name: Build docs on ubuntu-latest
     runs-on: ubuntu-latest
+    env:
+      ZENOWRAPPER_SKIP_EXTENSION: 1
     steps:
       - uses: usnistgov/Docs4NIST@add_analytics
-
-      - name: Build documentation
-        uses: usnistgov/Docs4NIST@add_analytics
-        env:
-          ZENOWRAPPER_SKIP_EXTENSION: 1
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/dev_env.yaml
