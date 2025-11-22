@@ -87,8 +87,15 @@ These algorithms provide rigorous statistical uncertainties for all computed pro
 # Add imports here
 from __future__ import annotations
 
-from zenowrapper.main import ZenoWrapper as ZenoWrapper
+import os
 
 from ._version import __version__ as __version__
+
+# Check if we're building docs (skip C++ extension import)
+if os.environ.get("ZENOWRAPPER_SKIP_EXTENSION", "").lower() in ("1", "true", "yes"):
+    # Mock mode for documentation building
+    pass
+else:
+    from zenowrapper.main import ZenoWrapper as ZenoWrapper
 
 __all__ = ["ZenoWrapper", "__version__"]

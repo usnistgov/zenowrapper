@@ -106,13 +106,35 @@ References
 
 from __future__ import annotations
 
+import os
 from typing import TYPE_CHECKING, Any
+from unittest.mock import MagicMock
 
 import numpy as np
 from MDAnalysis.analysis.base import AnalysisBase
 from MDAnalysis.analysis.results import ResultsGroup
 
-from .zenowrapper_ext import zenolib
+# Conditionally import zenolib or use mock for documentation building
+if os.environ.get("ZENOWRAPPER_SKIP_EXTENSION", "").lower() in ("1", "true", "yes"):
+    # Mock zenolib for documentation building with nested attributes
+    zenolib = MagicMock()
+    zenolib.Length = MagicMock()
+    zenolib.Temperature = MagicMock()
+    zenolib.Mass = MagicMock()
+    zenolib.Viscosity = MagicMock()
+    if TYPE_CHECKING:
+        from typing import Any as ZenoLength
+        from typing import Any as ZenoMass
+        from typing import Any as ZenoTemperature
+        from typing import Any as ZenoViscosity
+else:
+    from .zenowrapper_ext import zenolib  # type: ignore[no-redef]
+
+    if TYPE_CHECKING:
+        ZenoLength = zenolib.Length
+        ZenoTemperature = zenolib.Temperature
+        ZenoMass = zenolib.Mass
+        ZenoViscosity = zenolib.Viscosity
 
 if TYPE_CHECKING:
     from MDAnalysis.core.groups import AtomGroup
@@ -120,7 +142,7 @@ if TYPE_CHECKING:
 
 
 # Helper functions to convert string units to ZENO enum values
-def _get_length_unit(unit_str: str) -> zenolib.Length:
+def _get_length_unit(unit_str: str) -> ZenoLength:
     """
     Convert length unit string to ZENO enum.
 
@@ -144,7 +166,7 @@ def _get_length_unit(unit_str: str) -> zenolib.Length:
     return unit_map.get(unit_str, zenolib.Length.L)
 
 
-def _get_temperature_unit(unit_str: str) -> zenolib.Temperature:
+def _get_temperature_unit(unit_str: str) -> ZenoTemperature:
     """
     Convert temperature unit string to ZENO enum.
 
@@ -165,7 +187,7 @@ def _get_temperature_unit(unit_str: str) -> zenolib.Temperature:
     return unit_map.get(unit_str, zenolib.Temperature.K)
 
 
-def _get_mass_unit(unit_str: str) -> zenolib.Mass:
+def _get_mass_unit(unit_str: str) -> ZenoMass:
     """
     Convert mass unit string to ZENO enum.
 
@@ -188,7 +210,7 @@ def _get_mass_unit(unit_str: str) -> zenolib.Mass:
     return unit_map.get(unit_str, zenolib.Mass.kg)
 
 
-def _get_viscosity_unit(unit_str: str) -> zenolib.Viscosity:
+def _get_viscosity_unit(unit_str: str) -> ZenoViscosity:
     """
     Convert viscosity unit string to ZENO enum.
 

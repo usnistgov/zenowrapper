@@ -43,6 +43,10 @@ minimum-version = "0.4"
 # Setuptools-style build caching in a local directory
 build-dir = "src/build/{wheel_tag}"
 
+# Skip CMake build if ZENOWRAPPER_SKIP_EXTENSION is set to 1
+# This is useful for documentation building with Sphinx
+cmake.build-type = "Release"
+
 [tool.cibuildwheel]
 # Necessary to see build output from the actual compilation
 build-verbosity = 1
