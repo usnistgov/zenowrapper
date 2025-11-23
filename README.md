@@ -17,8 +17,11 @@ ZENOWrapper
 Certain commercial equipment, instruments, or materials are identified in this paper to foster understanding. Such identification does not imply recommendation or endorsement by the National Institute of Standards and Technology, nor does it imply that the materials or equipment identified are necessarily the best available for the purpose.
 
 ## Summary
+ZENO computes material properties using numerical path integration techniques based on Brownian motion Monte Carlo methods (MCMs). These methods provide stochastic solutions to elliptic partial differential equations (PDEs), which represent the desired material properties or serve as intermediates for their computation. The mathematical framework maps these problems onto the electrostatic capacitance problem, where the stochastic solution corresponds to the probability of a random walk from infinity hitting the material's surface. ZENO employs the Walk-on-Spheres (WoS) algorithm to efficiently simulate Brownian motion, enabling larger jumps compared to traditional Brownian dynamics techniques, significantly reducing computational cost.
 
-This package provides a concise Python wrapper around the ZENO computation engine with an MDAnalysis‑friendly API. It automates preparing ZENO inputs, running ZENO computations, and returning results as Python objects (accepting MDAnalysis Universe/AtomGroup objects and trajectory frames), enabling transport and hydrodynamic analyses to be run directly within MDAnalysis workflows for reproducible analysis and scripting. See the ZenoWrapper API documentation for details.
+The ZENOWrapper package provides a Python interface to the ZENO computation engine, integrating it seamlessly with MDAnalysis. This integration automates the preparation of ZENO input files, execution of computations, and retrieval of results as Python objects. By accepting MDAnalysis Universe/AtomGroup objects and trajectory frames, ZENOWrapper enables hydrodynamic and transport property analyses to be conducted directly within MDAnalysis workflows, facilitating reproducible research.
+
+Additionally, ZENOWrapper bridges ZENO’s specialized input system with any simulation package supported by MDAnalysis. It also leverages MDAnalysis’ parallelization capabilities and compatibility with interactive molecular dynamics (IMD3), enhancing the efficiency and scalability of hydrodynamic property calculations for macromolecular systems.
 
 ZENOWrapper is bound by a [Code of Conduct](https://github.com/usnistgov/zenowrapper/blob/main/CODE_OF_CONDUCT.md).
 
