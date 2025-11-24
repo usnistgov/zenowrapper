@@ -266,8 +266,9 @@ jobs:
       - uses: usnistgov/Docs4NIST@add_analytics
         with:
           docs-folder: docs/
-          conda-environment: devtools/conda-envs/docs_env.yaml
-          pre-build-command: ZENOWRAPPER_SKIP_EXTENSION=1 pip install -e .
+          pre-build-command: |
+            export ZENOWRAPPER_SKIP_EXTENSION=1
+            conda env update --name base --solver libmamba --file devtools/conda-envs/docs_env.yaml
           formats: |-
             epub
             html
