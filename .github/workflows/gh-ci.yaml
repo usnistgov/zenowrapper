@@ -267,6 +267,7 @@ jobs:
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
+          pre-build-command: ZENOWRAPPER_SKIP_EXTENSION=1 pip install -e .
           formats: |-
             epub
             html
