@@ -2,6 +2,8 @@ name: zenowrapper-dev
 channels:
   - conda-forge
   - defaults
+variables:
+  ZENOWRAPPER_SKIP_EXTENSION: "1"
 dependencies:
   # Base Python
   - python >=3.10

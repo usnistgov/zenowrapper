@@ -7,7 +7,8 @@ build-backend = "scikit_build_core.build"
 name = "zenowrapper"
 description = "This package wraps the package ZENO in a compatible way with MDAnalysis."
 authors = [
-    {name = "Jennifer A. Clark", email = "jennifer.clark@nist.gov"},
+    {name = "Jennifer A. Clark"},
+    {name = "Debra J. Audus", email = "debra.audus@nist.gov"},
 ]
 maintainers = [
     {name = "Debra J. Audus", email = "debra.audus@nist.gov"},
