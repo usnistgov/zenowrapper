@@ -264,11 +264,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: usnistgov/Docs4NIST@add_analytics
+        env:
+          ZENOWRAPPER_SKIP_EXTENSION: "1"
         with:
           docs-folder: docs/
-          pre-build-command: |
-            export ZENOWRAPPER_SKIP_EXTENSION=1
-            conda env update --name base --solver libmamba --file devtools/conda-envs/docs_env.yaml
+          conda-environment: devtools/conda-envs/docs_env.yaml
           formats: |-
             epub
             html
