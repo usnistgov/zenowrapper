@@ -262,10 +262,11 @@ jobs:
   docs:
     name: Build docs on ubuntu-latest
     runs-on: ubuntu-latest
+    env:
+      ZENOWRAPPER_SKIP_EXTENSION: "1"
     steps:
-      - uses: jaclark5/Docs4NIST@add_env # usnistgov/Docs4NIST@add_analytics
-        env:
-          ZENOWRAPPER_SKIP_EXTENSION: "1"
+# usnistgov/Docs4NIST@add_analytics
+      - uses: jaclark5/Docs4NIST@add_env
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
