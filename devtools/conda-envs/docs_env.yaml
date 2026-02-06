@@ -22,4 +22,4 @@ dependencies:
   # Pip-only dependencies
   - pip:
     - codecov
-    - -e ../../
+    - ../../
