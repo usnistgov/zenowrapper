@@ -13,7 +13,7 @@ on:
     # Biweekly tests run on main by default:
     #   Scheduled workflows run on the latest commit on the default or base branch.
     #   (from https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule)
-    - cron: "0 0 1,15 * *"
+    - cron: "0 0 2 * *"
 
 concurrency:
   # Specific group naming so CI is only cancelled
@@ -262,14 +262,13 @@ jobs:
   docs:
     name: Build docs on ubuntu-latest
     runs-on: ubuntu-latest
-    env:
-      ZENOWRAPPER_SKIP_EXTENSION: "1"
     steps:
         # usnistgov/Docs4NIST@add_analytics
       - uses: jaclark5/Docs4NIST@add_env
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
+          extra-env: 'ZENOWRAPPER_SKIP_EXTENSION=1'
           formats: |-
             epub
             html
