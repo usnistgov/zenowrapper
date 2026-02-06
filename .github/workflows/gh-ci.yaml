@@ -265,10 +265,8 @@ jobs:
     env:
       ZENOWRAPPER_SKIP_EXTENSION: "1"
     steps:
-# usnistgov/Docs4NIST@add_analytics
+        # usnistgov/Docs4NIST@add_analytics
       - uses: jaclark5/Docs4NIST@add_env
-        env:
-          ZENOWRAPPER_SKIP_EXTENSION: "1"
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
