@@ -1,0 +1,1224 @@
+
+
+
+
+
+  
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="../../../../_static/mdakits-empty-favicon-template.svg">
+</head>
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zenowrapper.main &mdash; ZENOWrapper  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/ntd2d.css?v=6fe47884" />
+
+  
+    <link rel="shortcut icon" href="../../_static/mdakits-empty-favicon-template.svg"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/js/versions.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RJSMY46M5C');
+  </script>
+  <!-- Old DAP UA tag -->
+  <script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+  </script>
+
+   
+
+  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SH9M3SGZK6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SH9M3SGZK6');
+  </script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+
+  
+
+
+
+
+<a href="../../index.html">
+  
+    <img src="../../_static/zeno_mdakit.png" class="logo" alt="Logo"/>
+</a>
+
+
+  
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+        <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../implementation.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../parallelization.html">Parallelization Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
+</ul>
+
+</div>
+
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ZENOWrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">zenowrapper.main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zenowrapper.main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Hydrodynamic Property Calculations Using ZENO Monte Carlo Methods</span>
+<span class="sd">===================================================================</span>
+
+<span class="sd">This module provides the :class:`ZenoWrapper` class for computing hydrodynamic,</span>
+<span class="sd">electronic, and geometric properties of molecular systems via Monte Carlo integration.</span>
+
+<span class="sd">The implementation wraps the NIST ZENO C++ library and integrates with MDAnalysis</span>
+<span class="sd">for seamless analysis of molecular dynamics trajectories.</span>
+
+<span class="sd">**Computed Properties**</span>
+
+<span class="sd">**Electrical Properties (via exterior calculation)**:</span>
+<span class="sd">    - Capacitance</span>
+<span class="sd">    - Electric polarizability tensor and eigenvalues</span>
+<span class="sd">    - Mean electric polarizability</span>
+<span class="sd">    - Intrinsic conductivity</span>
+
+<span class="sd">**Geometric Properties (via interior calculation)**:</span>
+<span class="sd">    - Volume</span>
+<span class="sd">    - Gyration tensor and eigenvalues</span>
+
+<span class="sd">**Hydrodynamic Properties (derived via electrostatic-hydrodynamic analogy)**:</span>
+<span class="sd">    - Hydrodynamic radius</span>
+<span class="sd">    - Friction coefficient (requires viscosity)</span>
+<span class="sd">    - Diffusion coefficient (requires temperature, viscosity)</span>
+<span class="sd">    - Sedimentation coefficient (requires mass, buoyancy factor, viscosity)</span>
+<span class="sd">    - Intrinsic viscosity</span>
+<span class="sd">    - Viscometric radius</span>
+
+<span class="sd">**Monte Carlo Algorithms**</span>
+
+<span class="sd">1. **Walk-on-Spheres (exterior)**: Random walks launched from a sphere enclosing</span>
+<span class="sd">   the molecule determine electrical properties by solving Laplace&#39;s equation.</span>
+<span class="sd">   Each walk either hits the object or escapes to infinity, analogous to Zeno&#39;s</span>
+<span class="sd">   paradox of Achilles and the Tortoise.</span>
+
+<span class="sd">2. **Interior Sampling**: Random points sampled within the launch sphere determine</span>
+<span class="sd">   volume and gyration properties based on whether points fall inside the molecule.</span>
+
+<span class="sd">Both methods provide rigorous statistical uncertainties via variance estimation</span>
+<span class="sd">and propagation of uncertainties.</span>
+
+<span class="sd">**Usage Example**</span>
+
+<span class="sd">.. code-block:: python</span>
+
+<span class="sd">    import MDAnalysis as mda</span>
+<span class="sd">    from zenowrapper import ZenoWrapper</span>
+
+<span class="sd">    # Load system</span>
+<span class="sd">    u = mda.Universe(&#39;protein.pdb&#39;, &#39;trajectory.dcd&#39;)</span>
+
+<span class="sd">    # Define VdW radii by atom type</span>
+<span class="sd">    type_radii = {</span>
+<span class="sd">        &#39;C&#39;: 1.70, &#39;N&#39;: 1.55, &#39;O&#39;: 1.52, &#39;S&#39;: 1.80,</span>
+<span class="sd">        &#39;H&#39;: 1.20, &#39;P&#39;: 1.80</span>
+<span class="sd">    }</span>
+
+<span class="sd">    # Initialize analysis</span>
+<span class="sd">    zeno = ZenoWrapper(</span>
+<span class="sd">        u.select_atoms(&#39;protein&#39;),</span>
+<span class="sd">        type_radii=type_radii,</span>
+<span class="sd">        n_walks=1000000,           # exterior calculation</span>
+<span class="sd">        n_interior_samples=100000,  # interior calculation</span>
+<span class="sd">        temperature=298.15,         # K, for diffusion coefficient</span>
+<span class="sd">        viscosity=0.01,            # poise (water at 20°C)</span>
+<span class="sd">        mass=50000.0,              # Da</span>
+<span class="sd">        buoyancy_factor=0.73,      # typical for proteins in water</span>
+<span class="sd">        length_units=&#39;A&#39;           # Angstroms</span>
+<span class="sd">    )</span>
+
+<span class="sd">    # Run over trajectory frames</span>
+<span class="sd">    zeno.run(start=0, stop=100, step=1, verbose=True)</span>
+
+<span class="sd">    # Access results (each is a Property object with .values and .variance arrays)</span>
+<span class="sd">    print(f&quot;Hydrodynamic radius: {zeno.results[&quot;hydrodynamic_radius&quot;].values.mean():.2f} Å&quot;)</span>
+<span class="sd">    print(f&quot;Diffusion coefficient: {zeno.results[&quot;diffusion_coefficient&quot;].values.mean():.2e}&quot;)</span>
+<span class="sd">    print(f&quot;Volume: {zeno.results[&quot;volume&quot;]values.mean():.2f} Å³&quot;)</span>
+
+<span class="sd">**Notes**</span>
+
+<span class="sd">- All results are stored as :class:`Property` objects with `.values` and `.variance`</span>
+<span class="sd">  arrays indexed by frame number</span>
+<span class="sd">- Computational cost scales with `n_walks` and `n_interior_samples`; adjust for</span>
+<span class="sd">  accuracy vs. speed tradeoff</span>
+<span class="sd">- Statistical uncertainties decrease as ~1/sqrt(N) for N samples</span>
+<span class="sd">- The `seed` parameter ensures reproducibility when set to a fixed value</span>
+
+<span class="sd">See Also</span>
+<span class="sd">--------</span>
+<span class="sd">MDAnalysis.analysis.base.AnalysisBase : Base class documentation</span>
+<span class="sd">    https://docs.mdanalysis.org/stable/documentation_pages/analysis/base.html</span>
+<span class="sd">ZENO Documentation : Algorithm and property details</span>
+<span class="sd">    https://zeno.nist.gov/</span>
+
+<span class="sd">References</span>
+<span class="sd">----------</span>
+<span class="sd">* Douglas, J.F., Zhou, H.X., and Hubbard, J.B. (2017)</span>
+<span class="sd">  &quot;Hydrodynamic friction and the capacitance of arbitrarily shaped objects&quot;</span>
+<span class="sd">  Phys. Rev. E 49: 5319</span>
+<span class="sd">* ZENO Calculations: https://zeno.nist.gov/Calculations.html</span>
+<span class="sd">* ZENO Output: https://zeno.nist.gov/Output.html</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.analysis.base</span> <span class="kn">import</span> <span class="n">AnalysisBase</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.analysis.results</span> <span class="kn">import</span> <span class="n">ResultsGroup</span>
+
+<span class="c1"># Conditionally import zenolib or use mock for documentation building</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ZENOWRAPPER_SKIP_EXTENSION&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;yes&quot;</span><span class="p">):</span>
+    <span class="c1"># Mock zenolib for documentation building with nested attributes</span>
+    <span class="n">zenolib</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">zenolib</span><span class="o">.</span><span class="n">Temperature</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">zenolib</span><span class="o">.</span><span class="n">Viscosity</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">ZenoLength</span>
+        <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">ZenoMass</span>
+        <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">ZenoTemperature</span>
+        <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span> <span class="k">as</span> <span class="n">ZenoViscosity</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.zenowrapper_ext</span> <span class="kn">import</span> <span class="n">zenolib</span>  <span class="c1"># type: ignore[no-redef]</span>
+
+    <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+        <span class="n">ZenoLength</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span>
+        <span class="n">ZenoTemperature</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Temperature</span>
+        <span class="n">ZenoMass</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span>
+        <span class="n">ZenoViscosity</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Viscosity</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">MDAnalysis.core.groups</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
+    <span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">NDArray</span>
+
+
+<span class="c1"># Helper functions to convert string units to ZENO enum values</span>
+<span class="k">def</span> <span class="nf">_get_length_unit</span><span class="p">(</span><span class="n">unit_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZenoLength</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert length unit string to ZENO enum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unit_str : str</span>
+<span class="sd">        Length unit: &#39;m&#39;, &#39;cm&#39;, &#39;nm&#39;, &#39;A&#39; (Angstrom), or &#39;L&#39; (arbitrary length)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    zenolib.Length</span>
+<span class="sd">        Corresponding ZENO length unit enum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">m</span><span class="p">,</span>
+        <span class="s2">&quot;cm&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="s2">&quot;nm&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">nm</span><span class="p">,</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">L</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">unit_str</span><span class="p">,</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Length</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_temperature_unit</span><span class="p">(</span><span class="n">unit_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZenoTemperature</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert temperature unit string to ZENO enum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unit_str : str</span>
+<span class="sd">        Temperature unit: &#39;C&#39; (Celsius) or &#39;K&#39; (Kelvin)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    zenolib.Temperature</span>
+<span class="sd">        Corresponding ZENO temperature unit enum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Temperature</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Temperature</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">unit_str</span><span class="p">,</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Temperature</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_mass_unit</span><span class="p">(</span><span class="n">unit_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZenoMass</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert mass unit string to ZENO enum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unit_str : str</span>
+<span class="sd">        Mass unit: &#39;Da&#39; (Dalton), &#39;kDa&#39; (kiloDalton), &#39;g&#39; (gram), or &#39;kg&#39; (kilogram)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    zenolib.Mass</span>
+<span class="sd">        Corresponding ZENO mass unit enum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Da&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span><span class="o">.</span><span class="n">Da</span><span class="p">,</span>
+        <span class="s2">&quot;kDa&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span><span class="o">.</span><span class="n">kDa</span><span class="p">,</span>
+        <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="s2">&quot;kg&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span><span class="o">.</span><span class="n">kg</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">unit_str</span><span class="p">,</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Mass</span><span class="o">.</span><span class="n">kg</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_viscosity_unit</span><span class="p">(</span><span class="n">unit_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZenoViscosity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert viscosity unit string to ZENO enum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    unit_str : str</span>
+<span class="sd">        Viscosity unit: &#39;p&#39; (poise) or &#39;cp&#39; (centipoise)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    zenolib.Viscosity</span>
+<span class="sd">        Corresponding ZENO viscosity unit enum</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unit_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Viscosity</span><span class="o">.</span><span class="n">p</span><span class="p">,</span>
+        <span class="s2">&quot;cp&quot;</span><span class="p">:</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Viscosity</span><span class="o">.</span><span class="n">cp</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">unit_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">unit_str</span><span class="p">,</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">Viscosity</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Property">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.Property.html#zenowrapper.main.Property">[docs]</a>
+<span class="k">class</span> <span class="nc">Property</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Container for ZENO computed property with values and statistical uncertainties.</span>
+
+<span class="sd">    Each property stores per-frame values and variances from Monte Carlo calculations.</span>
+<span class="sd">    Uncertainties are rigorously estimated via variance propagation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Property name (e.g., &#39;capacitance&#39;, &#39;diffusion_coefficient&#39;)</span>
+<span class="sd">    shape : tuple</span>
+<span class="sd">        Shape of values array, typically (n_frames,) for scalars or (n_frames, 3, 3) for tensors</span>
+<span class="sd">    unit : str or None</span>
+<span class="sd">        Physical unit string for documentation (e.g., &#39;Å&#39;, &#39;Å³&#39;, &#39;cm²/s&#39;)</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Property identifier</span>
+<span class="sd">    values : numpy.ndarray</span>
+<span class="sd">        Computed values for each analyzed frame</span>
+<span class="sd">    variance : numpy.ndarray</span>
+<span class="sd">        Statistical variance (uncertainty²) for each frame value</span>
+<span class="sd">    unit : str or None</span>
+<span class="sd">        Physical units</span>
+<span class="sd">    overall_value : float</span>
+<span class="sd">        Mean across all frames (computed by :meth:`compute_total_values`)</span>
+<span class="sd">    overall_variance : float</span>
+<span class="sd">        Total variance across frames (computed by :meth:`compute_total_values`)</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Statistical uncertainties from Monte Carlo sampling decrease as ~1/sqrt(N)</span>
+<span class="sd">    where N is the number of random walks or interior samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">unit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overall_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overall_variance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Property.add_value">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.Property.add_value.html#zenowrapper.main.Property.add_value">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Store computed value for a specific frame.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">            Frame index</span>
+<span class="sd">        value : float or numpy.ndarray</span>
+<span class="sd">            Computed property value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="Property.add_variance">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.Property.add_variance.html#zenowrapper.main.Property.add_variance">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Store variance (uncertainty²) for a specific frame.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        index : int</span>
+<span class="sd">            Frame index</span>
+<span class="sd">        value : float or numpy.ndarray</span>
+<span class="sd">            Statistical variance of the property</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="Property.compute_total_values">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.Property.compute_total_values.html#zenowrapper.main.Property.compute_total_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">compute_total_values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute overall statistics across all analyzed frames.</span>
+
+<span class="sd">        Calculates mean value and total variance from per-frame results.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any frame values are NaN (indicating incomplete analysis)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Values of NaN found in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overall_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">overall_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variance</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ZenoWrapper">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.ZenoWrapper.html#zenowrapper.main.ZenoWrapper">[docs]</a>
+<span class="k">class</span> <span class="nc">ZenoWrapper</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute hydrodynamic and geometric properties via ZENO Monte Carlo methods.</span>
+
+<span class="sd">    This analysis class wraps the NIST ZENO software to calculate physical properties</span>
+<span class="sd">    of molecular structures from MD trajectories. It uses two Monte Carlo algorithms:</span>
+<span class="sd">    Walk-on-Spheres (exterior) for electrical/hydrodynamic properties and Interior</span>
+<span class="sd">    Sampling for geometric properties.</span>
+
+<span class="sd">    The electrical properties are converted to hydrodynamic properties via the</span>
+<span class="sd">    electrostatic-hydrodynamic analogy. All properties include rigorous statistical</span>
+<span class="sd">    uncertainties from variance estimation.</span>
+
+<span class="sd">    **Two-Level Parallelization**</span>
+
+<span class="sd">    ZenoWrapper supports parallelization at two independent levels:</span>
+
+<span class="sd">    1. **Frame-level parallelism** (MDAnalysis): Distribute trajectory frames across</span>
+<span class="sd">       multiple Python processes using the ``backend`` parameter in :meth:`run()`.</span>
+<span class="sd">       Supported backends: ``&#39;serial&#39;``, ``&#39;multiprocessing&#39;``, ``&#39;dask&#39;``.</span>
+
+<span class="sd">    2. **Within-frame parallelism** (ZENO C++): Parallelize Monte Carlo walks within</span>
+<span class="sd">       each frame using the ``num_threads`` parameter. ZENO uses C++ std::thread for</span>
+<span class="sd">       efficient shared-memory parallelism.</span>
+
+<span class="sd">    These can be combined for maximum performance. For example, with 16 CPU cores:</span>
+<span class="sd">    ``run(backend=&#39;multiprocessing&#39;, n_workers=4)`` with ``num_threads=4`` uses</span>
+<span class="sd">    all 16 cores (4 processes × 4 threads per process).</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">       Frame-level parallelization requires trajectory readers that support random</span>
+<span class="sd">       access and pickling (most file-based readers). Streaming readers like</span>
+<span class="sd">       :class:`~MDAnalysis.coordinates.IMD.IMDReader` only support serial analysis</span>
+<span class="sd">       with within-frame threading.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    atom_group : MDAnalysis.core.groups.AtomGroup</span>
+<span class="sd">        Atoms to analyze (e.g., protein, polymer, nanoparticle)</span>
+<span class="sd">    type_radii : dict</span>
+<span class="sd">        Mapping of atom types to VdW radii in length_units, e.g.,</span>
+<span class="sd">        ``{&#39;C&#39;: 1.7, &#39;N&#39;: 1.55, &#39;O&#39;: 1.52}``. Required for all atom types present.</span>
+<span class="sd">    n_walks : int, optional</span>
+<span class="sd">        Number of random walks for exterior calculation (default: 100000).</span>
+<span class="sd">        Higher values improve accuracy but increase computation time.</span>
+<span class="sd">    min_n_walks : int, optional</span>
+<span class="sd">        Minimum walks before convergence check. If None, runs exactly n_walks.</span>
+<span class="sd">    n_interior_samples : int, optional</span>
+<span class="sd">        Number of sample points for interior calculation (default: 10000).</span>
+<span class="sd">        Higher values improve volume/gyration accuracy.</span>
+<span class="sd">    min_n_interior_samples : int, optional</span>
+<span class="sd">        Minimum samples before convergence check. If None, runs exactly n_interior_samples.</span>
+<span class="sd">    max_rsd_capacitance : float, optional</span>
+<span class="sd">        Target relative standard deviation for capacitance (e.g., 0.01 for 1%).</span>
+<span class="sd">        Computation stops early if reached.</span>
+<span class="sd">    max_rsd_polarizability : float, optional</span>
+<span class="sd">        Target relative standard deviation for polarizability.</span>
+<span class="sd">    max_rsd_volume : float, optional</span>
+<span class="sd">        Target relative standard deviation for volume.</span>
+<span class="sd">    max_run_time : float, optional</span>
+<span class="sd">        Maximum computation time in seconds per frame.</span>
+<span class="sd">    temperature : float, optional</span>
+<span class="sd">        Temperature for diffusion coefficient calculation. Required if diffusion</span>
+<span class="sd">        coefficient is needed.</span>
+<span class="sd">    size_scaling_factor : float, optional</span>
+<span class="sd">        Scale all radii by this factor (default: 1.0)</span>
+<span class="sd">    launch_radius : float, optional</span>
+<span class="sd">        Radius of sphere enclosing molecule. Auto-computed if None.</span>
+<span class="sd">    skin_thickness : float, optional</span>
+<span class="sd">        Cutoff distance for Walk-on-Spheres termination. Auto-set if None.</span>
+<span class="sd">    mass : float, optional</span>
+<span class="sd">        Molecular mass for intrinsic viscosity with mass units and sedimentation</span>
+<span class="sd">        coefficient. Specify in mass_units.</span>
+<span class="sd">    viscosity : float, optional</span>
+<span class="sd">        Solvent viscosity for friction/diffusion/sedimentation coefficients.</span>
+<span class="sd">        Specify in viscosity_units (e.g., 0.01 poise for water at 20°C).</span>
+<span class="sd">    buoyancy_factor : float, optional</span>
+<span class="sd">        Buoyancy factor for sedimentation coefficient (typically 0.72-0.73 for</span>
+<span class="sd">        proteins in water).</span>
+<span class="sd">    temperature_units : str, optional</span>
+<span class="sd">        &#39;K&#39; (Kelvin) or &#39;C&#39; (Celsius), default &#39;K&#39;</span>
+<span class="sd">    viscosity_units : str, optional</span>
+<span class="sd">        &#39;p&#39; (poise) or &#39;cp&#39; (centipoise), default &#39;p&#39;</span>
+<span class="sd">    length_units : str, optional</span>
+<span class="sd">        &#39;m&#39;, &#39;cm&#39;, &#39;nm&#39;, &#39;A&#39; (Angstrom), or &#39;L&#39; (arbitrary), default &#39;A&#39;</span>
+<span class="sd">    mass_units : str, optional</span>
+<span class="sd">        &#39;Da&#39;, &#39;kDa&#39;, &#39;g&#39;, or &#39;kg&#39;, default &#39;g&#39;</span>
+<span class="sd">    seed : int, optional</span>
+<span class="sd">        Random seed for reproducibility. Default -1 (random seed).</span>
+<span class="sd">    verbose : bool, optional</span>
+<span class="sd">        Print progress information (default: False)</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional arguments passed to :class:`MDAnalysis.analysis.base.AnalysisBase`</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : MDAnalysis.core.universe.Universe</span>
+<span class="sd">        Universe containing the trajectory</span>
+<span class="sd">    atom_group : MDAnalysis.core.groups.AtomGroup</span>
+<span class="sd">        Atoms being analyzed</span>
+<span class="sd">    type_radii : numpy.ndarray</span>
+<span class="sd">        Array of radii for each atom in atom_group</span>
+<span class="sd">    results : MDAnalysis.analysis.base.Results</span>
+<span class="sd">        Container for computed properties. Each property is a :class:`Property` object</span>
+<span class="sd">        with ``.values`` and ``.variance`` arrays indexed by frame. Available properties</span>
+<span class="sd">        depend on input parameters:</span>
+
+<span class="sd">        **Always computed:**</span>
+<span class="sd">            - ``capacitance`` : Molecular capacitance (length units)</span>
+<span class="sd">            - ``electric_polarizability_tensor`` : 3×3 polarizability tensor (length³)</span>
+<span class="sd">            - ``electric_polarizability_eigenvalues`` : Eigenvalues of tensor (length³)</span>
+<span class="sd">            - ``electric_polarizability`` : Mean polarizability (length³)</span>
+<span class="sd">            - ``intrinsic_conductivity`` : Dimensionless conductivity</span>
+<span class="sd">            - ``volume`` : Molecular volume (length³)</span>
+<span class="sd">            - ``gyration_tensor`` : 3×3 gyration tensor (length²)</span>
+<span class="sd">            - ``gyration_eigenvalues`` : Eigenvalues of gyration tensor (length²)</span>
+<span class="sd">            - ``capacitance_same_volume_sphere`` : Equivalent sphere radius (length)</span>
+<span class="sd">            - ``hydrodynamic_radius`` : Effective radius in solution (length)</span>
+<span class="sd">            - ``viscometric_radius`` : Radius from viscosity (length)</span>
+<span class="sd">            - ``intrinsic_viscosity`` : Dimensionless intrinsic viscosity</span>
+<span class="sd">            - ``prefactor_polarizability2intrinsic_viscosity`` : Shape factor</span>
+
+<span class="sd">        **Requires viscosity:**</span>
+<span class="sd">            - ``friction_coefficient`` : Resistance to motion (mass/time)</span>
+
+<span class="sd">        **Requires temperature and viscosity:**</span>
+<span class="sd">            - ``diffusion_coefficient`` : Translational diffusion (length²/time)</span>
+
+<span class="sd">        **Requires mass, buoyancy_factor, and viscosity:**</span>
+<span class="sd">            - ``sedimentation_coefficient`` : Sedimentation rate (time)</span>
+
+<span class="sd">        **Requires mass:**</span>
+<span class="sd">            - ``intrinsic_viscosity_mass`` : Intrinsic viscosity (length³/mass)</span>
+
+<span class="sd">    n_frames : int</span>
+<span class="sd">        Number of frames analyzed</span>
+<span class="sd">    times : numpy.ndarray</span>
+<span class="sd">        Timestamps of analyzed frames</span>
+<span class="sd">    frames : numpy.ndarray</span>
+<span class="sd">        Indices of analyzed frames</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    **Parallelization Strategy**</span>
+
+<span class="sd">    For optimal performance, consider your workload characteristics:</span>
+
+<span class="sd">    * **Many frames (&gt;100), fast computation**: Use frame-level parallelism</span>
+<span class="sd">      (``backend=&#39;multiprocessing&#39;``) with ``num_threads=1`` or small values</span>
+
+<span class="sd">    * **Few frames (&lt;20), expensive computation**: Use within-frame parallelism</span>
+<span class="sd">      with higher ``num_threads`` and ``backend=&#39;serial&#39;``</span>
+
+<span class="sd">    * **Balanced workload**: Use hybrid approach, e.g., ``n_workers=4`` with</span>
+<span class="sd">      ``num_threads=4`` on a 16-core machine</span>
+
+<span class="sd">    Memory usage scales with ``n_workers`` (each worker loads a copy of the trajectory),</span>
+<span class="sd">    while ``num_threads`` shares memory within each worker.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Basic usage computing hydrodynamic radius::</span>
+
+<span class="sd">        &gt;&gt;&gt; import MDAnalysis as mda</span>
+<span class="sd">        &gt;&gt;&gt; from zenowrapper import ZenoWrapper</span>
+<span class="sd">        &gt;&gt;&gt; u = mda.Universe(&#39;protein.pdb&#39;, &#39;traj.dcd&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; type_radii = {&#39;C&#39;: 1.7, &#39;N&#39;: 1.55, &#39;O&#39;: 1.52, &#39;S&#39;: 1.8}</span>
+<span class="sd">        &gt;&gt;&gt; zeno = ZenoWrapper(u.select_atoms(&#39;protein&#39;), type_radii=type_radii)</span>
+<span class="sd">        &gt;&gt;&gt; zeno.run(start=0, stop=100, step=10)</span>
+<span class="sd">        &gt;&gt;&gt; print(zeno.results.hydrodynamic_radius.values.mean())</span>
+
+<span class="sd">    Computing diffusion coefficient::</span>
+
+<span class="sd">        &gt;&gt;&gt; zeno = ZenoWrapper(</span>
+<span class="sd">        ...     u.atoms,</span>
+<span class="sd">        ...     type_radii=type_radii,</span>
+<span class="sd">        ...     temperature=298.15,  # K</span>
+<span class="sd">        ...     viscosity=0.01,      # poise (water at 20°C)</span>
+<span class="sd">        ...     temperature_units=&#39;K&#39;,</span>
+<span class="sd">        ...     viscosity_units=&#39;p&#39;</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; zeno.run()</span>
+<span class="sd">        &gt;&gt;&gt; D = zeno.results.diffusion_coefficient.values</span>
+<span class="sd">        &gt;&gt;&gt; D_mean = D.mean()</span>
+<span class="sd">        &gt;&gt;&gt; D_std = np.sqrt(zeno.results.diffusion_coefficient.variance.mean())</span>
+
+<span class="sd">    Using frame-level parallelization for long trajectories::</span>
+
+<span class="sd">        &gt;&gt;&gt; # Process 1000 frames using 8 workers, single-threaded per frame</span>
+<span class="sd">        &gt;&gt;&gt; zeno = ZenoWrapper(u.atoms, type_radii=type_radii, num_threads=1)</span>
+<span class="sd">        &gt;&gt;&gt; zeno.run(backend=&#39;multiprocessing&#39;, n_workers=8)</span>
+
+<span class="sd">    Using within-frame parallelization for expensive computation::</span>
+
+<span class="sd">        &gt;&gt;&gt; # Process few frames with 16-threaded ZENO per frame</span>
+<span class="sd">        &gt;&gt;&gt; zeno = ZenoWrapper(</span>
+<span class="sd">        ...     u.atoms,</span>
+<span class="sd">        ...     type_radii=type_radii,</span>
+<span class="sd">        ...     n_walks=10000000,  # 10M walks = expensive!</span>
+<span class="sd">        ...     num_threads=16</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; zeno.run(backend=&#39;serial&#39;)</span>
+
+<span class="sd">    Using hybrid two-level parallelization::</span>
+
+<span class="sd">        &gt;&gt;&gt; # Balance: 4 workers × 4 threads = 16 cores total</span>
+<span class="sd">        &gt;&gt;&gt; zeno = ZenoWrapper(u.atoms, type_radii=type_radii, num_threads=4)</span>
+<span class="sd">        &gt;&gt;&gt; zeno.run(backend=&#39;multiprocessing&#39;, n_workers=4)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    MDAnalysis.analysis.base.AnalysisBase : Base class with run() method</span>
+<span class="sd">    Property : Container for results with values and uncertainties</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    - Computation time scales linearly with n_walks and n_interior_samples</span>
+<span class="sd">    - Statistical uncertainty decreases as 1/sqrt(N) for N samples</span>
+<span class="sd">    - The electrostatic-hydrodynamic analogy relates capacitance C to hydrodynamic</span>
+<span class="sd">      radius: R_h = C (exact for spheres, approximate for other shapes)</span>
+<span class="sd">    - All properties include variance estimates via propagation of uncertainties</span>
+<span class="sd">    - Setting a fixed seed ensures reproducible results</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    * Douglas, J.F., Zhou, H.X., Hubbard, J.B. (1994)</span>
+<span class="sd">      &quot;Hydrodynamic friction and the capacitance of arbitrarily shaped objects&quot;</span>
+<span class="sd">      Phys. Rev. E 49: 5319-5331</span>
+<span class="sd">    * ZENO Documentation: https://zeno.nist.gov/</span>
+<span class="sd">    * ZENO Calculations: https://zeno.nist.gov/Calculations.html</span>
+<span class="sd">    * ZENO Output Properties: https://zeno.nist.gov/Output.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Mark this analysis as parallelizable with split-apply-combine</span>
+    <span class="n">_analysis_algorithm_is_parallelizable</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">atom_group</span><span class="p">:</span> <span class="n">AtomGroup</span><span class="p">,</span>
+        <span class="n">type_radii</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_walks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span>
+        <span class="n">min_n_walks</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">n_interior_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="n">min_n_interior_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_rsd_capacitance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_rsd_polarizability</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_rsd_volume</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_run_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">size_scaling_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">launch_radius</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skin_thickness</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">viscosity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">buoyancy_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">temperature_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span>
+        <span class="n">viscosity_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;p&quot;</span><span class="p">,</span>
+        <span class="n">length_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="n">mass_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">type_radii</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">type_radii</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">atom_group</span><span class="o">.</span><span class="n">universe</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span> <span class="o">=</span> <span class="n">atom_group</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">length_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mass_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mass_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">temperature_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viscosity_units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">viscosity_units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">verbose</span>
+
+        <span class="c1"># Store attributes needed for optional results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">mass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">viscosity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buoyancy_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">buoyancy_factor</span>
+
+        <span class="c1"># Store ZENO parameter settings (not the objects themselves!)</span>
+        <span class="c1"># We&#39;ll create fresh parameter objects for each frame in _single_frame()</span>
+        <span class="c1"># This prevents parameter pollution across frames</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;n_walks&quot;</span><span class="p">:</span> <span class="n">n_walks</span><span class="p">,</span>
+            <span class="s2">&quot;min_n_walks&quot;</span><span class="p">:</span> <span class="n">min_n_walks</span><span class="p">,</span>
+            <span class="s2">&quot;max_rsd_capacitance&quot;</span><span class="p">:</span> <span class="n">max_rsd_capacitance</span><span class="p">,</span>
+            <span class="s2">&quot;max_rsd_polarizability&quot;</span><span class="p">:</span> <span class="n">max_rsd_polarizability</span><span class="p">,</span>
+            <span class="s2">&quot;max_run_time&quot;</span><span class="p">:</span> <span class="n">max_run_time</span><span class="p">,</span>
+            <span class="s2">&quot;num_threads&quot;</span><span class="p">:</span> <span class="n">num_threads</span><span class="p">,</span>
+            <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+            <span class="s2">&quot;skin_thickness&quot;</span><span class="p">:</span> <span class="n">skin_thickness</span><span class="p">,</span>
+            <span class="s2">&quot;launch_radius&quot;</span><span class="p">:</span> <span class="n">launch_radius</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;min_n_interior_samples&quot;</span><span class="p">:</span> <span class="n">min_n_interior_samples</span><span class="p">,</span>
+            <span class="s2">&quot;n_interior_samples&quot;</span><span class="p">:</span> <span class="n">n_interior_samples</span><span class="p">,</span>
+            <span class="s2">&quot;max_rsd_volume&quot;</span><span class="p">:</span> <span class="n">max_rsd_volume</span><span class="p">,</span>
+            <span class="s2">&quot;max_run_time&quot;</span><span class="p">:</span> <span class="n">max_run_time</span><span class="p">,</span>
+            <span class="s2">&quot;num_threads&quot;</span><span class="p">:</span> <span class="n">num_threads</span><span class="p">,</span>
+            <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="n">seed</span><span class="p">,</span>
+            <span class="s2">&quot;launch_radius&quot;</span><span class="p">:</span> <span class="n">launch_radius</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span>
+            <span class="s2">&quot;temperature_units&quot;</span><span class="p">:</span> <span class="n">temperature_units</span><span class="p">,</span>
+            <span class="s2">&quot;mass&quot;</span><span class="p">:</span> <span class="n">mass</span><span class="p">,</span>
+            <span class="s2">&quot;mass_units&quot;</span><span class="p">:</span> <span class="n">mass_units</span><span class="p">,</span>
+            <span class="s2">&quot;viscosity&quot;</span><span class="p">:</span> <span class="n">viscosity</span><span class="p">,</span>
+            <span class="s2">&quot;viscosity_units&quot;</span><span class="p">:</span> <span class="n">viscosity_units</span><span class="p">,</span>
+            <span class="s2">&quot;buoyancy_factor&quot;</span><span class="p">:</span> <span class="n">buoyancy_factor</span><span class="p">,</span>
+            <span class="s2">&quot;length_units&quot;</span><span class="p">:</span> <span class="n">length_units</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Check atom types</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_radii</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please specify radii for atom/bead types: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span><span class="o">.</span><span class="n">types</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">missing_radii</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span><span class="o">.</span><span class="n">types</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">type_radii</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">missing_radii</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing radii for atom/bead types: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_radii</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_radii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">type_radii</span><span class="p">[</span><span class="n">atom_type</span><span class="p">]</span> <span class="o">*</span> <span class="n">size_scaling_factor</span> <span class="k">for</span> <span class="n">atom_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span><span class="o">.</span><span class="n">types</span><span class="p">]</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize result containers before trajectory analysis.</span>
+
+<span class="sd">        Creates :class:`Property` objects for all computable quantities based on</span>
+<span class="sd">        the provided parameters. Properties requiring optional parameters (temperature,</span>
+<span class="sd">        viscosity, mass, buoyancy_factor) are only created if those parameters were</span>
+<span class="sd">        specified during initialization.</span>
+
+<span class="sd">        This method is called automatically by :meth:`run` before frame iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;capacitance&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_tensor</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;electric_polarizability_tensor&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^3&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_eigenvalues</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;electric_polarizability_eigenvalues&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^3&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;electric_polarizability&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^3&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;intrinsic_conductivity&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^3&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;gyration_tensor&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^2&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;gyration_eigenvalues&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2">^2&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance_same_volume_sphere</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;capacitance_same_volume_sphere&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_units</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;hydrodynamic_radius&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">prefactor_polarizability2intrinsic_viscosity</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+            <span class="s2">&quot;prefactor_polarizability2intrinsic_viscosity&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;viscometric_radius&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;intrinsic_viscosity&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">unit_sed_coeff</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length_units</span><span class="si">}</span><span class="s2"> * </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span><span class="s2">&quot;friction_coefficient&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="n">unit_sed_coeff</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">buoyancy_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+                    <span class="s2">&quot;sedimentation_coefficient&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mass_units</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">unit_sed_coeff</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+                    <span class="s2">&quot;diffusion_coefficient&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature_units</span><span class="si">}</span><span class="s2"> / (</span><span class="si">{</span><span class="n">unit_sed_coeff</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span>
+                <span class="s2">&quot;mass_intrinsic_viscosity&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass_units</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute ZENO properties for the current trajectory frame.</span>
+
+<span class="sd">        Executes the Monte Carlo calculations (Walk-on-Spheres and Interior Sampling)</span>
+<span class="sd">        for the current frame&#39;s atomic coordinates. Results are stored in the</span>
+<span class="sd">        corresponding :class:`Property` objects in :attr:`results`.</span>
+
+<span class="sd">        This method is called automatically by :meth:`run` for each analyzed frame.</span>
+<span class="sd">        All heavy computation occurs in the C++ layer via the zenolib extension.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        The method extracts atomic positions from the current frame and passes them</span>
+<span class="sd">        to the C++ ZENO implementation along with the pre-configured Monte Carlo</span>
+<span class="sd">        parameters. Statistical uncertainties are computed automatically.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get values from python</span>
+        <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span><span class="o">.</span><span class="n">positions</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Analyzing frame </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create fresh parameter objects for this frame</span>
+        <span class="c1"># This is critical: ZENO&#39;s computeDefaultParameters() modifies the parameter</span>
+        <span class="c1"># objects in-place (setting launch sphere center/radius, skin thickness, etc.)</span>
+        <span class="c1"># Reusing the same objects across frames causes stale launch sphere parameters</span>
+        <span class="c1"># from previous frames to be incorrectly applied to new geometry</span>
+
+        <span class="c1"># Walk-on-Spheres parameters</span>
+        <span class="n">params_walk</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">ParametersWalkOnSpheres</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;n_walks&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setTotalNumWalks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;n_walks&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;min_n_walks&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setMinTotalNumWalks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;min_n_walks&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_capacitance&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setMaxErrorCapacitance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_capacitance&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_polarizability&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setMaxErrorPolarizability</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_polarizability&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_run_time&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setMaxRunTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;max_run_time&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setSeed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;skin_thickness&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setSkinThickness</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;skin_thickness&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;launch_radius&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_walk</span><span class="o">.</span><span class="n">setLaunchRadius</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;launch_radius&quot;</span><span class="p">])</span>
+        <span class="c1"># CRITICAL: Set num_threads (default 1). If 0, ZENO won&#39;t run any computations!</span>
+        <span class="n">params_walk</span><span class="o">.</span><span class="n">setNumThreads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_walk_settings</span><span class="p">[</span><span class="s2">&quot;num_threads&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Interior Sampling parameters</span>
+        <span class="n">params_interior</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">ParametersInteriorSampling</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;min_n_interior_samples&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setMinTotalNumSamples</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;min_n_interior_samples&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;n_interior_samples&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setTotalNumSamples</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;n_interior_samples&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_volume&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setMaxErrorVolume</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;max_rsd_volume&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;max_run_time&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setMaxRunTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;max_run_time&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setSeed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;seed&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;launch_radius&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_interior</span><span class="o">.</span><span class="n">setLaunchRadius</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;launch_radius&quot;</span><span class="p">])</span>
+        <span class="c1"># CRITICAL: Set num_threads (default 1). If 0, ZENO won&#39;t run any computations!</span>
+        <span class="n">params_interior</span><span class="o">.</span><span class="n">setNumThreads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_interior_settings</span><span class="p">[</span><span class="s2">&quot;num_threads&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Results parameters</span>
+        <span class="n">params_results</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">ParametersResults</span><span class="p">()</span>
+        <span class="n">length_units_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;length_units&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">length_units_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="n">params_results</span><span class="o">.</span><span class="n">setLengthScale</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">_get_length_unit</span><span class="p">(</span><span class="n">length_units_str</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">temp_units_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;temperature_units&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp_units_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="n">params_results</span><span class="o">.</span><span class="n">setTemperature</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">],</span>
+                <span class="n">_get_temperature_unit</span><span class="p">(</span><span class="n">temp_units_str</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mass_units_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;mass_units&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mass_units_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="n">params_results</span><span class="o">.</span><span class="n">setMass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">],</span> <span class="n">_get_mass_unit</span><span class="p">(</span><span class="n">mass_units_str</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;viscosity&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">visc_units_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;viscosity_units&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">visc_units_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+            <span class="n">params_results</span><span class="o">.</span><span class="n">setSolventViscosity</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;viscosity&quot;</span><span class="p">],</span>
+                <span class="n">_get_viscosity_unit</span><span class="p">(</span><span class="n">visc_units_str</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;buoyancy_factor&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params_results</span><span class="o">.</span><span class="n">setBuoyancyFactor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_zeno_results_settings</span><span class="p">[</span><span class="s2">&quot;buoyancy_factor&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Call C++ function to compute ZENO results</span>
+        <span class="c1"># All geometry building and computation happens in C++ layer</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">zenolib</span><span class="o">.</span><span class="n">compute_zeno_single_frame</span><span class="p">(</span>
+            <span class="n">positions</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type_radii</span><span class="p">,</span>
+            <span class="n">params_walk</span><span class="p">,</span>
+            <span class="n">params_interior</span><span class="p">,</span>
+            <span class="n">params_results</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Extract results - note the C++ returns flat arrays for tensors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">capacitance_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">capacitance_variance</span><span class="p">)</span>
+
+        <span class="c1"># Polarizability tensor is returned as flat array (row-major)</span>
+        <span class="n">pol_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">polarizability_tensor_mean</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">pol_tensor_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">polarizability_tensor_variance</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_tensor</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">pol_tensor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_tensor</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">pol_tensor_var</span><span class="p">)</span>
+
+        <span class="n">pol_eigen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">polarizability_eigenvalues_mean</span><span class="p">)</span>
+        <span class="n">pol_eigen_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">polarizability_eigenvalues_variance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_eigenvalues</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">pol_eigen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_eigenvalues</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">pol_eigen_var</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">mean_polarizability_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">mean_polarizability_variance</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity_variance</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">volume_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">volume_variance</span><span class="p">)</span>
+
+        <span class="c1"># Gyration tensor</span>
+        <span class="n">gyr_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor_mean</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">gyr_tensor_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor_variance</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">gyr_tensor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">gyr_tensor_var</span><span class="p">)</span>
+
+        <span class="n">gyr_eigen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues_mean</span><span class="p">)</span>
+        <span class="n">gyr_eigen_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues_variance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">gyr_eigen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">gyr_eigen_var</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance_same_volume_sphere</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">capacitance_sphere_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance_same_volume_sphere</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">capacitance_sphere_variance</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius_variance</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">prefactor_polarizability2intrinsic_viscosity</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">q_eta_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">prefactor_polarizability2intrinsic_viscosity</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">q_eta_variance</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius_variance</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity_variance</span><span class="p">)</span>
+
+        <span class="c1"># Optional results</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient_mean</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient_variance</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">buoyancy_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient_mean</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient_variance</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient_mean</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient_variance</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity</span><span class="o">.</span><span class="n">add_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity_mean</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity</span><span class="o">.</span><span class="n">add_variance</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity_variance</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_conclude</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the result uncertainties of the analysis&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_tensor</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability_eigenvalues</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">electric_polarizability</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_conductivity</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_tensor</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gyration_eigenvalues</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">capacitance_same_volume_sphere</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">prefactor_polarizability2intrinsic_viscosity</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">viscometric_radius</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">intrinsic_viscosity</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">friction_coefficient</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">buoyancy_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">sedimentation_coefficient</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mass_intrinsic_viscosity</span><span class="o">.</span><span class="n">compute_total_values</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ZenoWrapper.get_supported_backends">
+<a class="viewcode-back" href="../../autosummary/zenowrapper.main.ZenoWrapper.get_supported_backends.html#zenowrapper.main.ZenoWrapper.get_supported_backends">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_supported_backends</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the supported parallel backends for this analysis.</span>
+
+<span class="sd">        ZenoWrapper supports all standard MDAnalysis parallel backends since</span>
+<span class="sd">        each frame&#39;s analysis is completely independent and results can be</span>
+<span class="sd">        concatenated across frames.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple of str</span>
+<span class="sd">            Supported backend names: (&#39;serial&#39;, &#39;multiprocessing&#39;, &#39;dask&#39;)</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :ref:`parallel-analysis` : MDAnalysis parallel analysis documentation</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Even when using parallel backends, each worker will use ``num_threads``</span>
+<span class="sd">        for within-frame ZENO parallelization, giving two-level parallelism.</span>
+
+<span class="sd">        .. versionadded:: 3.0.0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="s2">&quot;multiprocessing&quot;</span><span class="p">,</span> <span class="s2">&quot;dask&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_aggregator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Define how to aggregate results from parallel workers.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ResultsGroup</span>
+<span class="sd">            Aggregator specifying how to combine results from multiple workers</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        All ZenoWrapper results are stored as Property objects with `.values`</span>
+<span class="sd">        and `.variance` arrays. We use `ndarray_vstack` to concatenate these</span>
+<span class="sd">        arrays along the frame dimension (axis 0).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">property_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;capacitance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;electric_polarizability_tensor&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;electric_polarizability_eigenvalues&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;electric_polarizability&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;intrinsic_conductivity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;volume&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;gyration_tensor&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;gyration_eigenvalues&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;capacitance_same_volume_sphere&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hydrodynamic_radius&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;prefactor_polarizability2intrinsic_viscosity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;viscometric_radius&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;intrinsic_viscosity&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">viscosity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">property_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;friction_coefficient&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">buoyancy_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">property_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;sedimentation_coefficient&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">property_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;diffusion_coefficient&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">property_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mass_intrinsic_viscosity&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Define custom aggregator function for Property objects</span>
+        <span class="k">def</span> <span class="nf">aggregate_property</span><span class="p">(</span><span class="n">properties</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Aggregate Property objects by concatenating values and variance arrays.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            properties : list of Property</span>
+<span class="sd">                Property objects from each worker for a single attribute</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            Property</span>
+<span class="sd">                Combined Property with stacked values and variance arrays</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+            <span class="c1"># Concatenate values and variance arrays from all workers</span>
+            <span class="c1"># Each property has shape (n_frames_worker, ...) - concatenate along frame axis</span>
+            <span class="n">stacked_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">prop</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">stacked_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">prop</span><span class="o">.</span><span class="n">variance</span> <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">properties</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Create a new Property with combined data</span>
+            <span class="n">combined</span> <span class="o">=</span> <span class="n">properties</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Get template from first worker</span>
+            <span class="n">combined</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">stacked_values</span>
+            <span class="n">combined</span><span class="o">.</span><span class="n">variance</span> <span class="o">=</span> <span class="n">stacked_variance</span>
+
+            <span class="k">return</span> <span class="n">combined</span>
+
+        <span class="c1"># Build lookup with custom aggregator for each property</span>
+        <span class="n">lookup</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">property_names</span><span class="p">,</span> <span class="n">aggregate_property</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ResultsGroup</span><span class="p">(</span><span class="n">lookup</span><span class="o">=</span><span class="n">lookup</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Works of NIST employees are not not subject to copyright protection in the United States. Project structure based on the MDAnalysis Cookiecutter version 0.1.</p>
+  </div>
+
+  
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+   
+
+  <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+  <iframe src="../../_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+
+</body>
+</html>

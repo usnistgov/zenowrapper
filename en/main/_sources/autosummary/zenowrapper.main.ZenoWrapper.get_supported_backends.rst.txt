@@ -1,0 +1,7 @@
+get\_supported\_backends
+========================
+
+.. currentmodule:: zenowrapper.main
+
+.. automethod:: ZenoWrapper.get_supported_backends
+   :no-index:

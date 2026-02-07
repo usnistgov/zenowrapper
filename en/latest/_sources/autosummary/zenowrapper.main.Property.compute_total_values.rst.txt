@@ -1,0 +1,7 @@
+compute\_total\_values
+======================
+
+.. currentmodule:: zenowrapper.main
+
+.. automethod:: Property.compute_total_values
+   :no-index:

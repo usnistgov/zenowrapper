@@ -1,0 +1,7 @@
+add\_variance
+=============
+
+.. currentmodule:: zenowrapper.main
+
+.. automethod:: Property.add_variance
+   :no-index:

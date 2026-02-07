@@ -1,0 +1,7 @@
+run
+===
+
+.. currentmodule:: zenowrapper.main
+
+.. automethod:: ZenoWrapper.run
+   :no-index:

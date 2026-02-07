@@ -1,0 +1,7 @@
+parallelizable
+==============
+
+.. currentmodule:: zenowrapper.main
+
+.. autoproperty:: ZenoWrapper.parallelizable
+   :no-index:

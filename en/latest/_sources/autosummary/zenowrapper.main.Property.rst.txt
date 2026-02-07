@@ -1,0 +1,26 @@
+Property
+========
+
+.. currentmodule:: zenowrapper.main
+
+zenowrapper.main.Property
+
+.. autoclass:: Property
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   
+   
+   
+
+   
+      .. autosummary::
+         :toctree:
+      
+         Property.add_value
+         Property.add_variance
+         Property.compute_total_values
+   
+   

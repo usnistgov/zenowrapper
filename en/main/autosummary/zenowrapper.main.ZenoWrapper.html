@@ -1,0 +1,572 @@
+
+
+
+
+
+  
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="../../_static/mdakits-empty-favicon-template.svg">
+</head>
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenoWrapper &mdash; ZENOWrapper  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/ntd2d.css?v=6fe47884" />
+
+  
+    <link rel="shortcut icon" href="../_static/mdakits-empty-favicon-template.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="parallelizable" href="zenowrapper.main.ZenoWrapper.parallelizable.html" />
+    <link rel="prev" title="compute_total_values" href="zenowrapper.main.Property.compute_total_values.html" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RJSMY46M5C');
+  </script>
+  <!-- Old DAP UA tag -->
+  <script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+  </script>
+
+   
+
+  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SH9M3SGZK6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SH9M3SGZK6');
+  </script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+
+  
+
+
+
+
+<a href="../index.html">
+  
+    <img src="../_static/zeno_mdakit.png" class="logo" alt="Logo"/>
+</a>
+
+
+  
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+        <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="zenowrapper.html">zenowrapper</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="zenowrapper.html#zenowrapper-hydrodynamic-property-calculations-for-molecular-systems">ZenoWrapper - Hydrodynamic Property Calculations for Molecular Systems</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="zenowrapper.main.html">main</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="zenowrapper.main.html#hydrodynamic-property-calculations-using-zeno-monte-carlo-methods">Hydrodynamic Property Calculations Using ZENO Monte Carlo Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#developer-information">Developer Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallelization.html">Parallelization Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+</ul>
+
+</div>
+
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZENOWrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="zenowrapper.html">zenowrapper</a></li>
+          <li class="breadcrumb-item"><a href="zenowrapper.main.html">main</a></li>
+      <li class="breadcrumb-item active">ZenoWrapper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/autosummary/zenowrapper.main.ZenoWrapper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zenowrapper">
+<h1>ZenoWrapper<a class="headerlink" href="#zenowrapper" title="Link to this heading"></a></h1>
+<p>zenowrapper.main.ZenoWrapper</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="zenowrapper.main.ZenoWrapper">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">zenowrapper.main.</span></span><span class="sig-name descname"><span class="pre">ZenoWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AtomGroup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_radii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_walks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_n_walks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_interior_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_n_interior_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rsd_capacitance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rsd_polarizability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_rsd_volume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_run_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_scaling_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">launch_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skin_thickness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viscosity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buoyancy_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'K'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viscosity_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'p'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenowrapper/main.html#ZenoWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenowrapper.main.ZenoWrapper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="(in MDAnalysis v2.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnalysisBase</span></code></a></p>
+<p>Compute hydrodynamic and geometric properties via ZENO Monte Carlo methods.</p>
+<p>This analysis class wraps the NIST ZENO software to calculate physical properties
+of molecular structures from MD trajectories. It uses two Monte Carlo algorithms:
+Walk-on-Spheres (exterior) for electrical/hydrodynamic properties and Interior
+Sampling for geometric properties.</p>
+<p>The electrical properties are converted to hydrodynamic properties via the
+electrostatic-hydrodynamic analogy. All properties include rigorous statistical
+uncertainties from variance estimation.</p>
+<p><strong>Two-Level Parallelization</strong></p>
+<p>ZenoWrapper supports parallelization at two independent levels:</p>
+<ol class="arabic simple">
+<li><p><strong>Frame-level parallelism</strong> (MDAnalysis): Distribute trajectory frames across
+multiple Python processes using the <code class="docutils literal notranslate"><span class="pre">backend</span></code> parameter in <a class="reference internal" href="#zenowrapper.main.ZenoWrapper.run" title="zenowrapper.main.ZenoWrapper.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>.
+Supported backends: <code class="docutils literal notranslate"><span class="pre">'serial'</span></code>, <code class="docutils literal notranslate"><span class="pre">'multiprocessing'</span></code>, <code class="docutils literal notranslate"><span class="pre">'dask'</span></code>.</p></li>
+<li><p><strong>Within-frame parallelism</strong> (ZENO C++): Parallelize Monte Carlo walks within
+each frame using the <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> parameter. ZENO uses C++ std::thread for
+efficient shared-memory parallelism.</p></li>
+</ol>
+<p>These can be combined for maximum performance. For example, with 16 CPU cores:
+<code class="docutils literal notranslate"><span class="pre">run(backend='multiprocessing',</span> <span class="pre">n_workers=4)</span></code> with <code class="docutils literal notranslate"><span class="pre">num_threads=4</span></code> uses
+all 16 cores (4 processes × 4 threads per process).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Frame-level parallelization requires trajectory readers that support random
+access and pickling (most file-based readers). Streaming readers like
+<a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/coordinates/IMD.html#MDAnalysis.coordinates.IMD.IMDReader" title="(in MDAnalysis v2.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IMDReader</span></code></a> only support serial analysis
+with within-frame threading.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atom_group</strong> (<em>MDAnalysis.core.groups.AtomGroup</em>) – Atoms to analyze (e.g., protein, polymer, nanoparticle)</p></li>
+<li><p><strong>type_radii</strong> (<em>dict</em>) – Mapping of atom types to VdW radii in length_units, e.g.,
+<code class="docutils literal notranslate"><span class="pre">{'C':</span> <span class="pre">1.7,</span> <span class="pre">'N':</span> <span class="pre">1.55,</span> <span class="pre">'O':</span> <span class="pre">1.52}</span></code>. Required for all atom types present.</p></li>
+<li><p><strong>n_walks</strong> (<em>int, optional</em>) – Number of random walks for exterior calculation (default: 100000).
+Higher values improve accuracy but increase computation time.</p></li>
+<li><p><strong>min_n_walks</strong> (<em>int, optional</em>) – Minimum walks before convergence check. If None, runs exactly n_walks.</p></li>
+<li><p><strong>n_interior_samples</strong> (<em>int, optional</em>) – Number of sample points for interior calculation (default: 10000).
+Higher values improve volume/gyration accuracy.</p></li>
+<li><p><strong>min_n_interior_samples</strong> (<em>int, optional</em>) – Minimum samples before convergence check. If None, runs exactly n_interior_samples.</p></li>
+<li><p><strong>max_rsd_capacitance</strong> (<em>float, optional</em>) – Target relative standard deviation for capacitance (e.g., 0.01 for 1%).
+Computation stops early if reached.</p></li>
+<li><p><strong>max_rsd_polarizability</strong> (<em>float, optional</em>) – Target relative standard deviation for polarizability.</p></li>
+<li><p><strong>max_rsd_volume</strong> (<em>float, optional</em>) – Target relative standard deviation for volume.</p></li>
+<li><p><strong>max_run_time</strong> (<em>float, optional</em>) – Maximum computation time in seconds per frame.</p></li>
+<li><p><strong>temperature</strong> (<em>float, optional</em>) – Temperature for diffusion coefficient calculation. Required if diffusion
+coefficient is needed.</p></li>
+<li><p><strong>size_scaling_factor</strong> (<em>float, optional</em>) – Scale all radii by this factor (default: 1.0)</p></li>
+<li><p><strong>launch_radius</strong> (<em>float, optional</em>) – Radius of sphere enclosing molecule. Auto-computed if None.</p></li>
+<li><p><strong>skin_thickness</strong> (<em>float, optional</em>) – Cutoff distance for Walk-on-Spheres termination. Auto-set if None.</p></li>
+<li><p><strong>mass</strong> (<em>float, optional</em>) – Molecular mass for intrinsic viscosity with mass units and sedimentation
+coefficient. Specify in mass_units.</p></li>
+<li><p><strong>viscosity</strong> (<em>float, optional</em>) – Solvent viscosity for friction/diffusion/sedimentation coefficients.
+Specify in viscosity_units (e.g., 0.01 poise for water at 20°C).</p></li>
+<li><p><strong>buoyancy_factor</strong> (<em>float, optional</em>) – Buoyancy factor for sedimentation coefficient (typically 0.72-0.73 for
+proteins in water).</p></li>
+<li><p><strong>temperature_units</strong> (<em>str, optional</em>) – ‘K’ (Kelvin) or ‘C’ (Celsius), default ‘K’</p></li>
+<li><p><strong>viscosity_units</strong> (<em>str, optional</em>) – ‘p’ (poise) or ‘cp’ (centipoise), default ‘p’</p></li>
+<li><p><strong>length_units</strong> (<em>str, optional</em>) – ‘m’, ‘cm’, ‘nm’, ‘A’ (Angstrom), or ‘L’ (arbitrary), default ‘A’</p></li>
+<li><p><strong>mass_units</strong> (<em>str, optional</em>) – ‘Da’, ‘kDa’, ‘g’, or ‘kg’, default ‘g’</p></li>
+<li><p><strong>seed</strong> (<em>int, optional</em>) – Random seed for reproducibility. Default -1 (random seed).</p></li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – Print progress information (default: False)</p></li>
+<li><p><strong>**kwargs</strong> – Additional arguments passed to <a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="(in MDAnalysis v2.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>universe</strong> (<a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/core/universe.html#MDAnalysis.core.universe.Universe" title="(in MDAnalysis v2.10.0)"><em>MDAnalysis.core.universe.Universe</em></a>) – Universe containing the trajectory</p></li>
+<li><p><strong>atom_group</strong> (<a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/core/groups.html#MDAnalysis.core.groups.AtomGroup" title="(in MDAnalysis v2.10.0)"><em>MDAnalysis.core.groups.AtomGroup</em></a>) – Atoms being analyzed</p></li>
+<li><p><strong>type_radii</strong> (<em>numpy.ndarray</em>) – Array of radii for each atom in atom_group</p></li>
+<li><p><strong>results</strong> (<em>MDAnalysis.analysis.base.Results</em>) – <p>Container for computed properties. Each property is a <a class="reference internal" href="zenowrapper.main.Property.html#zenowrapper.main.Property" title="zenowrapper.main.Property"><code class="xref py py-class docutils literal notranslate"><span class="pre">Property</span></code></a> object
+with <code class="docutils literal notranslate"><span class="pre">.values</span></code> and <code class="docutils literal notranslate"><span class="pre">.variance</span></code> arrays indexed by frame. Available properties
+depend on input parameters:</p>
+<dl class="simple">
+<dt><strong>Always computed:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacitance</span></code> : Molecular capacitance (length units)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">electric_polarizability_tensor</span></code> : 3×3 polarizability tensor (length³)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">electric_polarizability_eigenvalues</span></code> : Eigenvalues of tensor (length³)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">electric_polarizability</span></code> : Mean polarizability (length³)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intrinsic_conductivity</span></code> : Dimensionless conductivity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">volume</span></code> : Molecular volume (length³)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gyration_tensor</span></code> : 3×3 gyration tensor (length²)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gyration_eigenvalues</span></code> : Eigenvalues of gyration tensor (length²)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacitance_same_volume_sphere</span></code> : Equivalent sphere radius (length)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hydrodynamic_radius</span></code> : Effective radius in solution (length)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">viscometric_radius</span></code> : Radius from viscosity (length)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intrinsic_viscosity</span></code> : Dimensionless intrinsic viscosity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prefactor_polarizability2intrinsic_viscosity</span></code> : Shape factor</p></li>
+</ul>
+</dd>
+<dt><strong>Requires viscosity:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">friction_coefficient</span></code> : Resistance to motion (mass/time)</p></li>
+</ul>
+</dd>
+<dt><strong>Requires temperature and viscosity:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">diffusion_coefficient</span></code> : Translational diffusion (length²/time)</p></li>
+</ul>
+</dd>
+<dt><strong>Requires mass, buoyancy_factor, and viscosity:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">sedimentation_coefficient</span></code> : Sedimentation rate (time)</p></li>
+</ul>
+</dd>
+<dt><strong>Requires mass:</strong></dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">intrinsic_viscosity_mass</span></code> : Intrinsic viscosity (length³/mass)</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>n_frames</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Number of frames analyzed</p></li>
+<li><p><strong>times</strong> (<em>numpy.ndarray</em>) – Timestamps of analyzed frames</p></li>
+<li><p><strong>frames</strong> (<em>numpy.ndarray</em>) – Indices of analyzed frames</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><strong>Parallelization Strategy</strong></p>
+<p>For optimal performance, consider your workload characteristics:</p>
+<ul class="simple">
+<li><p><strong>Many frames (&gt;100), fast computation</strong>: Use frame-level parallelism
+(<code class="docutils literal notranslate"><span class="pre">backend='multiprocessing'</span></code>) with <code class="docutils literal notranslate"><span class="pre">num_threads=1</span></code> or small values</p></li>
+<li><p><strong>Few frames (&lt;20), expensive computation</strong>: Use within-frame parallelism
+with higher <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> and <code class="docutils literal notranslate"><span class="pre">backend='serial'</span></code></p></li>
+<li><p><strong>Balanced workload</strong>: Use hybrid approach, e.g., <code class="docutils literal notranslate"><span class="pre">n_workers=4</span></code> with
+<code class="docutils literal notranslate"><span class="pre">num_threads=4</span></code> on a 16-core machine</p></li>
+</ul>
+<p>Memory usage scales with <code class="docutils literal notranslate"><span class="pre">n_workers</span></code> (each worker loads a copy of the trajectory),
+while <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> shares memory within each worker.</p>
+<p class="rubric">Examples</p>
+<p>Basic usage computing hydrodynamic radius:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;protein.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;traj.dcd&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">type_radii</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.7</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="mf">1.55</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mf">1.52</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">),</span> <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Computing diffusion coefficient:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span>  <span class="c1"># K</span>
+<span class="gp">... </span>    <span class="n">viscosity</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>      <span class="c1"># poise (water at 20°C)</span>
+<span class="gp">... </span>    <span class="n">temperature_units</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">viscosity_units</span><span class="o">=</span><span class="s1">&#39;p&#39;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D_mean</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">variance</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Using frame-level parallelization for long trajectories:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Process 1000 frames using 8 workers, single-threaded per frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;multiprocessing&#39;</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using within-frame parallelization for expensive computation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Process few frames with 16-threaded ZENO per frame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">n_walks</span><span class="o">=</span><span class="mi">10000000</span><span class="p">,</span>  <span class="c1"># 10M walks = expensive!</span>
+<span class="gp">... </span>    <span class="n">num_threads</span><span class="o">=</span><span class="mi">16</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;serial&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using hybrid two-level parallelization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Balance: 4 workers × 4 threads = 16 cores total</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;multiprocessing&#39;</span><span class="p">,</span> <span class="n">n_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase" title="(in MDAnalysis v2.10.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MDAnalysis.analysis.base.AnalysisBase</span></code></a></dt><dd><p>Base class with run() method</p>
+</dd>
+<dt><a class="reference internal" href="zenowrapper.main.Property.html#zenowrapper.main.Property" title="zenowrapper.main.Property"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Property</span></code></a></dt><dd><p>Container for results with values and uncertainties</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Computation time scales linearly with n_walks and n_interior_samples</p></li>
+<li><p>Statistical uncertainty decreases as 1/sqrt(N) for N samples</p></li>
+<li><p>The electrostatic-hydrodynamic analogy relates capacitance C to hydrodynamic
+radius: R_h = C (exact for spheres, approximate for other shapes)</p></li>
+<li><p>All properties include variance estimates via propagation of uncertainties</p></li>
+<li><p>Setting a fixed seed ensures reproducible results</p></li>
+</ul>
+<p class="rubric">References</p>
+<ul>
+<li><p>Douglas, J.F., Zhou, H.X., Hubbard, J.B. (1994)
+“Hydrodynamic friction and the capacitance of arbitrarily shaped objects”
+Phys. Rev. E 49: 5319-5331</p></li>
+<li><p>ZENO Documentation: <a class="reference external" href="https://zeno.nist.gov/">https://zeno.nist.gov/</a></p></li>
+<li><p>ZENO Calculations: <a class="reference external" href="https://zeno.nist.gov/Calculations.html">https://zeno.nist.gov/Calculations.html</a></p></li>
+<li><p>ZENO Output Properties: <a class="reference external" href="https://zeno.nist.gov/Output.html">https://zeno.nist.gov/Output.html</a></p>
+<blockquote>
+<div><table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenowrapper.main.ZenoWrapper.parallelizable" title="zenowrapper.main.ZenoWrapper.parallelizable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZenoWrapper.parallelizable</span></code></a></p></td>
+<td><p>Boolean mark showing that a given class can be parallelizable with split-apply-combine procedure.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zenowrapper.main.ZenoWrapper.get_supported_backends" title="zenowrapper.main.ZenoWrapper.get_supported_backends"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZenoWrapper.get_supported_backends</span></code></a>()</p></td>
+<td><p>Return the supported parallel backends for this analysis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zenowrapper.main.ZenoWrapper.run" title="zenowrapper.main.ZenoWrapper.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZenoWrapper.run</span></code></a>([start, stop, step, frames, ...])</p></td>
+<td><p>Perform the calculation</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="zenowrapper.main.ZenoWrapper.get_supported_backends">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_supported_backends</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zenowrapper/main.html#ZenoWrapper.get_supported_backends"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zenowrapper.main.ZenoWrapper.get_supported_backends" title="Link to this definition"></a></dt>
+<dd><p>Return the supported parallel backends for this analysis.</p>
+<p>ZenoWrapper supports all standard MDAnalysis parallel backends since
+each frame’s analysis is completely independent and results can be
+concatenated across frames.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Supported backend names: (‘serial’, ‘multiprocessing’, ‘dask’)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/analysis/parallelization.html#parallel-analysis" title="(in MDAnalysis v2.10.0)"><span>Parallel analysis</span></a></dt><dd><p>MDAnalysis parallel analysis documentation</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Even when using parallel backends, each worker will use <code class="docutils literal notranslate"><span class="pre">num_threads</span></code>
+for within-frame ZENO parallelization, giving two-level parallelism.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.0.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="zenowrapper.main.ZenoWrapper.parallelizable">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parallelizable</span></span><a class="headerlink" href="#zenowrapper.main.ZenoWrapper.parallelizable" title="Link to this definition"></a></dt>
+<dd><p>Boolean mark showing that a given class can be parallelizable with
+split-apply-combine procedure. Namely, if we can safely distribute
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">_single_frame()</span></code> to multiple workers and then combine them with a
+proper <code class="xref py py-meth docutils literal notranslate"><span class="pre">_conclude()</span></code> call. If set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, no backends except
+for <code class="docutils literal notranslate"><span class="pre">serial</span></code> are supported.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to check parallelizability of the whole class, without
+explicitly creating an instance of the class, see
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">_analysis_algorithm_is_parallelizable</span></code>. Note that you
+setting it to other value will break things if the algorithm
+behind the analysis is not trivially parallelizable.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>if a given <code class="docutils literal notranslate"><span class="pre">AnalysisBase</span></code> subclass instance
+is parallelizable with split-apply-combine, or not</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.8.0.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="zenowrapper.main.ZenoWrapper.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frames</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.14)"><span class="pre">Iterable</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_parts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/analysis/backends.html#MDAnalysis.analysis.backends.BackendBase" title="(in MDAnalysis v2.10.0)"><span class="pre">BackendBase</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">unsupported_backend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progressbar_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zenowrapper.main.ZenoWrapper.run" title="Link to this definition"></a></dt>
+<dd><p>Perform the calculation</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul>
+<li><p><strong>start</strong> (<em>int, optional</em>) – start frame of analysis</p></li>
+<li><p><strong>stop</strong> (<em>int, optional</em>) – stop frame of analysis</p></li>
+<li><p><strong>step</strong> (<em>int, optional</em>) – number of frames to skip between each analysed frame</p></li>
+<li><p><strong>frames</strong> (<em>array_like, optional</em>) – array of integers or booleans to slice trajectory; <code class="docutils literal notranslate"><span class="pre">frames</span></code> can
+only be used <em>instead</em> of <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, and <code class="docutils literal notranslate"><span class="pre">step</span></code>. Setting
+<em>both</em> <code class="docutils literal notranslate"><span class="pre">frames</span></code> and at least one of <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, <code class="docutils literal notranslate"><span class="pre">step</span></code>
+to a non-default value will raise a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.2.0.</span></p>
+</div>
+</li>
+<li><p><strong>verbose</strong> (<em>bool, optional</em>) – Turn on verbosity</p></li>
+<li><p><strong>progressbar_kwargs</strong> (<em>dict, optional</em>) – ProgressBar keywords with custom parameters regarding progress bar
+position, etc; see <a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/lib/log.html#MDAnalysis.lib.log.ProgressBar" title="(in MDAnalysis v2.10.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MDAnalysis.lib.log.ProgressBar</span></code></a>
+for full list. Available only for <code class="docutils literal notranslate"><span class="pre">backend='serial'</span></code></p></li>
+<li><p><strong>backend</strong> (<em>Union[str, BackendBase], optional</em>) – By default, performs calculations in a serial fashion.
+Otherwise, user can choose a backend: <code class="docutils literal notranslate"><span class="pre">str</span></code> is matched to a
+builtin backend (one of <code class="docutils literal notranslate"><span class="pre">serial</span></code>, <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> and
+<code class="docutils literal notranslate"><span class="pre">dask</span></code>), or a <code class="xref py py-class docutils literal notranslate"><span class="pre">MDAnalysis.analysis.results.BackendBase</span></code>
+subclass.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.8.0.</span></p>
+</div>
+</li>
+<li><p><strong>n_workers</strong> (<em>int</em>) – positive integer with number of workers (processes, in case of
+built-in backends) to split the work between</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.8.0.</span></p>
+</div>
+</li>
+<li><p><strong>n_parts</strong> (<em>int, optional</em>) – number of parts to split computations across. Can be more than
+number of workers.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.8.0.</span></p>
+</div>
+</li>
+<li><p><strong>unsupported_backend</strong> (<em>bool, optional</em>) – if you want to run your custom backend on a parallelizable class
+that has not been tested by developers, by default False</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 2.8.0.</span></p>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.2.0: </span>Added ability to analyze arbitrary frames by passing a list of
+frame indices in the <cite>frames</cite> keyword argument.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.5.0: </span>Add <cite>progressbar_kwargs</cite> parameter,
+allowing to modify description, position etc of tqdm progressbars</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 2.8.0: </span>Introduced <code class="docutils literal notranslate"><span class="pre">backend</span></code>, <code class="docutils literal notranslate"><span class="pre">n_workers</span></code>, <code class="docutils literal notranslate"><span class="pre">n_parts</span></code> and
+<code class="docutils literal notranslate"><span class="pre">unsupported_backend</span></code> keywords, and refactored the method logic to
+support parallelizable execution.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="zenowrapper.main.Property.compute_total_values.html" class="btn btn-neutral float-left" title="compute_total_values" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zenowrapper.main.ZenoWrapper.parallelizable.html" class="btn btn-neutral float-right" title="parallelizable" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Works of NIST employees are not not subject to copyright protection in the United States. Project structure based on the MDAnalysis Cookiecutter version 0.1.</p>
+  </div>
+
+  
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+   
+
+  <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+  <iframe src="../_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+
+</body>
+</html>

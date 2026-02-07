@@ -1,0 +1,296 @@
+
+
+
+
+
+  
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="../../_static/mdakits-empty-favicon-template.svg">
+</head>
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zenowrapper &mdash; ZENOWrapper  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/ntd2d.css?v=6fe47884" />
+
+  
+    <link rel="shortcut icon" href="../_static/mdakits-empty-favicon-template.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/js/versions.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="main" href="zenowrapper.main.html" />
+    <link rel="prev" title="API Documentation" href="../api.html" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RJSMY46M5C');
+  </script>
+  <!-- Old DAP UA tag -->
+  <script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+  </script>
+
+   
+
+  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SH9M3SGZK6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SH9M3SGZK6');
+  </script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+
+  
+
+
+
+
+<a href="../index.html">
+  
+    <img src="../_static/zeno_mdakit.png" class="logo" alt="Logo"/>
+</a>
+
+
+  
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+        <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">zenowrapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zenowrapper-hydrodynamic-property-calculations-for-molecular-systems">ZenoWrapper - Hydrodynamic Property Calculations for Molecular Systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="zenowrapper.main.html">main</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#developer-information">Developer Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../implementation.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parallelization.html">Parallelization Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+</ul>
+
+</div>
+
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ZENOWrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Documentation</a></li>
+      <li class="breadcrumb-item active">zenowrapper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/autosummary/zenowrapper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zenowrapper">
+<h1>zenowrapper<a class="headerlink" href="#zenowrapper" title="Link to this heading"></a></h1>
+<p>zenowrapper</p>
+<p class="rubric">Description</p>
+<section id="zenowrapper-hydrodynamic-property-calculations-for-molecular-systems">
+<span id="module-zenowrapper"></span><h2>ZenoWrapper - Hydrodynamic Property Calculations for Molecular Systems<a class="headerlink" href="#zenowrapper-hydrodynamic-property-calculations-for-molecular-systems" title="Link to this heading"></a></h2>
+<p>ZenoWrapper provides a Python interface to the NIST ZENO software for computing
+hydrodynamic, electronic, and geometric properties of molecular structures from
+MD simulations. This package integrates ZENO’s Monte Carlo algorithms with
+MDAnalysis, enabling high-throughput analysis of biomolecular trajectories.</p>
+<p><strong>Key Applications</strong></p>
+<p>Compute essential physical properties for understanding molecular behavior in solution:</p>
+<ul class="simple">
+<li><p><strong>Diffusion coefficients</strong> - predict translational mobility and transport rates</p></li>
+<li><p><strong>Sedimentation coefficients</strong> - analyze molecular mass and shape from ultracentrifugation</p></li>
+<li><p><strong>Intrinsic viscosity</strong> - determine solution behavior and polymer characterization</p></li>
+<li><p><strong>Hydrodynamic radius</strong> - estimate effective molecular size in solution</p></li>
+<li><p><strong>Friction coefficients</strong> - quantify resistance to motion through solvent</p></li>
+<li><p><strong>Gyration tensor</strong> - characterize molecular shape and anisotropy</p></li>
+</ul>
+<p><strong>Scientific Impact</strong></p>
+<p>These properties are critical for:</p>
+<ul class="simple">
+<li><p>Comparing simulation predictions with experimental measurements (AUC, DLS, etc.)</p></li>
+<li><p>Characterizing protein complexes, polymers, and nanoparticles</p></li>
+<li><p>Validating force field accuracy in solution conditions</p></li>
+<li><p>Predicting macromolecular behavior in crowded cellular environments</p></li>
+</ul>
+<p><strong>Algorithm</strong></p>
+<p>ZENO employs two complementary Monte Carlo methods:</p>
+<ol class="arabic simple">
+<li><p><strong>Walk-on-Spheres (exterior)</strong>: Solves Laplace’s equation to compute electrical
+properties (capacitance, polarizability) and hydrodynamic properties via
+electrostatic-hydrodynamic analogy</p></li>
+<li><p><strong>Interior Sampling</strong>: Estimates geometric properties (volume, gyration tensor)
+by random point sampling within the molecular volume</p></li>
+</ol>
+<p>These algorithms provide rigorous statistical uncertainties for all computed properties.</p>
+<p><strong>References</strong></p>
+<ul class="simple">
+<li><p>ZENO Documentation: <a class="reference external" href="https://zeno.nist.gov/">https://zeno.nist.gov/</a></p></li>
+<li><p>Calculations: <a class="reference external" href="https://zeno.nist.gov/Calculations.html">https://zeno.nist.gov/Calculations.html</a></p></li>
+<li><p>Output Properties: <a class="reference external" href="https://zeno.nist.gov/Output.html">https://zeno.nist.gov/Output.html</a></p></li>
+<li><p>Douglas, J.F. et al. (2017) J. Res. NIST 122: <a class="reference external" href="https://doi.org/10.6028/jres.122.020">https://doi.org/10.6028/jres.122.020</a></p></li>
+</ul>
+<p><strong>Usage Example</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
+<span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
+
+<span class="c1"># Load system</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;protein.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;trajectory.dcd&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define VdW radii by atom type</span>
+<span class="n">type_radii</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.70</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="mf">1.55</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mf">1.52</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="mf">1.80</span><span class="p">,</span>
+    <span class="s1">&#39;H&#39;</span><span class="p">:</span> <span class="mf">1.20</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span> <span class="mf">1.80</span>
+<span class="p">}</span>
+
+<span class="c1"># Initialize analysis</span>
+<span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">),</span>
+    <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span>
+    <span class="n">n_walks</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span>           <span class="c1"># exterior calculation</span>
+    <span class="n">n_interior_samples</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>  <span class="c1"># interior calculation</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span>         <span class="c1"># K, for diffusion coefficient</span>
+    <span class="n">viscosity</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>            <span class="c1"># poise (water at 20°C)</span>
+    <span class="n">mass</span><span class="o">=</span><span class="mf">50000.0</span><span class="p">,</span>              <span class="c1"># Da</span>
+    <span class="n">buoyancy_factor</span><span class="o">=</span><span class="mf">0.73</span><span class="p">,</span>      <span class="c1"># typical for proteins in water</span>
+    <span class="n">length_units</span><span class="o">=</span><span class="s1">&#39;A&#39;</span>           <span class="c1"># Angstroms</span>
+<span class="p">)</span>
+
+<span class="c1"># Run over trajectory frames</span>
+<span class="n">zeno</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Access results (each is a Property object with .values and .variance arrays)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hydrodynamic radius: </span><span class="si">{</span><span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hydrodynamic_radius</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Å&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diffusion coefficient: </span><span class="si">{</span><span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">diffusion_coefficient</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Volume: </span><span class="si">{</span><span class="n">zeno</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Å³&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="zenowrapper.main.html#module-zenowrapper.main" title="zenowrapper.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a></p></td>
+<td><p>Hydrodynamic Property Calculations Using ZENO Monte Carlo Methods</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../api.html" class="btn btn-neutral float-left" title="API Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="zenowrapper.main.html" class="btn btn-neutral float-right" title="main" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Works of NIST employees are not not subject to copyright protection in the United States. Project structure based on the MDAnalysis Cookiecutter version 0.1.</p>
+  </div>
+
+  
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+   
+
+  <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+  <iframe src="../_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+
+
+
+
+
+  
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="_static/mdakits-empty-favicon-template.svg">
+</head>
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Implementation Details &mdash; ZENOWrapper  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=6fe47884" />
+
+  
+    <link rel="shortcut icon" href="_static/mdakits-empty-favicon-template.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/js/versions.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parallelization Guide" href="parallelization.html" />
+    <link rel="prev" title="run" href="autosummary/zenowrapper.main.ZenoWrapper.run.html" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-RJSMY46M5C');
+  </script>
+  <!-- Old DAP UA tag -->
+  <script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+  </script>
+
+   
+
+  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SH9M3SGZK6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SH9M3SGZK6');
+  </script>
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+
+  
+
+
+
+
+<a href="index.html">
+  
+    <img src="_static/zeno_mdakit.png" class="logo" alt="Logo"/>
+</a>
+
+
+  
+  
+  
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        </div>
+<div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+        <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation Details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-layer-main-py">Python Layer (<code class="docutils literal notranslate"><span class="pre">main.py</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-layer-zenolib-cpp">C++ Layer (<code class="docutils literal notranslate"><span class="pre">zenolib.cpp</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#benefits">Benefits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zeno-workflow">ZENO Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#implementation-notes">Implementation Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="parallelization.html">Parallelization Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+</ul>
+
+</div>
+
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ZENOWrapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Documentation</a></li>
+      <li class="breadcrumb-item active">Implementation Details</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/implementation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="implementation-details">
+<h1>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading"></a></h1>
+<p>This document describes the internal architecture and implementation details of ZenoWrapper, including the optimization strategies used to minimize data transfer between Python and C++ layers.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This implementation minimizes data transfer between Python and C++ layers by performing all ZENO computations (geometry building, Walk on Spheres, Interior Sampling) entirely in the C++ layer, with only a single function call per frame from Python.</p>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
+<section id="python-layer-main-py">
+<h3>Python Layer (<code class="docutils literal notranslate"><span class="pre">main.py</span></code>)<a class="headerlink" href="#python-layer-main-py" title="Link to this heading"></a></h3>
+<p><strong>ZenoWrapper Class Structure:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>__init__</strong>: Initializes ZENO parameter objects once</p>
+<ul class="simple">
+<li><p>Creates <code class="docutils literal notranslate"><span class="pre">ParametersWalkOnSpheres</span></code>, <code class="docutils literal notranslate"><span class="pre">ParametersInteriorSampling</span></code>, and <code class="docutils literal notranslate"><span class="pre">ParametersResults</span></code> objects</p></li>
+<li><p>Configures all parameters (number of walks, error tolerances, physical properties, etc.)</p></li>
+<li><p>Validates atom types and creates radii array</p></li>
+</ul>
+</li>
+<li><p><strong>_prepare</strong>: Initializes output data structures</p>
+<ul class="simple">
+<li><p>Creates <code class="docutils literal notranslate"><span class="pre">Property</span></code> objects for all ZENO results (capacitance, polarizability, volume, etc.)</p></li>
+<li><p>Allocates numpy arrays for storing results across all frames</p></li>
+<li><p>Handles optional results (friction coefficient, diffusion coefficient, etc.) based on provided parameters</p></li>
+</ul>
+</li>
+<li><p><strong>_single_frame</strong>: Analyzes a single frame</p>
+<ul class="simple">
+<li><p>Extracts atomic positions from MDAnalysis</p></li>
+<li><p><strong>Single C++ call</strong>: <code class="docutils literal notranslate"><span class="pre">zenolib.compute_zeno_single_frame(positions,</span> <span class="pre">radii,</span> <span class="pre">params_walk,</span> <span class="pre">params_interior,</span> <span class="pre">params_results)</span></code></p></li>
+<li><p>Unpacks flat C++ arrays into numpy tensors</p></li>
+<li><p>Stores mean and variance values for this frame</p></li>
+</ul>
+</li>
+<li><p><strong>_conclude</strong>: Summarizes results</p>
+<ul class="simple">
+<li><p>Computes overall mean and total variance across all frames</p></li>
+<li><p>Produces final results for the user</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="c-layer-zenolib-cpp">
+<h3>C++ Layer (<code class="docutils literal notranslate"><span class="pre">zenolib.cpp</span></code>)<a class="headerlink" href="#c-layer-zenolib-cpp" title="Link to this heading"></a></h3>
+<p><strong>Key Components:</strong></p>
+<ol class="arabic">
+<li><p><strong>ZenoResults Struct</strong>: Efficient result container</p>
+<ul class="simple">
+<li><p>Contains all ZENO outputs as simple doubles and double arrays</p></li>
+<li><p>Mean and variance for each property</p></li>
+<li><p>Flat arrays for tensors (row-major order) to minimize marshalling overhead</p></li>
+</ul>
+</li>
+<li><p><strong>compute_zeno_single_frame Function</strong>: Main computation entry point</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ZenoResults</span><span class="w"> </span><span class="n">compute_zeno_single_frame</span><span class="p">(</span>
+<span class="w">    </span><span class="n">positions</span><span class="p">,</span><span class="w">  </span><span class="c1">// Nx3 numpy array</span>
+<span class="w">    </span><span class="n">radii</span><span class="p">,</span><span class="w">      </span><span class="c1">// N numpy array</span>
+<span class="w">    </span><span class="n">params_walk</span><span class="p">,</span>
+<span class="w">    </span><span class="n">params_interior</span><span class="p">,</span>
+<span class="w">    </span><span class="n">params_results</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Internal workflow:</strong></p>
+<ul class="simple">
+<li><p>Builds <code class="docutils literal notranslate"><span class="pre">MixedModel&lt;double&gt;</span></code> from positions and radii</p></li>
+<li><p>Creates spheres using ZENO’s <code class="docutils literal notranslate"><span class="pre">Vector3</span></code> and <code class="docutils literal notranslate"><span class="pre">Sphere</span></code> classes</p></li>
+<li><p>Instantiates <code class="docutils literal notranslate"><span class="pre">Zeno</span></code> object with the model</p></li>
+<li><p>Calls <code class="docutils literal notranslate"><span class="pre">doWalkOnSpheres()</span></code> and <code class="docutils literal notranslate"><span class="pre">doInteriorSampling()</span></code></p></li>
+<li><p>Extracts results via <code class="docutils literal notranslate"><span class="pre">getResults()</span></code></p></li>
+<li><p>Packs all means and variances into <code class="docutils literal notranslate"><span class="pre">ZenoResults</span></code> struct</p></li>
+<li><p>Returns struct to Python (nanobind handles conversion)</p></li>
+</ul>
+</li>
+<li><p><strong>Nanobind Bindings</strong>: Expose C++ classes to Python</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ParametersWalkOnSpheres</span></code>: Walk-on-Spheres configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ParametersInteriorSampling</span></code>: Interior sampling configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ParametersResults</span></code>: Physical parameters and units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ZenoResults</span></code>: Read-only result struct with all properties exposed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute_zeno_single_frame</span></code>: Main computation function</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="benefits">
+<h2>Benefits<a class="headerlink" href="#benefits" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Performance</strong>: Minimized Python/C++ crossing overhead</p></li>
+<li><p><strong>Simplicity</strong>: Clean API with single function call</p></li>
+<li><p><strong>Memory Efficiency</strong>: Direct numpy array access via nanobind</p></li>
+<li><p><strong>Maintainability</strong>: Clear separation of concerns</p></li>
+<li><p><strong>Type Safety</strong>: Strongly typed C++ with automatic Python bindings</p></li>
+</ol>
+</section>
+<section id="zeno-workflow">
+<h2>ZENO Workflow<a class="headerlink" href="#zeno-workflow" title="Link to this heading"></a></h2>
+<p>The implementation follows ZENO’s standard workflow:</p>
+<ol class="arabic simple">
+<li><p><strong>Geometry Construction</strong>: Build <code class="docutils literal notranslate"><span class="pre">MixedModel</span></code> from spheres</p></li>
+<li><p><strong>Preprocessing</strong>: ZENO automatically preprocesses the model</p></li>
+<li><p><strong>Walk on Spheres</strong>: Monte Carlo method for exterior properties (capacitance, polarizability)</p></li>
+<li><p><strong>Interior Sampling</strong>: Monte Carlo method for interior properties (volume, gyration)</p></li>
+<li><p><strong>Results Compilation</strong>: ZENO computes derived properties from raw Monte Carlo results</p></li>
+</ol>
+<p>All steps 1-5 occur in a single C++ function call, with geometry built from numpy arrays.</p>
+</section>
+<section id="usage-example">
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
+<span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
+
+<span class="c1"># Load trajectory</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;topology.pdb&quot;</span><span class="p">,</span> <span class="s2">&quot;trajectory.xtc&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define radii for each atom type</span>
+<span class="n">type_radii</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;CA&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;CB&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+
+<span class="c1"># Create analyzer</span>
+<span class="n">zw</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
+    <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">,</span>
+    <span class="n">n_walks</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+    <span class="n">n_interior_samples</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">298.15</span><span class="p">,</span>
+    <span class="n">viscosity</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+
+<span class="c1"># Run analysis (automatically calls _prepare, _single_frame for each frame, _conclude)</span>
+<span class="n">zw</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="c1"># Access results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hydrodynamic radius: </span><span class="si">{</span><span class="n">zw</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;hydrodynamic_radius&quot;</span><span class="p">]</span><span class="n">overall_value</span><span class="si">}</span><span class="s2"> ± &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zw</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;hydrodynamic_radius&quot;</span><span class="p">]</span><span class="n">overall_variance</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>All ZENO computation parameters are configured once during <code class="docutils literal notranslate"><span class="pre">__init__</span></code></p></li>
+<li><p>The same parameter objects are reused for all frames (thread-safe)</p></li>
+<li><p>Results are accumulated frame-by-frame in Python numpy arrays</p></li>
+<li><p>Final statistics computed in <code class="docutils literal notranslate"><span class="pre">_conclude</span></code> using standard uncertainty propagation</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="autosummary/zenowrapper.main.ZenoWrapper.run.html" class="btn btn-neutral float-left" title="run" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parallelization.html" class="btn btn-neutral float-right" title="Parallelization Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Works of NIST employees are not not subject to copyright protection in the United States. Project structure based on the MDAnalysis Cookiecutter version 0.1.</p>
+  </div>
+
+  
+
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    var versions_json_url = ''
+</script>
+
+<div class="rst-versions" data-toggle="rst-versions" role="note"
+     aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+        
+      <span class="fa fa-caret-down"></span>
+    </span>
+
+    <div class="rst-other-versions">
+        <dl id="versionselector">
+            <dt>Other Versions</dt>
+        </dl>
+
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+   
+
+  <!-- Taken from https://www.filamentgroup.com/lab/html-includes/#another-demo%3A-including-another-html-file -->
+  <iframe src="_static/ntd2d_menu.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+
+</body>
+</html>

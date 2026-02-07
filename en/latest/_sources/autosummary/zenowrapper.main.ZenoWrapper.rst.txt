@@ -1,0 +1,30 @@
+ZenoWrapper
+===========
+
+.. currentmodule:: zenowrapper.main
+
+zenowrapper.main.ZenoWrapper
+
+.. autoclass:: ZenoWrapper
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   
+   
+      .. autosummary::
+         :toctree:
+      
+         ZenoWrapper.parallelizable
+   
+   
+
+   
+      .. autosummary::
+         :toctree:
+      
+         ZenoWrapper.get_supported_backends
+         ZenoWrapper.run
+   
+   
