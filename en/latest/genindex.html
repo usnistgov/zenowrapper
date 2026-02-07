@@ -64,12 +64,41 @@
     gtag('config', 'G-SH9M3SGZK6');
   </script>
 
-  <!-- NIST header/footer styling -->
-  <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
-  <!-- jQuery must load before NIST script -->
-  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
-  <!-- NIST header/footer injection script -->
-  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+  <!-- Fix NIST footer positioning after injection -->
+  <script>
+    // Wait for NIST header-footer script to inject content
+    document.addEventListener('DOMContentLoaded', function() {
+      // Use MutationObserver to detect when NIST footer is added
+      const observer = new MutationObserver(function(mutations) {
+        const nistFooter = document.querySelector('[class*="nist-footer"], [id*="nist-footer"], footer[class*="nist"]');
+        const nistHeader = document.querySelector('[class*="nist-header"], [id*="nist-header"], header[class*="nist"]');
+
+        if (nistFooter) {
+          nistFooter.style.position = 'relative';
+          nistFooter.style.marginTop = '2rem';
+          nistFooter.style.clear = 'both';
+        }
+
+        if (nistHeader) {
+          nistHeader.style.position = 'relative';
+        }
+
+        // Stop observing once we've found and fixed the elements
+        if (nistFooter && nistHeader) {
+          observer.disconnect();
+        }
+      });
+
+      // Start observing the document body for added nodes
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      // Fallback: stop observing after 5 seconds
+      setTimeout(function() { observer.disconnect(); }, 5000);
+    });
+  </script>
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -285,7 +314,6 @@
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-  
 
    
 
