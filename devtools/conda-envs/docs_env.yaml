@@ -8,6 +8,9 @@ dependencies:
 
   # Build system dependencies
   - pip
+  - cmake
+  - ninja
+  - cxx-compiler
 
   # Core runtime dependencies
   - numpy

@@ -1,7 +1,13 @@
 [build-system]
-requires = ["scikit-build-core >=0.4.3", "nanobind >=1.3.2", "setuptools-scm"]
+requires = [
+    "scikit-build-core >=0.4.3",
+    "nanobind >=1.3.2",
+    "setuptools-scm",
+    "setuptools>=61",
+]
+#build-backend = "pyproject_hook"
+#backend-path = ["."]
 build-backend = "scikit_build_core.build"
-
 
 [project]
 name = "zenowrapper"
@@ -29,10 +35,12 @@ dynamic = [
 ]
 
 
-# [project.urls]
-"Source" = "https://github.com/usnistgov/zenowrapper"
+[project.urls]
+Source = "https://github.com/usnistgov/zenowrapper"
 "Public Documentation" = "https://Docs4NIST.nist.gov/zenowrapper/"
 
+[tool.setuptools_scm]
+write_to = "src/zenowrapper/_version.py"
 
 [tool.scikit-build]
 wheel.license-files = ["LICENSE.md", "AUTHORS*"]
@@ -52,14 +60,11 @@ cmake.build-type = "Release"
 [[tool.scikit-build.overrides]]
 if.env.ZENOWRAPPER_SKIP_EXTENSION = "1"
 cmake.targets = []
+cmake.args = ["-DSKIP_EXTENSION=ON"]
 
 [tool.cibuildwheel]
 # Necessary to see build output from the actual compilation
 build-verbosity = 1
-
-[tool.setuptools_scm]
-write_to = "src/zenowrapper/_version.py"
-
 
 [project.optional-dependencies]
 test = [
