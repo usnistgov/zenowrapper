@@ -50,7 +50,19 @@
    
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
-  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
+
+  <!-- Load jQuery only if the theme hasn't provided it (keeps RTD themes from double-loading) -->
+  <script>
+    (function() {
+      if (typeof window.jQuery === 'undefined') {
+        var jq = document.createElement('script');
+        jq.src = 'https://code.jquery.com/jquery-3.6.2.min.js';
+        jq.defer = true;
+        document.head.appendChild(jq);
+      }
+    })();
+  </script>
+
   <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
 
 
