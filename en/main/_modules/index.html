@@ -67,6 +67,10 @@
 
 
 
+  <!-- Theme icon fonts moved into proper head block -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.min.css" integrity="sha512-b1ASx0WHgVFL5ZQhTgiPWX+68KjS38Jk87jg7pe+qC7q9YkEtFq0z7xCglv7qGIs/68d3mAp+StfC8WKC5SSAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SH9M3SGZK6"></script>
   <script>
@@ -76,11 +80,9 @@
     gtag('config', 'G-SH9M3SGZK6');
   </script>
 
-  <!-- Fix NIST footer positioning after injection -->
+  <!-- Optional: Fix NIST footer positioning after injection -->
   <script>
-    // Wait for NIST header-footer script to inject content
     document.addEventListener('DOMContentLoaded', function() {
-      // Use MutationObserver to detect when NIST footer is added
       const observer = new MutationObserver(function(mutations) {
         const nistFooter = document.querySelector('[class*="nist-footer"], [id*="nist-footer"], footer[class*="nist"]');
         const nistHeader = document.querySelector('[class*="nist-header"], [id*="nist-header"], header[class*="nist"]');
@@ -95,19 +97,16 @@
           nistHeader.style.position = 'relative';
         }
 
-        // Stop observing once we've found and fixed the elements
         if (nistFooter && nistHeader) {
           observer.disconnect();
         }
       });
 
-      // Start observing the document body for added nodes
       observer.observe(document.body, {
         childList: true,
         subtree: true
       });
 
-      // Fallback: stop observing after 5 seconds
       setTimeout(function() { observer.disconnect(); }, 5000);
     });
   </script>
