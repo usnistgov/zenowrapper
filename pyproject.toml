@@ -5,8 +5,6 @@ requires = [
     "setuptools-scm",
     "setuptools>=61",
 ]
-#build-backend = "pyproject_hook"
-#backend-path = ["."]
 build-backend = "scikit_build_core.build"
 
 [project]
