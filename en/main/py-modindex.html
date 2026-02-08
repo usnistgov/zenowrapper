@@ -51,19 +51,7 @@
    
 
   <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
-
-  <!-- Load jQuery only if the theme hasn't provided it (keeps RTD themes from double-loading) -->
-  <script>
-    (function() {
-      if (typeof window.jQuery === 'undefined') {
-        var jq = document.createElement('script');
-        jq.src = 'https://code.jquery.com/jquery-3.6.2.min.js';
-        jq.defer = true;
-        document.head.appendChild(jq);
-      }
-    })();
-  </script>
-
+  <script src="https://code.jquery.com/jquery-3.6.2.min.js" type="text/javascript" defer="defer"></script>
   <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
 
 
@@ -81,36 +69,32 @@
     gtag('config', 'G-SH9M3SGZK6');
   </script>
 
-  <!-- Optional: Fix NIST footer positioning after injection -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const observer = new MutationObserver(function(mutations) {
-        const nistFooter = document.querySelector('[class*="nist-footer"], [id*="nist-footer"], footer[class*="nist"]');
-        const nistHeader = document.querySelector('[class*="nist-header"], [id*="nist-header"], header[class*="nist"]');
+  <!-- Fix NIST footer positioning for mdanalysis-sphinx-theme -->
+  <style>
+    body > footer[class*="nist"],
+    body > [class*="nist-footer"],
+    body > [id*="nist-footer"] {
+      position: relative !important;
+      margin-top: 2rem !important;
+      clear: both !important;
+      display: block !important;
+    }
 
-        if (nistFooter) {
-          nistFooter.style.position = 'relative';
-          nistFooter.style.marginTop = '2rem';
-          nistFooter.style.clear = 'both';
-        }
+    body > header[class*="nist"],
+    body > [class*="nist-header"],
+    body > [id*="nist-header"] {
+      position: relative !important;
+      display: block !important;
+    }
 
-        if (nistHeader) {
-          nistHeader.style.position = 'relative';
-        }
+    .wy-nav-content-wrap {
+      min-height: calc(100vh - 200px);
+    }
 
-        if (nistFooter && nistHeader) {
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
-
-      setTimeout(function() { observer.disconnect(); }, 5000);
-    });
-  </script>
+    .rst-footer-buttons {
+      margin-bottom: 2rem;
+    }
+  </style>
 
 
 </head>
