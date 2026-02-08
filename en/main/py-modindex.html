@@ -71,20 +71,33 @@
 
   <!-- Fix NIST footer positioning for mdanalysis-sphinx-theme -->
   <style>
-    body > footer[class*="nist"],
-    body > [class*="nist-footer"],
-    body > [id*="nist-footer"] {
+    /* Target the wrapper divs created by NIST JavaScript */
+    #nistheadergoeshere {
       position: relative !important;
-      margin-top: 2rem !important;
+      display: block !important;
+      z-index: 10;
+      width: 100%;
+    }
+
+    #nistfootergoeshere {
+      position: relative !important;
+      display: block !important;
       clear: both !important;
+      margin-top: 2rem !important;
+      width: 100%;
+    }
+
+    /* Also target the actual footer/header elements inside */
+    #nistfootergoeshere footer,
+    #nistheadergoeshere header {
+      position: relative !important;
       display: block !important;
     }
 
-    body > header[class*="nist"],
-    body > [class*="nist-header"],
-    body > [id*="nist-header"] {
-      position: relative !important;
-      display: block !important;
+    /* Ensure theme content doesn't overlap */
+    .wy-grid-for-nav {
+      position: relative;
+      z-index: 1;
     }
 
     .wy-nav-content-wrap {
