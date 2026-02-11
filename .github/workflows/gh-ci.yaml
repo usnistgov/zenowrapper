@@ -95,7 +95,7 @@ jobs:
         echo "CC=$(brew --prefix gcc@11)/bin/gcc-11" >> $GITHUB_ENV
         echo "CXX=$(brew --prefix gcc@11)/bin/g++-11" >> $GITHUB_ENV
 
-#    - name: Install GCC (Windows) 
+#    - name: Install GCC (Windows)
 #      if: runner.os == 'Windows'
 #      run: |
 #        # Install MinGW-w64 via Chocolatey (includes GCC and make)
@@ -262,13 +262,14 @@ jobs:
   docs:
     name: Build docs on ubuntu-latest
     runs-on: ubuntu-latest
+    env:
+        ZENOWRAPPER_SKIP_EXTENSION: '1'
     steps:
         # usnistgov/Docs4NIST@add_analytics
-      - uses: jaclark5/Docs4NIST@add_env
+      - uses: jaclark5/Docs4NIST@add_env_simple
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
-          extra-env: 'ZENOWRAPPER_SKIP_EXTENSION=1'
           formats: |-
             epub
             html
