@@ -248,7 +248,7 @@ jobs:
       run: |
         pip install pipx twine
 
-    - name: Build package
+    - name: Build packagek
       run: |
         python -m pipx run build --sdist
 
@@ -266,7 +266,7 @@ jobs:
         ZENOWRAPPER_SKIP_EXTENSION: '1'
     steps:
         # usnistgov/Docs4NIST@add_analytics
-      - uses: jaclark5/Docs4NIST@add_env_simple
+      - uses: usnistgov/Docs4NIST@add_analytics
         with:
           docs-folder: docs/
           conda-environment: devtools/conda-envs/docs_env.yaml
