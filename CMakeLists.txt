@@ -98,9 +98,22 @@ target_link_libraries(zenowrapper_ext PRIVATE ${ZENO_LIBRARY})
 target_compile_definitions(zenowrapper_ext PRIVATE USE_SPRNG_RNG)
 
 # Install directive for scikit-build-core
-set_target_properties(zenowrapper_ext PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper"
-  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper"   # for Windows DLLs
-  ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/src/zenowrapper"   # for static/archives
-)
-install(TARGETS zenowrapper_ext LIBRARY DESTINATION src/zenowrapper)
+install(TARGETS zenowrapper_ext
+  LIBRARY DESTINATION zenowrapper
+  RUNTIME DESTINATION zenowrapper)
+
+# Keep source-tree test/import behavior used by this repository's CI.
+# This copy does not affect wheel layout: installation still uses the install()
+# rule above and places the extension in platlib/zenowrapper.
+option(ZENOWRAPPER_COPY_EXTENSION_TO_SOURCE
+  "Copy built extension into src/zenowrapper for source-tree tests"
+  ON)
+
+if(ZENOWRAPPER_COPY_EXTENSION_TO_SOURCE)
+  add_custom_command(TARGET zenowrapper_ext POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/src/zenowrapper"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      "$<TARGET_FILE:zenowrapper_ext>"
+      "${CMAKE_SOURCE_DIR}/src/zenowrapper/$<TARGET_FILE_NAME:zenowrapper_ext>"
+    VERBATIM)
+endif()
