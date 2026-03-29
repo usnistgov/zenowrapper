@@ -87,7 +87,7 @@ These algorithms provide rigorous statistical uncertainties for all computed pro
 # Add imports here
 from __future__ import annotations
 
-import importlib
+import importlib.metadata
 import os
 
 __version__ = importlib.metadata.version("zenowrapper")

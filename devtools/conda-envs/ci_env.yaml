@@ -23,6 +23,7 @@ dependencies:
   - pytest >=6.0
   - pytest-cov >=3.0
   - pytest-xdist >=2.5
+  - pytest-timeout >=2.3
   - mypy >=1.0
 
   # Documentation dependencies

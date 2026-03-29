@@ -161,7 +161,6 @@ class TestEdgeCases:
             n_walks=5000,
             n_interior_samples=500,
         )
-        # Run only first frame with parallel backend
         zeno.run(stop=1, backend="multiprocessing", n_workers=2)
 
         assert len(zeno.results.capacitance.values) == 1

@@ -183,7 +183,7 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest -n 2 -v --cov=src/zenowrapper --cov-report=xml --cov-report=term-missing --cov-report=html --color=yes src/tests/
+        pytest -n 2 -v --timeout=300 --cov=src/zenowrapper --cov-report=xml --cov-report=term-missing --cov-report=html --color=yes src/tests/
 
     - name: Coverage comment
       if: github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11' && matrix.mdanalysis-version == 'latest'
