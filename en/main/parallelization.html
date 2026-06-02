@@ -21,7 +21,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parallelization Guide &mdash; ZENOWrapper  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/ntd2d.css?v=6fe47884" />
 
   
@@ -261,8 +261,8 @@ Total Parallelism: 4 processes × 4 threads = 16 parallel computations
 <li><p><strong>Memory</strong>: N_CORES × base memory (each worker loads full trajectory)</p></li>
 <li><p><strong>Scaling</strong>: Near-linear up to ~physical cores</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
-<span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">MDAnalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mda</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zenowrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZenoWrapper</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;topology.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;trajectory.dcd&#39;</span><span class="p">)</span>  <span class="c1"># 1000 frames</span>
 
@@ -472,9 +472,9 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot
 </ol>
 <section id="example-adaptive-strategy">
 <h3>Example: Adaptive Strategy<a class="headerlink" href="#example-adaptive-strategy" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
-<span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
-<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">MDAnalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mda</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">zenowrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZenoWrapper</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;topology.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;trajectory.dcd&#39;</span><span class="p">)</span>
 <span class="n">n_cores</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>

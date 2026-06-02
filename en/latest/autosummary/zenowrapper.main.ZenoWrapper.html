@@ -21,7 +21,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZenoWrapper &mdash; ZENOWrapper  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/ntd2d.css?v=6fe47884" />
 
   
@@ -332,8 +332,8 @@ with higher <code class="docutils literal notranslate"><span class="pre">num_thr
 while <code class="docutils literal notranslate"><span class="pre">num_threads</span></code> shares memory within each worker.</p>
 <p class="rubric">Examples</p>
 <p>Basic usage computing hydrodynamic radius:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span> <span class="k">as</span> <span class="nn">mda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">zenowrapper</span> <span class="kn">import</span> <span class="n">ZenoWrapper</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">MDAnalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">zenowrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">ZenoWrapper</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;protein.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;traj.dcd&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">type_radii</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mf">1.7</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="mf">1.55</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mf">1.52</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zeno</span> <span class="o">=</span> <span class="n">ZenoWrapper</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">),</span> <span class="n">type_radii</span><span class="o">=</span><span class="n">type_radii</span><span class="p">)</span>
